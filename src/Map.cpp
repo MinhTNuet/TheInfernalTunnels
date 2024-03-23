@@ -14,7 +14,7 @@ int tileMap::getType() const
     return tileType;
 }
 
-GameMap::GameMap(int s_x, const char* path, SDL_Texture* _tileSet, const int& _STT)
+Map::Map(int s_x, const char* path, SDL_Texture* _tileSet, const int& _STT)
 {
     start_x = s_x;
     start_y = 0;
@@ -24,22 +24,22 @@ GameMap::GameMap(int s_x, const char* path, SDL_Texture* _tileSet, const int& _S
     loadMap(path, _STT);
 }
 
-void GameMap::clearMap()
+void Map::clearMap()
 {
     tiles.clear();
 }
 
-void GameMap::setStart_x(int _x)
+void Map::setStart_x(int _x)
 {
     start_x = _x;
 }
 
-void GameMap::setMapTexture(SDL_Texture* _Map)
+void Map::setMapTexture(SDL_Texture* texture)
 {
-    tileSet = _Map;
+    tileSet = texture;
 }
 
-void GameMap::loadMap(const char* path, int _STT)
+void Map::loadMap(const char* path, int _STT)
 {
     ifstream file(path);
     if(!file)
@@ -69,7 +69,7 @@ void GameMap::loadMap(const char* path, int _STT)
     file.close();
 }
 
-void GameMap::drawTile(SDL_Renderer* renderer, int x, int y, int tileType) {
+void Map::drawTile(SDL_Renderer* renderer, int x, int y, int tileType) {
     SDL_Rect rect = {x, y, TILE_SIZE, TILE_SIZE};
     SDL_Color color;
     if (tileType == 1) {
@@ -81,7 +81,7 @@ void GameMap::drawTile(SDL_Renderer* renderer, int x, int y, int tileType) {
     SDL_RenderFillRect(renderer, &rect);
 }
 
-void GameMap::renderMap(SDL_Renderer* renderer)
+void Map::renderMap(SDL_Renderer* renderer)
 {
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {

@@ -32,6 +32,8 @@ typedef struct gameMap
 
 namespace gamefunc {
     bool initWindow();
+    void clearRender();
+    void setRender();
     SDL_Texture* loadTextureFromFile(string path);
     void renderTexture(SDL_Texture* img, SDL_Rect* rect1, SDL_Rect* rect2);
     void renderTexture(SDL_Texture* img, SDL_Rect* rect1, int x, int y, int w, int h);

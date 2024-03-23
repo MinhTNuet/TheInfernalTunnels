@@ -34,11 +34,11 @@ private:
 
 };
 
-class GameMap
+class Map
 {
 public:
-    GameMap(){;}
-    GameMap(int s_x, const char* path, SDL_Texture* _tileSet, const int& _STT);
+    Map(){;}
+    Map(int s_x, const char* path, SDL_Texture* _tileSet, const int& _STT);
 
     void clearMap();
     void setStart_x(int _x);

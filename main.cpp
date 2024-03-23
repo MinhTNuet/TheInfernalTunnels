@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             SDL_RenderClear(renderer);
 
-            GameMap::renderMap(renderer);
+            Map::renderMap(renderer);
 
             gamefunc::renderPresent();
             gamefunc::destroyTexture();
