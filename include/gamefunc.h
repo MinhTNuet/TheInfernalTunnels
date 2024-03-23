@@ -14,8 +14,8 @@ const int SCREEN_HEIGHT = 640;
 const int SCREEN_BPP = 32;
 
 #define MAP_WIDTH 10
-#define MAP_HEIGHT 10
-#define TILE_SIZE 64
+#define MAP_HEIGHT 8
+#define TILE_SIZE 32
 #define MAX_MAP_X 400
 #define MAX_MAP_Y 10
 
@@ -32,7 +32,6 @@ typedef struct gameMap
 
 namespace gamefunc {
     bool initWindow();
-    void clearRender();
     SDL_Texture* loadTextureFromFile(string path);
     void renderTexture(SDL_Texture* img, SDL_Rect* rect1, SDL_Rect* rect2);
     void renderTexture(SDL_Texture* img, SDL_Rect* rect1, int x, int y, int w, int h);

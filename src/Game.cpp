@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "gamefunc.h"
+
 bool Game::init()
 {
     if(SDL_Init( SDL_INIT_EVERYTHING) < 0)

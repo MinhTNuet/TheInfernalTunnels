@@ -36,10 +36,12 @@
 		<Unit filename="README.md" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/Map.h" />
+		<Unit filename="include/Texture.h" />
 		<Unit filename="include/gamefunc.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Map.cpp" />
+		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/gamefunc.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

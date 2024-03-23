@@ -68,3 +68,27 @@ void GameMap::loadMap(const char* path, int _STT)
     }
     file.close();
 }
+
+void GameMap::drawTile(SDL_Renderer* renderer, int x, int y, int tileType) {
+    SDL_Rect rect = {x, y, TILE_SIZE, TILE_SIZE};
+    SDL_Color color;
+    if (tileType == 1) {
+        color = {0, 0, 0};
+    } else {
+        color = {255, 255, 255};
+    }
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderFillRect(renderer, &rect);
+}
+
+void GameMap::renderMap(SDL_Renderer* renderer)
+{
+    for (int i = 0; i < MAP_HEIGHT; i++) {
+        for (int j = 0; j < MAP_WIDTH; j++) {
+            int x = j * TILE_SIZE;
+            int y = i * TILE_SIZE;
+            int tileType = tileMaps[i][j];
+            drawTile(renderer, x, y, tileType);
+        }
+    }
+}

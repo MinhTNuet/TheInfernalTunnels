@@ -18,5 +18,6 @@ public:
     bool init();
     bool loadMedia();
     bool loadMap();
+
 };
 #endif // GAME_H

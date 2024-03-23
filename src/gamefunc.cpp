@@ -13,8 +13,7 @@ bool gamefunc::initWindow()
             cout << "Error init Renderer: " << SDL_GetError() << endl;
             return false;
         } else {
-            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-            SDL_RenderClear(renderer);
+            gamefun::clearRender();
         }
     }
     return true;
@@ -24,6 +23,12 @@ void gamefunc::clearRender()
 {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
+}
+
+void gamefunc::clearRender()
+{
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
 }
 
 SDL_Texture* gamefunc::loadTextureFromFile(string path)
