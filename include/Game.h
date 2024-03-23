@@ -6,10 +6,14 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <bits/stdc++.h>
+#include "Map.h"
+#include "Texture.h"
+#include "gamefunc.h"
 
 using namespace std;
 
-class Game{
+class Game
+{
 public:
     bool init();
     bool loadMedia();

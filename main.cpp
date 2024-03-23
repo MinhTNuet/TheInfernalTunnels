@@ -12,6 +12,10 @@ int main(int argc, char* argv[])
     if(!mainGame.init())return 0;
     else {
         if(!mainGame.loadMedia() || !mainGame.loadMap())return 0;
+        else {
 
+        }
     }
+
+    gamefunc::destroyTexture();
 }

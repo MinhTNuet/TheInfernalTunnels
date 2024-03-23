@@ -1,6 +1,7 @@
 #include "gamefunc.h"
 
-bool gamefunc::initWindow(){
+bool gamefunc::initWindow()
+{
     window = SDL_CreateWindow( "The Infernal Tunnels", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if(window == NULL){
         cout << "Error init Window: " << SDL_GetError() << endl;
@@ -25,31 +26,31 @@ void gamefunc::clearRender()
     SDL_RenderClear(renderer);
 }
 
-SDL_Texture* gamefunc::loadTexture(string path)
+SDL_Texture* gamefunc::loadTextureFromFile(string path)
 {
-    SDL_Texture* texture = NULL;
-    texture = IMG_LoadTexture(renderer, path.c_str());
-    if(texture == NULL){
-        cout << "Error load texture: " << SDL_GetError() << endl;
+    SDL_Texture* texture = IMG_LoadTexture(renderer, path.c_str());
+    if (texture == NULL) {
+        cout << "Error loading texture from file: " << SDL_GetError() << endl;
+    } else {
+        cout << "Successfully loaded texture from file: " << path << endl;
     }
-    cout << "Success load texture: " << path << endl;
     return texture;
 }
 
-void gamefunc::renderTexture(SDL_Texture* img, SDL_Rect* rect1, SDL_Rect* rect2)
+void gamefunc::renderTexture(SDL_Texture* texture, SDL_Rect* src, SDL_Rect* des)
 {
-    SDL_RenderCopy(renderer, img, rect1, rect2);
+    SDL_RenderCopy(renderer, texture, src, des);
 }
 
-void gamefunc::renderTexture(SDL_Texture* img, SDL_Rect* rect1, int _x, int _y, int _w, int _h)
+void gamefunc::renderTexture(SDL_Texture* texture, SDL_Rect* src, int _x, int _y, int _w, int _h)
 {
-    SDL_Rect rect2 = {_x, _y, _w, _h};
-    SDL_RenderCopy(renderer, img, rect1, &rect2);
+    SDL_Rect des = {_x, _y, _w, _h};
+    SDL_RenderCopy(renderer, texture, src, &des);
 }
 
-void gamefunc::renderTextureFlip(SDL_Texture* img, SDL_Rect* rect1, SDL_Rect* rect2, SDL_RendererFlip flip )
+void gamefunc::renderTextureFlip(SDL_Texture* texture, SDL_Rect* src, SDL_Rect* des, SDL_RendererFlip flip)
 {
-    SDL_RenderCopyEx(renderer, img, rect1, rect2, 0, NULL, flip);
+    SDL_RenderCopyEx(renderer, texture, src, des, 0, NULL, flip);
 }
 
 void gamefunc::renderPresent()
@@ -79,7 +80,7 @@ bool gamefunc::initFont( const char* path )
 	return true;
 }
 
-SDL_Texture* gamefunc::createText(string text, SDL_Color color)
+SDL_Texture* gamefunc::createTextTexture(string text, SDL_Color color)
 {
     SDL_Texture* texture = NULL;
     SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
@@ -89,4 +90,10 @@ SDL_Texture* gamefunc::createText(string text, SDL_Color color)
     if(texture == NULL) SDL_GetError();
     SDL_FreeSurface(textSurface);
     return texture;
+}
+
+void gamefunc::renderQuit()
+{
+    clearRender();
+    destroyTexture();
 }
