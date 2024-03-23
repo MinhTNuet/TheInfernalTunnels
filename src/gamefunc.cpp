@@ -41,10 +41,10 @@ void gamefunc::renderTexture(SDL_Texture* img, SDL_Rect* rect1, SDL_Rect* rect2)
     SDL_RenderCopy(renderer, img, rect1, rect2);
 }
 
-void gamefunc::renderTexture(SDL_Texture* img, SDL_Rect* rect1, int x, int y, int w, int h)
+void gamefunc::renderTexture(SDL_Texture* img, SDL_Rect* rect1, int _x, int _y, int _w, int _h)
 {
-    SDL_Rect rect2 = { x, y, w, h };
-    SDL_RenderCopy(renderer, img, rect1, &rect2 );
+    SDL_Rect rect2 = {_x, _y, _w, _h};
+    SDL_RenderCopy(renderer, img, rect1, &rect2);
 }
 
 void gamefunc::renderTextureFlip(SDL_Texture* img, SDL_Rect* rect1, SDL_Rect* rect2, SDL_RendererFlip flip )
@@ -59,8 +59,8 @@ void gamefunc::renderPresent()
 
 void gamefunc::destroyTexture()
 {
-    SDL_DestroyRenderer( renderer );
-    SDL_DestroyWindow( window );
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
     renderer = NULL;
     window = NULL;
     IMG_Quit();
@@ -87,6 +87,6 @@ SDL_Texture* gamefunc::createText(string text, SDL_Color color)
     if(textSurface == NULL) TTF_GetError();
     texture = SDL_CreateTextureFromSurface(renderer, textSurface);
     if(texture == NULL) SDL_GetError();
-    SDL_FreeSurface( textSurface );
+    SDL_FreeSurface(textSurface);
     return texture;
 }

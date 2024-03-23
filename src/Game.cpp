@@ -23,5 +23,12 @@ bool Game::init()
     return true;
 }
 
+bool Game::loadMedia(){
+
+}
+
+bool Game::loadMap(){
+
+}
 
 
