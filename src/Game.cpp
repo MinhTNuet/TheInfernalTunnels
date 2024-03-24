@@ -64,6 +64,12 @@ void Game::render_Game()
     render_Map();
 }
 
+void Game::load_map()
+{
+    Map mp;
+    mp.loadMap("map1.txt");
+}
+
 void Game::render_Map()
 {
     Map mp;

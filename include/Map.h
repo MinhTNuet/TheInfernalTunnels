@@ -27,12 +27,12 @@ class Map
 {
 public:
     Map(){;}
-    Map(int s_x, const char* path, SDL_Texture* _tileSet, const int& _STT);
+    Map(int s_x, const char* path, SDL_Texture* _tileSet);
 
     void clearMap();
     void setStart_x(int _x);
     void setMapTexture(SDL_Texture* _Map);
-    void loadMap(const char* path, int _STT);
+    void loadMap(string fileName);
     void renderMap(vector<SDL_Rect> clipTile, SDL_Rect& camera);
 
     int getStart_x() const {return start_x;}

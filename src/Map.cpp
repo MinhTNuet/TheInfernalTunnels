@@ -16,14 +16,13 @@ int tileMat::getType() const
     return tileType;
 }
 
-Map::Map(int s_x, const char* path, SDL_Texture* _tileSet, const int& _STT)
+Map::Map(int s_x, const char* path, SDL_Texture* _tileSet)
 {
     start_x = s_x;
     start_y = 0;
-    STT = _STT;
     tileSet = _tileSet;
 
-    loadMap(path, _STT);
+    loadMap(path);
 }
 
 void Map::clearMap()
@@ -41,14 +40,13 @@ void Map::setMapTexture(SDL_Texture* texture)
     tileSet = texture;
 }
 
-void Map::loadMap(const char* path, int _STT)
+void Map::loadMap(string fileName)
 {
-    ifstream file(path);
+    ifstream file(fileName);
     if(!file)
     {
         cout << "Could not load data map";
     }
-    STT = _STT;
     int x = 0;
     int y = 0;
     int data;

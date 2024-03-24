@@ -23,6 +23,8 @@ static SDL_Renderer* renderer = NULL;
 static TTF_Font* font = NULL;
 static SDL_Event* event;
 
+
+
 namespace gamefunc {
     bool initWindow();
     void clearRender();

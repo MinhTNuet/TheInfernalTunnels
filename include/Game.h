@@ -22,6 +22,7 @@ public:
     void setTileClip();
 
     void render_Game();
+    void load_map();
     void render_Map();
 
 
