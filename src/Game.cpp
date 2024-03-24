@@ -37,4 +37,41 @@ bool Game::loadMap()
 
 }
 
+void Game::setTileClip()
+{
+    tileClip.push_back({0, 0, 0, 0});
 
+    for(int i=0; i<13; i++){
+        for(int j=0; j<20; j++){
+            tileClip.push_back({TILE_SIZE*j, TILE_SIZE*i, TILE_SIZE, TILE_SIZE} );
+        }
+    }
+}
+
+//bool Game::createMap()
+//{
+//    for( int i=0 ; i<3 ; i++){
+//        int random = rand() % totalMap.size();
+//        random = i;
+//        Map gameMap( i*MAP_WIDTH*TILE_SIZE, totalMap[random].path, tileSet, totalMap[random].STT );
+//        listM.push_back( Map );
+//    }
+//    return true;
+//}
+
+void Game::render_Game()
+{
+    render_Map();
+}
+
+void Game::render_Map()
+{
+    Map mp;
+    mp.renderMap(tileClip, camera);
+}
+
+void Game::clearMedia()
+{
+    SDL_DestroyTexture(tileSet);
+    TTF_CloseFont(font);
+}

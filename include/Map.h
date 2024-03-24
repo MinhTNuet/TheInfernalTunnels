@@ -12,10 +12,10 @@
 using namespace std;
 
 
-class tileMap : public Texture
+class tileMat : public Texture
 {
 public:
-    tileMap(int _x, int _y, int _type);
+    tileMat(int _x, int _y, int _type);
     void setCollision(int _h);
     int getType() const;
 private:
@@ -33,12 +33,16 @@ public:
     void setStart_x(int _x);
     void setMapTexture(SDL_Texture* _Map);
     void loadMap(const char* path, int _STT);
+    void renderMap(vector<SDL_Rect> clipTile, SDL_Rect& camera);
 
-    void drawTile(SDL_Renderer* renderer, int x, int y, int tileType);
-    void renderMap(SDL_Renderer* renderer);
+    int getStart_x() const {return start_x;}
+    int getStart_y() const {return start_y;}
+    int getSTT() const {return STT;}
+
+    tileMat getDataMap(int _x, int _y) const {return tiles[_y][_x];}
 private:
     int start_x, start_y, STT;
-    vector <vector<tileMap>> tiles;
+    vector <vector<tileMat>> tiles;
 
     SDL_Texture* tileSet;
 

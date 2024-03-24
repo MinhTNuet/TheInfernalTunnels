@@ -11,11 +11,10 @@ using namespace std;
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 640;
-const int SCREEN_BPP = 32;
 
-#define MAP_WIDTH 10
-#define MAP_HEIGHT 8
-#define TILE_SIZE 32
+#define MAP_WIDTH 34
+#define MAP_HEIGHT 17
+#define TILE_SIZE 64
 #define MAX_MAP_X 400
 #define MAX_MAP_Y 10
 
@@ -23,17 +22,6 @@ static SDL_Window* window = NULL;
 static SDL_Renderer* renderer = NULL;
 static TTF_Font* font = NULL;
 static SDL_Event* event;
-
-const int tileMp[MAP_HEIGHT][MAP_WIDTH] = {
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
-    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
-    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
-    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
-    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1}
-};
 
 namespace gamefunc {
     bool initWindow();

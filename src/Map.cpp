@@ -1,15 +1,17 @@
 #include "Map.h"
 
-tileMap::tileMap(int _x, int _y, int _type) : Texture(_x, _y)
+tileMat::tileMat(int _x, int _y, int _type) : Texture(_x, _y)
 {
     tileType = _type;
     collision = {_x, _y, TILE_SIZE, TILE_SIZE};
-}void tileMap::setCollision(int _h)
+}
+
+void tileMat::setCollision(int _h)
 {
     collision.h = _h;
 }
 
-int tileMap::getType() const
+int tileMat::getType() const
 {
     return tileType;
 }
@@ -53,11 +55,11 @@ void Map::loadMap(const char* path, int _STT)
     char temp;
 
     for(int i=0; i < MAP_HEIGHT; i++){
-        vector <tileMap> row;
+        vector <tileMat> row;
         for(int j=0; j < MAP_WIDTH; j++){
             file >> data;
             file >> temp;
-            tileMap column(x, y, data);
+            tileMat column(x, y, data);
             if(data > 120 && data < 140) column.setCollision(24);
             row.push_back(column);
             x += TILE_SIZE;
@@ -69,26 +71,15 @@ void Map::loadMap(const char* path, int _STT)
     file.close();
 }
 
-void Map::drawTile(SDL_Renderer* renderer, int x, int y, int tileType) {
-    SDL_Rect rect = {x, y, TILE_SIZE, TILE_SIZE};
-    SDL_Color color;
-    if (tileType == 1) {
-        color = {0, 0, 0};
-    } else {
-        color = {255, 255, 255};
-    }
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderFillRect(renderer, &rect);
-}
-
-void Map::renderMap(SDL_Renderer* renderer)
+void Map::renderMap(vector <SDL_Rect> clipTile, SDL_Rect& camera)
 {
-    for (int i = 0; i < MAP_HEIGHT; i++) {
-        for (int j = 0; j < MAP_WIDTH; j++) {
-            int x = j * TILE_SIZE;
-            int y = i * TILE_SIZE;
-            int tileType = tileMp[i][j];
-            drawTile(renderer, x, y, tileType);
+    for(int i = camera.y/TILE_SIZE; i*TILE_SIZE - camera.y < SCREEN_HEIGHT; i++){
+        for(int j = (camera.x - getStart_x())/TILE_SIZE; j< MAP_WIDTH; j++){
+            if(j<0) continue;
+            if(j*TILE_SIZE + getStart_x() - camera.x >= SCREEN_WIDTH) break;
+
+            SDL_Rect dst = {getDataMap(j, i).getX() + getStart_x() - camera.x, getDataMap(j, i).getY() - camera.y, TILE_SIZE, TILE_SIZE};
+            gamefunc::renderTexture(tileSet, &clipTile[getDataMap(j, i).getType()], &dst );
         }
     }
 }

@@ -8,33 +8,21 @@
 using namespace std;
 
 
-int main(int argc, char* argv[])
+int main( int argc, char* argv[] )
 {
-    bool quit = false;
     SDL_Event e;
-    if(!gamefunc::initWindow()) return 0;
-    else {
-        while( !quit )
-        {
-            while( SDL_PollEvent( &e ) != 0 )
-            {
-                //User requests quit
-                if( e.type == SDL_QUIT )
-                {
-                    quit = true;
-                }
-                gamefunc::setRender();
-                SDL_RenderClear(renderer);
-                Map mp;
-
-                mp.renderMap(renderer);
-
-                gamefunc::renderPresent();
-                gamefunc::destroyTexture();
+    Game gameMain;
+    if(!gameMain.init()) return 0;
+    else{
+        if(!gameMain.loadMedia() || !gameMain.loadMap()) return 0;
+        else{
+            gameMain.setTileClip();
+            while(gameMain.isRunning()){
+                SDL_PollEvent(&e);
             }
+
         }
     }
-
-
+    gameMain.clearMedia();
     gamefunc::destroyTexture();
 }

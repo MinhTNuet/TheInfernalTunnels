@@ -7,6 +7,8 @@
 #include <SDL_ttf.h>
 #include <bits/stdc++.h>
 #include "Map.h"
+#include "gamefunc.h"
+#include "Texture.h"
 
 using namespace std;
 
@@ -16,6 +18,21 @@ public:
     bool init();
     bool loadMedia();
     bool loadMap();
+//    bool createMap();
+    void setTileClip();
+
+    void render_Game();
+    void render_Map();
+
+
+    void clearMedia();
+    bool isRunning() {return runningGame;}
+private:
+    bool runningGame = false;
+
+    SDL_Texture* tileSet = NULL;
+    SDL_Rect camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+    vector <SDL_Rect> tileClip;
 
 };
 #endif // GAME_H
