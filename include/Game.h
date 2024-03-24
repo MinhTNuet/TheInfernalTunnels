@@ -7,8 +7,6 @@
 #include <SDL_ttf.h>
 #include <bits/stdc++.h>
 #include "Map.h"
-#include "Texture.h"
-#include "gamefunc.h"
 
 using namespace std;
 

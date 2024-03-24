@@ -4,6 +4,7 @@
 #include <SDL_ttf.h>
 #include <bits/stdc++.h>
 #include "Game.h"
+
 using namespace std;
 
 
@@ -11,22 +12,26 @@ int main(int argc, char* argv[])
 {
     bool quit = false;
     SDL_Event e;
-    while( !quit )
-    {
-        while( SDL_PollEvent( &e ) != 0 )
+    if(!gamefunc::initWindow()) return 0;
+    else {
+        while( !quit )
         {
-            //User requests quit
-            if( e.type == SDL_QUIT )
+            while( SDL_PollEvent( &e ) != 0 )
             {
-                quit = true;
+                //User requests quit
+                if( e.type == SDL_QUIT )
+                {
+                    quit = true;
+                }
+                gamefunc::setRender();
+                SDL_RenderClear(renderer);
+                Map mp;
+
+                mp.renderMap(renderer);
+
+                gamefunc::renderPresent();
+                gamefunc::destroyTexture();
             }
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            SDL_RenderClear(renderer);
-
-            Map::renderMap(renderer);
-
-            gamefunc::renderPresent();
-            gamefunc::destroyTexture();
         }
     }
 

@@ -24,10 +24,15 @@ static SDL_Renderer* renderer = NULL;
 static TTF_Font* font = NULL;
 static SDL_Event* event;
 
-typedef struct gameMap
-{
-    int start_x_;
-    int start_y_;
+const int tileMp[MAP_HEIGHT][MAP_WIDTH] = {
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
+    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
+    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
+    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
+    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1}
 };
 
 namespace gamefunc {

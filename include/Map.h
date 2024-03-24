@@ -8,20 +8,9 @@
 #include <bits/stdc++.h>
 #include "gamefunc.h"
 #include "Texture.h"
-#include "Game.h"
 
 using namespace std;
 
-int tileMaps[MAP_HEIGHT][MAP_WIDTH] = {
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
-    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
-    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
-    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0},
-    {0, 1, 0, 1, 0, 1, 0, 1, 0, 1}
-};
 
 class tileMap : public Texture
 {

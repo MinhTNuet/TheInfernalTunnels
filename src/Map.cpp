@@ -87,7 +87,7 @@ void Map::renderMap(SDL_Renderer* renderer)
         for (int j = 0; j < MAP_WIDTH; j++) {
             int x = j * TILE_SIZE;
             int y = i * TILE_SIZE;
-            int tileType = tileMaps[i][j];
+            int tileType = tileMp[i][j];
             drawTile(renderer, x, y, tileType);
         }
     }

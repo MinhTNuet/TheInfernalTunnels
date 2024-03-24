@@ -6,6 +6,7 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <bits/stdc++.h>
+#include "gamefunc.h"
 
 using namespace std;
 
