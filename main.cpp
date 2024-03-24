@@ -14,14 +14,10 @@ int main( int argc, char* argv[] )
     Game gameMain;
     if(!gameMain.init()) return 0;
     else{
-        if(!gameMain.loadMedia() || !gameMain.loadMap()) return 0;
-        else{
-            while(true){
-                SDL_PollEvent(&e);
-                gameMain.load_map();
-                gameMain.render_Game();
-            }
-
+        while(true){
+            SDL_PollEvent(&e);
+            gameMain.load_map();
+            gameMain.render_Game();
         }
     }
     gameMain.clearMedia();

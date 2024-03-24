@@ -27,16 +27,6 @@ bool Game::init()
     return true;
 }
 
-bool Game::loadMedia()
-{
-
-}
-
-bool Game::loadMap()
-{
-
-}
-
 void Game::setTileClip()
 {
     tileClip.push_back({0, 0, 0, 0});
@@ -66,14 +56,12 @@ void Game::render_Game()
 
 void Game::load_map()
 {
-    Map mp;
-    mp.loadMap("map1.txt");
+    mp = new Map(100, "map1.txt");
 }
 
 void Game::render_Map()
 {
-    Map mp;
-    mp.renderMap(tileClip, camera);
+    mp->renderMap(tileClip, camera);
 }
 
 void Game::clearMedia()

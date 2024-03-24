@@ -12,15 +12,15 @@
 
 using namespace std;
 
+
 class Game
 {
 public:
     bool init();
-    bool loadMedia();
-    bool loadMap();
 //    bool createMap();
     void setTileClip();
 
+    Map* mp;
     void render_Game();
     void load_map();
     void render_Map();

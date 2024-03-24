@@ -27,7 +27,7 @@ class Map
 {
 public:
     Map(){;}
-    Map(int s_x, const char* path, SDL_Texture* _tileSet);
+    Map(int s_x, string fileName);
 
     void clearMap();
     void setStart_x(int _x);

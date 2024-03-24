@@ -16,13 +16,12 @@ int tileMat::getType() const
     return tileType;
 }
 
-Map::Map(int s_x, const char* path, SDL_Texture* _tileSet)
+Map::Map(int s_x, string fileName)
 {
     start_x = s_x;
     start_y = 0;
-    tileSet = _tileSet;
 
-    loadMap(path);
+    loadMap(fileName);
 }
 
 void Map::clearMap()
