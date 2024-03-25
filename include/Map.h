@@ -27,19 +27,20 @@ class Map
 {
 public:
     Map(){;}
-    Map(int s_x, string fileName);
+    Map(int s_x, string fileName, SDL_Texture* _tileSet);
 
     void clearMap();
     void setStart_x(int _x);
     void setMapTexture(SDL_Texture* _Map);
     void loadMap(string fileName);
+
     void renderMap(vector<SDL_Rect> clipTile, SDL_Rect& camera);
 
     int getStart_x() const {return start_x;}
     int getStart_y() const {return start_y;}
-    int getSTT() const {return STT;}
 
     tileMat getDataMap(int _x, int _y) const {return tiles[_y][_x];}
+
 private:
     int start_x, start_y, STT;
     vector <vector<tileMat>> tiles;

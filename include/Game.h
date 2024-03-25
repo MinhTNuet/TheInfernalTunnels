@@ -17,14 +17,14 @@ class Game
 {
 public:
     bool init();
-//    bool createMap();
+//  bool createMap();
     void setTileClip();
 
     Map* mp;
     void render_Game();
     void load_map();
-    void render_Map();
 
+    void render_Map();
 
     void clearMedia();
     bool isRunning() {return runningGame;}
@@ -32,6 +32,7 @@ private:
     bool runningGame = false;
 
     SDL_Texture* tileSet = NULL;
+
     SDL_Rect camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     vector <SDL_Rect> tileClip;
 

@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1711292421 source:d:\minhc++\theinfernaltunnels\src\map.cpp
+1711384629 source:d:\minhc++\theinfernaltunnels\src\map.cpp
 	"Map.h"
 
-1711292421 d:\minhc++\theinfernaltunnels\include\map.h
+1711378981 d:\minhc++\theinfernaltunnels\include\map.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -11,7 +11,7 @@
 	"gamefunc.h"
 	"Texture.h"
 
-1711298042 source:d:\minhc++\theinfernaltunnels\main.cpp
+1711381798 source:d:\minhc++\theinfernaltunnels\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -19,10 +19,10 @@
 	<bits/stdc++.h>
 	"Game.h"
 
-1711298042 source:d:\minhc++\theinfernaltunnels\src\game.cpp
+1711384611 source:d:\minhc++\theinfernaltunnels\src\game.cpp
 	"Game.h"
 
-1711298042 d:\minhc++\theinfernaltunnels\include\game.h
+1711385217 d:\minhc++\theinfernaltunnels\include\game.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -32,24 +32,29 @@
 	"gamefunc.h"
 	"Texture.h"
 
-1711277886 d:\minhc++\theinfernaltunnels\include\gamefunc.h
+1711382015 d:\minhc++\theinfernaltunnels\include\gamefunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
 	<SDL_ttf.h>
 	<bits/stdc++.h>
 
-1711218896 source:d:\minhc++\theinfernaltunnels\src\gamefunc.cpp
+1711381467 source:d:\minhc++\theinfernaltunnels\src\gamefunc.cpp
 	"gamefunc.h"
 
-1711199225 source:d:\minhc++\theinfernaltunnels\src\texture.cpp
+1711366166 source:d:\minhc++\theinfernaltunnels\src\texture.cpp
 	"Texture.h"
 
-1711249828 d:\minhc++\theinfernaltunnels\include\texture.h
+1711377096 d:\minhc++\theinfernaltunnels\include\texture.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
 	<SDL_ttf.h>
 	<bits/stdc++.h>
 	"gamefunc.h"
+
+1711383932 source:d:\minhc++\theinfernaltunnels\src\player.cpp
+	"player.h"
+
+1711383932 d:\minhc++\theinfernaltunnels\include\player.h
 

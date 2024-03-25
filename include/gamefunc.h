@@ -15,8 +15,6 @@ const int SCREEN_HEIGHT = 640;
 #define MAP_WIDTH 34
 #define MAP_HEIGHT 17
 #define TILE_SIZE 64
-#define MAX_MAP_X 400
-#define MAX_MAP_Y 10
 
 static SDL_Window* window = NULL;
 static SDL_Renderer* renderer = NULL;
@@ -28,7 +26,6 @@ static SDL_Event* event;
 namespace gamefunc {
     bool initWindow();
     void clearRender();
-    void setRender();
     SDL_Texture* loadTextureFromFile(string path);
     void renderTexture(SDL_Texture* img, SDL_Rect* rect1, SDL_Rect* rect2);
     void renderTexture(SDL_Texture* img, SDL_Rect* rect1, int x, int y, int w, int h);

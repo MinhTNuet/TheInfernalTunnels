@@ -24,7 +24,10 @@ bool Game::init()
     }
     if(!gamefunc::initWindow()) return false;
     cout << "Success init dowload" << endl;
+
+    tileSet = gamefunc::loadTextureFromFile("src/anhtest.jpg");
     return true;
+
 }
 
 void Game::setTileClip()
@@ -56,7 +59,7 @@ void Game::render_Game()
 
 void Game::load_map()
 {
-    mp = new Map(100, "map1.txt");
+    mp = new Map(0, "map1.txt", tileSet);
 }
 
 void Game::render_Map()

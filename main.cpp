@@ -14,10 +14,12 @@ int main( int argc, char* argv[] )
     Game gameMain;
     if(!gameMain.init()) return 0;
     else{
+        gameMain.setTileClip();
+        gameMain.load_map();
         while(true){
             SDL_PollEvent(&e);
-            gameMain.load_map();
             gameMain.render_Game();
+            gamefunc::renderPresent();
         }
     }
     gameMain.clearMedia();

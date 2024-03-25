@@ -1,0 +1,40 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "tile1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tile2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "D:/minhc++",
+    "last.imagePath": "D:/minhc++/texture sưu tầm/gothicvania patreon collection/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG",
+    "map.height": 17,
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "map.width": 34,
+    "openFiles": [
+        "tile1.tsx"
+    ],
+    "project": "anh.tiled-project",
+    "recentFiles": [
+        "tile1.tsx",
+        "tile2.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}

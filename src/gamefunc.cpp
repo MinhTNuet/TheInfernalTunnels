@@ -26,15 +26,12 @@ void gamefunc::clearRender()
     SDL_RenderClear(renderer);
 }
 
-void gamefunc::setRender()
-{
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-}
 
 SDL_Texture* gamefunc::loadTextureFromFile(string path)
 {
-    SDL_Texture* texture = IMG_LoadTexture(renderer, path.c_str());
+    SDL_Texture* texture = NULL;
+    texture = IMG_LoadTexture(renderer, path.c_str());
     if (texture == NULL) {
         cout << "Error loading texture from file: " << SDL_GetError() << endl;
     } else {
@@ -46,6 +43,7 @@ SDL_Texture* gamefunc::loadTextureFromFile(string path)
 void gamefunc::renderTexture(SDL_Texture* texture, SDL_Rect* src, SDL_Rect* des)
 {
     SDL_RenderCopy(renderer, texture, src, des);
+
 }
 
 void gamefunc::renderTexture(SDL_Texture* texture, SDL_Rect* src, int _x, int _y, int _w, int _h)
