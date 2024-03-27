@@ -26,6 +26,9 @@ bool Game::init()
     cout << "Success init dowload" << endl;
 
     tileSet = gamefunc::loadTextureFromFile("src/anhtest.jpg");
+    p_texture[0] = gamefunc::loadTextureFromFile("src/Jump.png");
+    p_texture[1] = gamefunc::loadTextureFromFile("src/Run.png");
+    p_texture[2] = gamefunc::loadTextureFromFile("src/Fall.png");
     return true;
 
 }
@@ -51,6 +54,13 @@ void Game::setTileClip()
 //    }
 //    return true;
 //}
+
+bool Game::createPlayer()
+{
+    Player = new player( 64, 128);
+    if( Player == NULL ) return false;
+    return true;
+}
 
 void Game::render_Game()
 {

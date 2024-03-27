@@ -96,6 +96,54 @@ SDL_Texture* gamefunc::createTextTexture(string text, SDL_Color color)
     return texture;
 }
 
+bool gamefunc::checkCollision(SDL_Rect obj1, SDL_Rect obj2)
+{
+    if(obj1.x + obj1.w < obj2.x) return false;
+    if(obj2.x + obj2.w < obj1.x) return false;
+    if(obj1.y + obj1.h < obj2.y) return false;
+    if(obj2.y + obj2.h < obj1.x) return false;
+}
+
+bool gamefunc::checkWall(SDL_Rect obj, Map mat, bool* grounded)
+{
+    int a = obj.x / TILE_SIZE;
+    int b = a + 1;
+    int c = obj.y / TILE_SIZE;
+    int d = c + 1;
+
+    if(d >= MAP_HEIGHT)return false;
+
+    if(grounded != NULL){
+        if(mat.getDataMap(a,d).getType() > 140 && mat.getDataMap(b,d).getType() > 140) * grounded = false;
+        else if(mat.getDataMap(a,d).getType() > 140 && obj.x + obj.w < mat.getDataMap(b,d).getX()) * grounded = false;
+
+    }
+
+    if(mat.getDataMap(a,c).getType() <140){
+        if(gamefunc::checkCollision(obj, mat.getDataMap(a,c).getCollision()))return true;
+    }
+    if(mat.getDataMap(b,c).getType() <140){
+        if(gamefunc::checkCollision(obj, mat.getDataMap(b,c).getCollision()))return true;
+    }
+    if(mat.getDataMap(a,d).getType() <140){
+        if(gamefunc::checkCollision(obj, mat.getDataMap(a,d).getCollision()))return true;
+    }
+    if(mat.getDataMap(b,d).getType() <140){
+        if(gamefunc::checkCollision(obj, mat.getDataMap(b,d).getCollision()))return true;
+    }
+    return false;
+}
+
+void gamefunc::setWindowFS()
+{
+    SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+}
+
+void gamefunc::quitWindowFS()
+{
+    SDL_SetWindowFullscreen(window, 0);
+}
+
 void gamefunc::renderQuit()
 {
     clearRender();
