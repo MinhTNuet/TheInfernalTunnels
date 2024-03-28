@@ -29,6 +29,7 @@ bool Game::init()
     p_texture[0] = gamefunc::loadTextureFromFile("src/Jump.png");
     p_texture[1] = gamefunc::loadTextureFromFile("src/Run.png");
     p_texture[2] = gamefunc::loadTextureFromFile("src/Fall.png");
+
     return true;
 
 }
@@ -57,7 +58,7 @@ void Game::setTileClip()
 
 bool Game::createPlayer()
 {
-    Player = new player( 64, 128, p_texture[1]);
+    Player = new player( 64, 128, tileSet);
     if(Player == NULL) return false;
     return true;
 }

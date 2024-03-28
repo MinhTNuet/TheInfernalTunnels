@@ -13,56 +13,53 @@ void player::updatePlayer(Map& mat)
 
 void player::handleEvent(SDL_Event &e)
 {
+    cout<<x_vel<<" "<<y_vel<<endl;
     if(e.type == SDL_KEYDOWN && e.key.repeat == 0){
         switch(e.key.keysym.sym){
-            case SDLK_d:
-                x_vel += player_speed;
-                cout<<"a";
-                break;
-            case SDLK_a:
-                x_vel -= player_speed;
-                cout<<"a";
-                break;
-            case SDLK_w:
-                Jump();
-                grounded = false;
-                break;
+        case SDLK_d:
+            x_vel += player_speed;
+            break;
+        case SDLK_a:
+            x_vel -= player_speed;
+            break;
+        case SDLK_w:
+            Jump();
+            grounded = false;
+            break;
 
         }
     }
     if(e.type == SDL_KEYUP && e.key.repeat == 0){
         switch(e.key.keysym.sym){
-            case SDLK_d:
-                x_vel -= player_speed;
-                break;
-            case SDLK_a:
-                x_vel += player_speed;
-                break;
+        case SDLK_d:
+            x_vel -= player_speed;
+            break;
+        case SDLK_a:
+            x_vel += player_speed;
+            break;
         }
     }
 }
 void player::handleCollision(Map &mat)
 {
     x += x_vel;
-    collision.x = x - mat.getStart_x() + 36;
-    if(gamefunc::checkWall(getCollision(), mat) || grounded || x + 36 < mat.getStart_x()){
+    this->collision.x = x;
+    if(gamefunc::checkWall(getCollision(), mat)){
         x -= x_vel;
-        collision.x = getX() - mat.getStart_x() + 36;
+        this->collision.x = getX();
     }
 
     y_vel += force;
     y += y_vel;
-    collision.y = y + 36;
-
+    this->collision.y = y;
     if(gamefunc::checkWall(getCollision(), mat, &grounded)){
         if(y_vel > 0){
             grounded = true;
         }
         y -= y_vel;
         y_vel = 0;
-        collision.y = y += 36;
+        collision.y = y ;
     }
-
 }
 void player::Jump()
 {
@@ -99,8 +96,8 @@ void player::changeCam(SDL_Rect &camera, Map& mat)
 
 void player::renderPlayer(SDL_Rect &camera)
 {
-    SDL_Rect str = {x - camera.x, y - camera.y, 250, 250};
-    SDL_Rect des = {0, 0, 250, 250};
+    SDL_Rect str = {x - camera.x, y - camera.y, 64, 64};
+    SDL_Rect des = {0, 0, 64, 64};
     gamefunc::renderTexture(p_texture, &des, &str);
 }
 
