@@ -20,16 +20,17 @@ class player : public Texture
             fall
         };
         player(int _x, int _y, SDL_Texture* image);
+        void updatePlayer(Map& mat);
 
         void handleEvent(SDL_Event &e);
         void handleStatus();
 
-        void handleCollision(Map mat);
+        void handleCollision(Map& mat);
 
         void Jump();
         void buffhp() {if(hp<3) hp++;}
 
-        void changeCam(SDL_Rect &camera, Map mat);
+        void changeCam(SDL_Rect &camera, Map& mat);
         void renderPlayer(SDL_Rect &camera);
         void resetplayer();
 

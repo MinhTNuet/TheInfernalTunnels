@@ -13,10 +13,13 @@ using namespace std;
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 640;
+const int force = 1;
 
 #define MAP_WIDTH 34
 #define MAP_HEIGHT 17
 #define TILE_SIZE 64
+
+const int distanceMax = MAP_WIDTH * MAP_HEIGHT;
 
 static SDL_Window* window = NULL;
 static SDL_Renderer* renderer = NULL;

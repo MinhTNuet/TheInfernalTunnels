@@ -11,7 +11,7 @@
 	"gamefunc.h"
 	"Texture.h"
 
-1711606558 source:d:\minhc++\theinfernaltunnels\main.cpp
+1711634254 source:d:\minhc++\theinfernaltunnels\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -19,10 +19,10 @@
 	<bits/stdc++.h>
 	"Game.h"
 
-1711600818 source:d:\minhc++\theinfernaltunnels\src\game.cpp
+1711638572 source:d:\minhc++\theinfernaltunnels\src\game.cpp
 	"Game.h"
 
-1711600663 d:\minhc++\theinfernaltunnels\include\game.h
+1711636978 d:\minhc++\theinfernaltunnels\include\game.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -33,7 +33,7 @@
 	"Texture.h"
 	"player.h"
 
-1711545930 d:\minhc++\theinfernaltunnels\include\gamefunc.h
+1711635836 d:\minhc++\theinfernaltunnels\include\gamefunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -55,10 +55,10 @@
 	<SDL_ttf.h>
 	<bits/stdc++.h>
 
-1711609189 source:d:\minhc++\theinfernaltunnels\src\player.cpp
+1711638529 source:d:\minhc++\theinfernaltunnels\src\player.cpp
 	"player.h"
 
-1711593436 d:\minhc++\theinfernaltunnels\include\player.h
+1711637809 d:\minhc++\theinfernaltunnels\include\player.h
 	<SDL_image.h>
 	<SDL_mixer.h>
 	<SDL_ttf.h>

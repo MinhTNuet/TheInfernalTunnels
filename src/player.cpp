@@ -6,15 +6,23 @@ player::player(int _x, int _y, SDL_Texture* image) : Texture(_x, _y)
     p_texture = image;
 }
 
+void player::updatePlayer(Map& mat)
+{
+    handleCollision(mat);
+}
+
 void player::handleEvent(SDL_Event &e)
 {
     if(e.type == SDL_KEYDOWN && e.key.repeat == 0){
         switch(e.key.keysym.sym){
             case SDLK_d:
                 x_vel += player_speed;
+                cout<<"a";
                 break;
             case SDLK_a:
                 x_vel -= player_speed;
+                cout<<"a";
+                break;
             case SDLK_w:
                 Jump();
                 grounded = false;
@@ -29,18 +37,32 @@ void player::handleEvent(SDL_Event &e)
                 break;
             case SDLK_a:
                 x_vel += player_speed;
+                break;
         }
     }
 }
-
-void player::handleCollision(Map mat)
+void player::handleCollision(Map &mat)
 {
     x += x_vel;
     collision.x = x - mat.getStart_x() + 36;
-    if(gamefunc::checkWall(getCollision(), mat) || x + 36 < mat.getStart_x()){
+    if(gamefunc::checkWall(getCollision(), mat) || grounded || x + 36 < mat.getStart_x()){
         x -= x_vel;
         collision.x = getX() - mat.getStart_x() + 36;
     }
+
+    y_vel += force;
+    y += y_vel;
+    collision.y = y + 36;
+
+    if(gamefunc::checkWall(getCollision(), mat, &grounded)){
+        if(y_vel > 0){
+            grounded = true;
+        }
+        y -= y_vel;
+        y_vel = 0;
+        collision.y = y += 36;
+    }
+
 }
 void player::Jump()
 {
@@ -55,7 +77,7 @@ int lerp(int a, int b, float t)
     return (1-t)*a + t*b;
 }
 
-void player::changeCam(SDL_Rect &camera, Map mat)
+void player::changeCam(SDL_Rect &camera, Map& mat)
 {
     int cam_target_x = x - (float)1/2 * SCREEN_WIDTH;
     int cam_target_y = y - (float)1/3 * SCREEN_HEIGHT;
@@ -66,7 +88,7 @@ void player::changeCam(SDL_Rect &camera, Map mat)
 
     if( cam_target_y < 0.5*TILE_SIZE){
         cam_target_y = 0.5*TILE_SIZE;
-    } else if(cam_target_y > 64*MAP_HEIGHT - SCREEN_HEIGHT - 0.5*TILE_SIZE ){
+    } else if(cam_target_y > 64*MAP_HEIGHT - SCREEN_HEIGHT - 0.5*TILE_SIZE){
         cam_target_y = 64*MAP_HEIGHT - SCREEN_HEIGHT - 0.5*TILE_SIZE;
     }
 
@@ -77,9 +99,9 @@ void player::changeCam(SDL_Rect &camera, Map mat)
 
 void player::renderPlayer(SDL_Rect &camera)
 {
-    SDL_Rect str = {0, 0, 250, 250};
+    SDL_Rect str = {x - camera.x, y - camera.y, 250, 250};
     SDL_Rect des = {0, 0, 250, 250};
-    gamefunc::renderTexture(p_texture, &str, &des);
+    gamefunc::renderTexture(p_texture, &des, &str);
 }
 
 void player::resetplayer()

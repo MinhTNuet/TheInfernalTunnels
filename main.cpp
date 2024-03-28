@@ -19,8 +19,7 @@ int main( int argc, char* argv[] )
         gameMain.createPlayer();
         while(true){
             SDL_PollEvent(&e);
-            gameMain.render_Game();
-            gamefunc::renderPresent();
+            gameMain.runGame(e);
         }
     }
     gameMain.clearMedia();

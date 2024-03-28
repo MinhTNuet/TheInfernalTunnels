@@ -58,8 +58,14 @@ void Game::setTileClip()
 bool Game::createPlayer()
 {
     Player = new player( 64, 128, p_texture[1]);
-    if( Player == NULL ) return false;
+    if(Player == NULL) return false;
     return true;
+}
+
+void Game::updateGame()
+{
+    Player->updatePlayer(*mat);
+    Player->changeCam(camera, *mat);
 }
 
 void Game::render_Game()
@@ -70,12 +76,34 @@ void Game::render_Game()
 
 void Game::load_map()
 {
-    mp = new Map(0, "map1.txt", tileSet);
+    mat = new Map(0, "map1.txt", tileSet);
 }
 
 void Game::render_Map()
 {
-    mp->renderMap(tileClip, camera);
+    mat->renderMap(tileClip, camera);
+}
+
+void Game::resetGame()
+{
+    Player->resetplayer();
+
+}
+
+void Game::handleInputGame(SDL_Event &e)
+{
+    if(e.type == SDL_QUIT) gamefunc::renderQuit();
+    Player->handleEvent(e);
+
+}
+
+void Game::runGame(SDL_Event &e)
+{
+    handleInputGame(e);
+    updateGame();
+    render_Game();
+
+    gamefunc::renderPresent();
 }
 
 void Game::clearMedia()

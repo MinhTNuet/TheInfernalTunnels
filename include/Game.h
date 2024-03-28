@@ -22,13 +22,19 @@ public:
 
     bool createPlayer();
 
+    void updateGame();
+
     void render_Game();
     void load_map();
-
     void render_Map();
 
+    void resetGame();
+    void handleInputGame(SDL_Event &e);
     void clearMedia();
+
+    void runGame(SDL_Event &e);
     bool isRunning() {return runningGame;}
+
 private:
     bool runningGame = false;
 
@@ -39,6 +45,6 @@ private:
     vector <SDL_Rect> tileClip;
 
     player* Player;
-    Map* mp;
+    Map* mat;
 };
 #endif // GAME_H
