@@ -35,7 +35,7 @@ private:
     SDL_Texture* tileSet = NULL;
     SDL_Texture* p_texture[3] = {NULL};
 
-    SDL_Rect camera = {200, 200, SCREEN_WIDTH, SCREEN_HEIGHT};
+    SDL_Rect camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     vector <SDL_Rect> tileClip;
 
     player* Player;

@@ -1,8 +1,9 @@
 #include "player.h"
 
-player::player(int _x, int _y) : Texture(_x, _y)
+player::player(int _x, int _y, SDL_Texture* image) : Texture(_x, _y)
 {
     collision = {_x, _y, player_w, player_h};
+    p_texture = image;
 }
 
 void player::handleEvent(SDL_Event &e)
@@ -74,6 +75,12 @@ void player::changeCam(SDL_Rect &camera, Map mat)
     camera.y = lerp(camera.y, cam_target_y, smooth);
 }
 
+void player::renderPlayer(SDL_Rect &camera)
+{
+    SDL_Rect str = {0, 0, 64, 64};
+    SDL_Rect des = {0, 0, 64, 64};
+    gamefunc::renderTexture(p_texture, &str, &des);
+}
 
 void player::resetplayer()
 {

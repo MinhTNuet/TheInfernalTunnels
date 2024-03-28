@@ -15,10 +15,11 @@ class player : public Texture
 {
     public:
         enum status{
+            jump,
             run,
-            jump
+            fall
         };
-        player(int _x, int _y);
+        player(int _x, int _y, SDL_Texture* image);
 
         void handleEvent(SDL_Event &e);
         void handleStatus();
@@ -29,6 +30,7 @@ class player : public Texture
         void buffhp() {if(hp<3) hp++;}
 
         void changeCam(SDL_Rect &camera, Map mat);
+        void renderPlayer(SDL_Rect &camera);
         void resetplayer();
 
 
@@ -41,6 +43,8 @@ class player : public Texture
         int index_map_player = 0;
         int startX_map_player;
         int x_vel = 0, y_vel = 0;
+
+        SDL_Texture* p_texture;
 
         bool idling = false;
         bool grounded = false;

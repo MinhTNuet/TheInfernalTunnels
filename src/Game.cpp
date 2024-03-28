@@ -57,7 +57,7 @@ void Game::setTileClip()
 
 bool Game::createPlayer()
 {
-    Player = new player( 64, 128);
+    Player = new player( 64, 128, p_texture[1]);
     if( Player == NULL ) return false;
     return true;
 }
@@ -65,6 +65,7 @@ bool Game::createPlayer()
 void Game::render_Game()
 {
     render_Map();
+    Player->renderPlayer(camera);
 }
 
 void Game::load_map()
