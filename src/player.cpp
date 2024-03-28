@@ -77,8 +77,8 @@ void player::changeCam(SDL_Rect &camera, Map mat)
 
 void player::renderPlayer(SDL_Rect &camera)
 {
-    SDL_Rect str = {0, 0, 64, 64};
-    SDL_Rect des = {0, 0, 64, 64};
+    SDL_Rect str = {0, 0, 250, 250};
+    SDL_Rect des = {0, 0, 250, 250};
     gamefunc::renderTexture(p_texture, &str, &des);
 }
 

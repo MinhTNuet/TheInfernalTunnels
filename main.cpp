@@ -16,6 +16,7 @@ int main( int argc, char* argv[] )
     else{
         gameMain.setTileClip();
         gameMain.load_map();
+        gameMain.createPlayer();
         while(true){
             SDL_PollEvent(&e);
             gameMain.render_Game();
