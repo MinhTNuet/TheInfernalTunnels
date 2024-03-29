@@ -114,21 +114,21 @@ bool gamefunc::checkWall(SDL_Rect obj, Map mat, bool* grounded)
     if(d >= MAP_HEIGHT)return false;
 
     if(grounded != NULL){
-        if(mat.getDataMap(a,d).getType() > 140 && mat.getDataMap(b,d).getType() > 140) *grounded = false;
-        else if(mat.getDataMap(a,d).getType() > 140 && obj.x + obj.w < mat.getDataMap(b,d).getX()) * grounded = false;
+        if(mat.getDataMap(a,d).getType() > 170 && mat.getDataMap(b,d).getType() > 170) *grounded = false;
+        else if(mat.getDataMap(a,d).getType() > 170 && obj.x + obj.w < mat.getDataMap(b,d).getX()) * grounded = false;
 
     }
 
-    if(mat.getDataMap(a,c).getType() <140){
+    if(mat.getDataMap(a,c).getType() < 132){
         if(gamefunc::checkCollision(obj, mat.getDataMap(a,c).getCollision()))return true;
     }
-    if(mat.getDataMap(b,c).getType() <140){
+    if(mat.getDataMap(b,c).getType() < 132){
         if(gamefunc::checkCollision(obj, mat.getDataMap(b,c).getCollision()))return true;
     }
-    if(mat.getDataMap(a,d).getType() <140){
+    if(mat.getDataMap(a,d).getType() < 132){
         if(gamefunc::checkCollision(obj, mat.getDataMap(a,d).getCollision()))return true;
     }
-    if(mat.getDataMap(b,d).getType() <140){
+    if(mat.getDataMap(b,d).getType() < 132){
         if(gamefunc::checkCollision(obj, mat.getDataMap(b,d).getCollision()))return true;
     }
     return false;

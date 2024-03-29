@@ -18,7 +18,6 @@ void player::handleEvent(SDL_Event &e)
         switch(e.key.keysym.sym){
         case SDLK_d:
             x_vel += player_speed;
-
             break;
         case SDLK_a:
             x_vel -= player_speed;
@@ -44,15 +43,15 @@ void player::handleEvent(SDL_Event &e)
 void player::handleCollision(Map &mat)
 {
     x += x_vel;
-    this->collision.x = x;
+    collision.x = x;
     if(gamefunc::checkWall(getCollision(), mat)){
         x -= x_vel;
-        this->collision.x = getX();
+        collision.x = getX();
     }
 
     y_vel += force;
     y += y_vel;
-    this->collision.y = y;
+    collision.y = y;
     if(gamefunc::checkWall(getCollision(), mat, &grounded)){
         if(y_vel > 0){
             grounded = true;
