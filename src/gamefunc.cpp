@@ -101,7 +101,8 @@ bool gamefunc::checkCollision(SDL_Rect obj1, SDL_Rect obj2)
     if(obj1.x + obj1.w < obj2.x) return false;
     if(obj2.x + obj2.w < obj1.x) return false;
     if(obj1.y + obj1.h < obj2.y) return false;
-    if(obj2.y + obj2.h < obj1.x) return false;
+    if(obj2.y + obj2.h < obj1.y) return false;
+    return true;
 }
 
 bool gamefunc::checkWall(SDL_Rect obj, Map mat, bool* grounded)
@@ -114,8 +115,8 @@ bool gamefunc::checkWall(SDL_Rect obj, Map mat, bool* grounded)
     if(d >= MAP_HEIGHT)return false;
 
     if(grounded != NULL){
-        if(mat.getDataMap(a,d).getType() > 170 && mat.getDataMap(b,d).getType() > 170) *grounded = false;
-        else if(mat.getDataMap(a,d).getType() > 170 && obj.x + obj.w < mat.getDataMap(b,d).getX()) * grounded = false;
+        if(mat.getDataMap(a,d).getType() > 132 && mat.getDataMap(b,d).getType() > 132) *grounded = false;
+        else if(mat.getDataMap(a,d).getType() > 132 && obj.x + obj.w < mat.getDataMap(b,d).getX()) * grounded = false;
 
     }
 

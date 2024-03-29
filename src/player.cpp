@@ -29,7 +29,7 @@ void player::handleEvent(SDL_Event &e)
 
         }
     }
-    if(e.type == SDL_KEYUP && e.key.repeat == 0){
+    if(e.type == SDL_KEYUP && e.key.repeat == 0 && x_vel != 0){
         switch(e.key.keysym.sym){
         case SDLK_d:
             x_vel -= player_speed;
@@ -64,7 +64,7 @@ void player::handleCollision(Map &mat)
 void player::Jump()
 {
     if(grounded){
-        y_vel = -17;
+        y_vel = -30;
         jumping = true;
     }
 }
