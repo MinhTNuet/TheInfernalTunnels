@@ -25,10 +25,10 @@ bool Game::init()
     if(!gamefunc::initWindow()) return false;
     cout << "Success init dowload" << endl;
 
-    tileSet = gamefunc::loadTextureFromFile("src/anhtest.jpg");
-    p_texture[0] = gamefunc::loadTextureFromFile("src/Jump.png");
-    p_texture[1] = gamefunc::loadTextureFromFile("src/Run.png");
-    p_texture[2] = gamefunc::loadTextureFromFile("src/Fall.png");
+    tileSet = gamefunc::loadTextureFromFile("image/tileSet.jpg");
+    p_texture[0] = gamefunc::loadTextureFromFile("image/player/Sprites/Jump.png");
+    p_texture[1] = gamefunc::loadTextureFromFile("image/player/Sprites/Run.png");
+    p_texture[2] = gamefunc::loadTextureFromFile("image/player/Sprites/Fall.png");
 
     return true;
 
@@ -38,8 +38,8 @@ void Game::setTileClip()
 {
     tileClip.push_back({0, 0, 0, 0});
 
-    for(int i=0; i<13; i++){
-        for(int j=0; j<20; j++){
+    for(int i=0; i<11; i++){
+        for(int j=0; j<12; j++){
             tileClip.push_back({TILE_SIZE*j, TILE_SIZE*i, TILE_SIZE, TILE_SIZE} );
         }
     }
@@ -77,7 +77,7 @@ void Game::render_Game()
 
 void Game::load_map()
 {
-    mat = new Map(0, "map1.txt", tileSet);
+    mat = new Map(0, "image/Map/map1.txt", p_texture[1]);
 }
 
 void Game::render_Map()

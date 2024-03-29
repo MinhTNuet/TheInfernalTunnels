@@ -2,7 +2,7 @@
 
 bool gamefunc::initWindow()
 {
-    window = SDL_CreateWindow( "The Infernal Tunnels", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("The Infernal Tunnels", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if(window == NULL){
         cout << "Error init Window: " << SDL_GetError() << endl;
         return false;
@@ -114,7 +114,7 @@ bool gamefunc::checkWall(SDL_Rect obj, Map mat, bool* grounded)
     if(d >= MAP_HEIGHT)return false;
 
     if(grounded != NULL){
-        if(mat.getDataMap(a,d).getType() > 140 && mat.getDataMap(b,d).getType() > 140) * grounded = false;
+        if(mat.getDataMap(a,d).getType() > 140 && mat.getDataMap(b,d).getType() > 140) *grounded = false;
         else if(mat.getDataMap(a,d).getType() > 140 && obj.x + obj.w < mat.getDataMap(b,d).getX()) * grounded = false;
 
     }

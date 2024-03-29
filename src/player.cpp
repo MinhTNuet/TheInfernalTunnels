@@ -83,7 +83,7 @@ void player::changeCam(SDL_Rect &camera, Map& mat)
         cam_target_x = mat.getStart_x();
     }
 
-    if( cam_target_y < 0.5*TILE_SIZE){
+    if(cam_target_y < 0.5*TILE_SIZE){
         cam_target_y = 0.5*TILE_SIZE;
     } else if(cam_target_y > 64*MAP_HEIGHT - SCREEN_HEIGHT - 0.5*TILE_SIZE){
         cam_target_y = 64*MAP_HEIGHT - SCREEN_HEIGHT - 0.5*TILE_SIZE;
