@@ -17,7 +17,11 @@ class player : public Texture
         enum status{
             jump,
             run,
-            fall
+            fall,
+            attack,
+            death,
+            idle,
+            hurt
         };
         player(int _x, int _y, SDL_Texture* image);
         void updatePlayer(Map& mat);

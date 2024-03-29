@@ -17,9 +17,11 @@ class Game
 {
 public:
     bool init();
-//  bool createMap();
+    bool loadMedia();
+    bool loadMap();
     void setTileClip();
 
+    //  bool createMap();
     bool createPlayer();
 
     void updateGame();

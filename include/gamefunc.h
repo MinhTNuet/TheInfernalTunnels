@@ -28,6 +28,17 @@ static SDL_Event* event;
 
 class Map;
 
+struct map_enemy
+{
+    const char* path;
+    int STT;
+    map_enemy(const char* _path, int _STT){
+        path = _path;
+        STT = _STT;
+    }
+    const char* getPath() { return path; }
+};
+
 namespace gamefunc {
     bool initWindow();
     void clearRender();

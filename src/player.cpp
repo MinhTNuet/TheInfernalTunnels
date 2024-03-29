@@ -18,6 +18,7 @@ void player::handleEvent(SDL_Event &e)
         switch(e.key.keysym.sym){
         case SDLK_d:
             x_vel += player_speed;
+
             break;
         case SDLK_a:
             x_vel -= player_speed;

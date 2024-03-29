@@ -57,7 +57,6 @@ void Map::loadMap(string fileName)
             file >> data;
             file >> temp;
             tileMat column(x, y, data);
-            if(data > 120 && data < 140) column.setCollision(24);
             row.push_back(column);
             x += TILE_SIZE;
         }

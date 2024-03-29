@@ -25,7 +25,7 @@ bool Game::init()
     if(!gamefunc::initWindow()) return false;
     cout << "Success init dowload" << endl;
 
-    tileSet = gamefunc::loadTextureFromFile("image/tileSet.jpg");
+    tileSet = gamefunc::loadTextureFromFile("image/tileSet.png");
     p_texture[0] = gamefunc::loadTextureFromFile("image/player/Sprites/Jump.png");
     p_texture[1] = gamefunc::loadTextureFromFile("image/player/Sprites/Run.png");
     p_texture[2] = gamefunc::loadTextureFromFile("image/player/Sprites/Fall.png");
@@ -34,12 +34,30 @@ bool Game::init()
 
 }
 
+bool Game::loadMedia()
+{
+    bool check = true;
+
+}
+
+//bool Game::loadMap()
+//{
+//    map_enemy map1("image/Map/map1.txt",1);
+//    total_map.push_back(map1);
+//    map_enemy map2("image/Map/map2.txt",2);
+//    total_map.push_back(map2);
+//    map_enemy map3("image/Map/map3.txt",3);
+//    total_map.push_back(map1);
+//    return true;
+//}
+
+
 void Game::setTileClip()
 {
     tileClip.push_back({0, 0, 0, 0});
 
     for(int i=0; i<11; i++){
-        for(int j=0; j<12; j++){
+        for(int j=0; j<34; j++){
             tileClip.push_back({TILE_SIZE*j, TILE_SIZE*i, TILE_SIZE, TILE_SIZE} );
         }
     }
@@ -58,7 +76,7 @@ void Game::setTileClip()
 
 bool Game::createPlayer()
 {
-    Player = new player( 64, 128, tileSet);
+    Player = new player(64, 320, tileSet);
     if(Player == NULL) return false;
     return true;
 }
@@ -77,7 +95,7 @@ void Game::render_Game()
 
 void Game::load_map()
 {
-    mat = new Map(0, "image/Map/map1.txt", p_texture[1]);
+    mat = new Map(0, "image/Map/map1.txt", tileSet);
 }
 
 void Game::render_Map()
@@ -95,7 +113,6 @@ void Game::handleInputGame(SDL_Event &e)
 {
     if(e.type == SDL_QUIT) gamefunc::renderQuit();
     Player->handleEvent(e);
-
 }
 
 void Game::runGame(SDL_Event &e)
