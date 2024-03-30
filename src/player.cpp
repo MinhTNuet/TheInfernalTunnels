@@ -64,7 +64,7 @@ void player::handleCollision(Map &mat)
 void player::Jump()
 {
     if(grounded){
-        y_vel = -30;
+        y_vel = -20;
         jumping = true;
     }
 }

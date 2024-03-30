@@ -43,7 +43,7 @@ class player : public Texture
     private:
         int player_w = 48;
         int player_h = 56;
-        int player_speed = 2;
+        int player_speed = 4;
         int hp = 3;
         int index_map_player = 0;
         int startX_map_player;

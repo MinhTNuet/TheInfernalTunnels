@@ -95,7 +95,7 @@ void Game::render_Game()
 
 void Game::load_map()
 {
-    mat = new Map(0, "image/Map/map1.txt", tileSet);
+    mat = new Map(0, "image/Map/map3.txt", tileSet);
 }
 
 void Game::render_Map()
