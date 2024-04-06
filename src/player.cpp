@@ -14,7 +14,6 @@ void player::updatePlayer(deque <Map>& list_map)
 
 void player::handleEvent(SDL_Event &e)
 {
-    cout<<x_vel<<" "<<y_vel<<endl;
     if(e.type == SDL_KEYDOWN && e.key.repeat == 0){
         switch(e.key.keysym.sym){
         case SDLK_d:

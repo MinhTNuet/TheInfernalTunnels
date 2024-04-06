@@ -36,6 +36,7 @@ bool Game::loadMedia()
     p_texture[0] = gamefunc::loadTextureFromFile("image/player/Sprites/Jump.png");
     p_texture[1] = gamefunc::loadTextureFromFile("image/player/Sprites/Run.png");
     p_texture[2] = gamefunc::loadTextureFromFile("image/player/Sprites/Fall.png");
+    return check;
 }
 
 bool Game::loadMap()
@@ -45,7 +46,7 @@ bool Game::loadMap()
     map_enemy map2("image/Map/map2.txt",2);
     total_map.push_back(map2);
     map_enemy map3("image/Map/map3.txt",3);
-    total_map.push_back(map1);
+    total_map.push_back(map3);
     return true;
 }
 
@@ -63,10 +64,10 @@ void Game::setTileClip()
 
 bool Game::createMap()
 {
-    for( int i=0 ; i<3 ; i++){
+    for(int i=0 ; i<3 ; i++){
         int random = rand() % total_map.size();
         random = i;
-        Map mat( i*MAP_WIDTH*TILE_SIZE, total_map[random].path, tileSet, total_map[random].STT );
+        Map mat(i*MAP_WIDTH*TILE_SIZE, total_map[random].path, tileSet, total_map[random].STT);
         list_map.push_back(mat);
     }
     if(list_map.size() < 3){
@@ -108,7 +109,7 @@ bool Game::updateMap()
         }
         cout << "Update Map number: " << randomMap << endl;
 
-        Map mat( list_map[1].getStart_x() + TILE_SIZE*MAP_WIDTH, total_map[randomMap].path, tileSet, total_map[randomMap].STT );
+        Map mat(list_map[1].getStart_x() + TILE_SIZE*MAP_WIDTH, total_map[randomMap].path, tileSet, total_map[randomMap].STT );
         list_map.push_back(mat);
         return true;
     }
@@ -146,7 +147,6 @@ void Game::runGame(SDL_Event &e)
     handleInputGame(e);
     updateGame();
     render_Game();
-
 
     gamefunc::renderPresent();
 }
