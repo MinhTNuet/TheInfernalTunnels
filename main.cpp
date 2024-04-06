@@ -16,7 +16,9 @@ int main( int argc, char* argv[] )
     else{
         if(!gameMain.loadMedia() || !gameMain.loadMap())return 0;
         else{
+            gameMain.setTileClip();
             gameMain.createMap();
+            gameMain.createPlayer();
             while(true){
                 SDL_PollEvent(&e);
                 gameMain.runGame(e);

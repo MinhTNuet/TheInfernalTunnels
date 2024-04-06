@@ -76,7 +76,7 @@ void Map::renderMap(vector <SDL_Rect> clipTile, SDL_Rect& camera)
         for(int j = (camera.x - getStart_x())/TILE_SIZE; j< MAP_WIDTH; j++){
             if(j<0) continue;
             if(j*TILE_SIZE + getStart_x() - camera.x >= SCREEN_WIDTH) break;
-            SDL_Rect dst = {getDataMap(j,i).getX() - camera.x, getDataMap(j,i).getY() - camera.y, TILE_SIZE, TILE_SIZE};
+            SDL_Rect dst = {getDataMap(j,i).getX() + getStart_x() - camera.x, getDataMap(j,i).getY() - camera.y, TILE_SIZE, TILE_SIZE};
             gamefunc::renderTexture(tileSet, &clipTile[getDataMap(j,i).getType()], &dst);
         }
     }
