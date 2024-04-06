@@ -16,15 +16,18 @@ using namespace std;
 class Game
 {
 public:
+    Game(){;};
     bool init();
     bool loadMedia();
     bool loadMap();
     void setTileClip();
 
-    //  bool createMap();
+    bool createMap();
     bool createPlayer();
 
     void updateGame();
+    bool updateMap();
+
 
     void render_Game();
     void load_map();
@@ -47,6 +50,8 @@ private:
     vector <SDL_Rect> tileClip;
 
     player* Player;
-    Map* mat;
+    vector <map_enemy> total_map;
+    deque <Map> list_map;
+
 };
 #endif // GAME_H

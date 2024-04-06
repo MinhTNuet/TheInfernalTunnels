@@ -16,12 +16,13 @@ int tileMat::getType() const
     return tileType;
 }
 
-Map::Map(int s_x, string fileName, SDL_Texture* _tileSet)
+Map::Map(int s_x, const char* fileName, SDL_Texture* _tileSet, const int& _STT)
 {
     start_x = s_x;
     start_y = 0;
+    STT = _STT;
     tileSet = _tileSet;
-    loadMap(fileName);
+    loadMap(fileName, _STT);
 }
 
 void Map::clearMap()
@@ -39,13 +40,15 @@ void Map::setMapTexture(SDL_Texture* texture)
     tileSet = texture;
 }
 
-void Map::loadMap(string fileName)
+void Map::loadMap(const char* fileName, int _STT)
 {
     ifstream file(fileName);
     if(!file)
     {
         cout << "Could not load data map";
     }
+
+    STT = _STT;
     int x = 0;
     int y = 0;
     int data;
@@ -77,4 +80,22 @@ void Map::renderMap(vector <SDL_Rect> clipTile, SDL_Rect& camera)
             gamefunc::renderTexture(tileSet, &clipTile[getDataMap(j,i).getType()], &dst);
         }
     }
+}
+
+void Map::fillRight(vector <SDL_Rect> clipTile, SDL_Rect& camera)
+{
+    if(camera.x + 64*MAP_WIDTH <= getStart_x())return;
+
+    for(int i=camera.y/TILE_SIZE; i*TILE_SIZE - camera.y < SCREEN_HEIGHT; i++){
+        for(int j=0; j*64+getStart_x() - camera.x < SCREEN_WIDTH; j++){
+            SDL_Rect dst = {getStart_x() - camera.x + j*64, getDataMap(j,i).getY() - camera.y, TILE_SIZE, TILE_SIZE};
+            gamefunc::renderTexture(tileSet, &clipTile[getDataMap(j,i).getType()], &dst);
+        }
+    }
+}
+
+void Map::fillLeft(vector <SDL_Rect> clipTile, SDL_Rect& camera)
+{
+    if(camera.x >= getStart_x() + 64*MAP_WIDTH)return;
+    renderMap(clipTile, camera);
 }

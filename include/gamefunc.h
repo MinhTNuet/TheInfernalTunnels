@@ -55,6 +55,7 @@ namespace gamefunc {
 
     bool checkCollision(SDL_Rect obj1, SDL_Rect obj2);
     bool checkWall(SDL_Rect obj, Map mat, bool* grounded = NULL);
+    bool checkWall(SDL_Rect obj, Map map1, Map map2, bool* grounded = NULL);
 
     void setWindowFS();
     void quitWindowFS();

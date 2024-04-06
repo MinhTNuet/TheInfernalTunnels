@@ -135,6 +135,39 @@ bool gamefunc::checkWall(SDL_Rect obj, Map mat, bool* grounded)
     return false;
 }
 
+bool gamefunc::checkWall(SDL_Rect obj, Map map1, Map map2, bool* grounded)
+{
+    bool check = false;
+    int a = MAP_WIDTH-1;
+    int b = 0;
+    int c = obj.y/TILE_SIZE;
+    int d = c + 1;
+
+    if(d >= MAP_HEIGHT) return false;
+
+    if(grounded != NULL){
+        if(map1.getDataMap(a, d).getType() > 132 && map2.getDataMap(b, d).getType() > 132 && grounded != NULL) *grounded = false;
+        else if(map1.getDataMap(a, d).getType() > 132 && obj.x+obj.w <= map2.getDataMap(b, d).getX()) *grounded = false;
+    }
+
+    if(map1.getDataMap(a, c).getType() < 132){
+        if(gamefunc::checkCollision( obj, map1.getDataMap(a, c).getCollision())) return true;
+    }
+    if(map1.getDataMap(a, d).getType() < 132){
+        if(gamefunc::checkCollision( obj, map1.getDataMap(a, d).getCollision())) return true;
+    }
+
+    obj.x -= 64*MAP_WIDTH;
+    if(map2.getDataMap(b, c).getType() < 132){
+        if(gamefunc::checkCollision(obj, map2.getDataMap(b, c).getCollision())) check = true;
+    }
+    if(map2.getDataMap(b, d).getType() < 132){
+        if(gamefunc::checkCollision(obj, map2.getDataMap(b, d).getCollision())) check = true;
+    }
+
+    return check;
+}
+
 void gamefunc::setWindowFS()
 {
     SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
