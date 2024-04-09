@@ -38,7 +38,7 @@ bool Game::loadMedia()
     p_texture[2] = gamefunc::loadTextureFromFile("image/player/Sprites/Hurt.png");
     p_texture[3] = gamefunc::loadTextureFromFile("image/player/Sprites/Death.png");
     p_texture[4] = gamefunc::loadTextureFromFile("image/player/Sprites/Idle.png");
-    p_texture[5] = gamefunc::loadTextureFromFile("image/player/Sprites/Walk.png");
+    p_texture[5] = gamefunc::loadTextureFromFile("image/player/Sprites/Walking.png");
     p_texture[6] = gamefunc::loadTextureFromFile("image/player/Sprites/Fall.png");
     return check;
 }
@@ -51,6 +51,10 @@ bool Game::loadMap()
     total_map.push_back(map2);
     map_enemy map3("image/Map/map3.txt",3);
     total_map.push_back(map3);
+    map_enemy map4("image/Map/map4.txt",4);
+    total_map.push_back(map4);
+    map_enemy map5("image/Map/map5.txt",5);
+    total_map.push_back(map5);
     return true;
 }
 
