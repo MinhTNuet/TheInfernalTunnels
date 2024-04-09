@@ -34,8 +34,12 @@ bool Game::loadMedia()
     bool check = true;
     tileSet = gamefunc::loadTextureFromFile("image/tileSet.png");
     p_texture[0] = gamefunc::loadTextureFromFile("image/player/Sprites/Jump.png");
-    p_texture[1] = gamefunc::loadTextureFromFile("image/player/Sprites/Run.png");
-    p_texture[2] = gamefunc::loadTextureFromFile("image/player/Sprites/Fall.png");
+    p_texture[1] = gamefunc::loadTextureFromFile("image/player/Sprites/Attack.png");
+    p_texture[2] = gamefunc::loadTextureFromFile("image/player/Sprites/Hurt.png");
+    p_texture[3] = gamefunc::loadTextureFromFile("image/player/Sprites/Death.png");
+    p_texture[4] = gamefunc::loadTextureFromFile("image/player/Sprites/Idle.png");
+    p_texture[5] = gamefunc::loadTextureFromFile("image/player/Sprites/Walk.png");
+    p_texture[6] = gamefunc::loadTextureFromFile("image/player/Sprites/Fall.png");
     return check;
 }
 
@@ -79,7 +83,7 @@ bool Game::createMap()
 
 bool Game::createPlayer()
 {
-    Player = new player(64, 320, tileSet);
+    Player = new player(64, 320, p_texture);
     if(Player == NULL) return false;
     return true;
 }

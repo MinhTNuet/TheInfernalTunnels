@@ -16,14 +16,14 @@ class player : public Texture
 public:
     enum status{
         jump,
-        run,
         fall,
         attack,
-        death,
+        hurt,
+        dead,
         idle,
-        hurt
+        walk
     };
-    player(int _x, int _y, SDL_Texture* image);
+    player(int _x, int _y, SDL_Texture* image[]);
     void updatePlayer(deque <Map>& list_map);
 
     void handleEvent(SDL_Event &e);
@@ -41,6 +41,8 @@ public:
 
     int getStartMap() const {return startX_map_player;}
     int gethp() const {return hp;}
+    bool checkAttack() const { return countHit == 26; }
+    bool isDead() const { return countDead >= 7*6-1; }
 
 private:
     int player_w = 48;
@@ -51,8 +53,20 @@ private:
     int startX_map_player;
     int x_vel = 0, y_vel = 0;
 
-    SDL_Texture* p_texture;
+    static const int WALKING_FRAMES = 8;
+    static const int IDLING_FRAMES = 8;
+    static const int JUMPING_FRAMES = 2;
+    static const int FALLING_FRAMES = 2;
+    static const int ATTACKING_FRAMES = 8;
+    static const int HURTING_FRAMES = 3;
+    static const int DIE_FRAMES = 7;
 
+    SDL_Rect animationFalling[FALLING_FRAMES];
+    SDL_Rect animationPlayer[8];
+
+    SDL_Texture* p_texture[7];
+
+    int countWalk = 0, countIdle = 0, countJump = 0, countFall = 0, countHit = 0, countHurt = 0, countDead = 0;
     bool idling = false, grounded = false, walking = false, jumping= false, falling = false, attacking = false, hurting = false, die = false ;
 };
 

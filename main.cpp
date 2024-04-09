@@ -17,11 +17,12 @@ int main( int argc, char* argv[] )
         if(!gameMain.loadMedia() || !gameMain.loadMap())return 0;
         else{
             gameMain.setTileClip();
-            gameMain.createMap();
-            gameMain.createPlayer();
-            while(true){
-                SDL_PollEvent(&e);
-                gameMain.runGame(e);
+            if(!gameMain.createMap() || !gameMain.createPlayer())return 0;
+            else {
+                while(true){
+                    SDL_PollEvent(&e);
+                    gameMain.runGame(e);
+                }
             }
         }
     }

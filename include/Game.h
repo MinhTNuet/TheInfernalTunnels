@@ -44,7 +44,7 @@ private:
     bool runningGame = false;
 
     SDL_Texture* tileSet = NULL;
-    SDL_Texture* p_texture[3] = {NULL};
+    SDL_Texture* p_texture[7] = {NULL};
 
     SDL_Rect camera = {64, 128, SCREEN_WIDTH, SCREEN_HEIGHT};
     vector <SDL_Rect> tileClip;

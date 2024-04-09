@@ -1,15 +1,38 @@
 #include "player.h"
 
-player::player(int _x, int _y, SDL_Texture* image) : Texture(_x, _y)
+player::player(int _x, int _y, SDL_Texture* image[]) : Texture(_x, _y)
 {
     collision = {_x, _y, player_w, player_h};
-    p_texture = image;
+    p_texture[jump] = image[jump];
+    p_texture[attack] = image[attack];
+    p_texture[hurt] = image[hurt];
+    p_texture[dead] = image[dead];
+    p_texture[idle] = image[idle];
+    p_texture[walk] = image[walk];
+
+    for(int i=0 ; i<FALLING_FRAMES ; i++){
+        animationFalling[i] = {512 + i*64, 0, 64, 64};
+    }
+
+    for(int i=0 ; i<32 ; i++){
+        animationPlayer[i] = {i*64, 0, 64, 64};
+    }
 }
 
 void player::updatePlayer(deque <Map>& list_map)
 {
     mapPresent(list_map);
-    handleCollision(list_map);
+
+    if(!die){
+        handleStatus();
+        handleCollision(list_map);
+    }
+
+    if(y > MAP_HEIGHT*64 +128 && !die){
+        die = true;
+        countDead = 6*24;
+    }
+
 }
 
 void player::handleEvent(SDL_Event &e)
@@ -27,7 +50,11 @@ void player::handleEvent(SDL_Event &e)
             Jump();
             grounded = false;
             break;
-
+        case SDLK_SPACE:
+            if(!hurting && !die) {
+                attacking = true;
+            }
+            break;
         }
     }
     if(e.type == SDL_KEYUP && e.key.repeat == 0 && x_vel != 0){
@@ -41,6 +68,28 @@ void player::handleEvent(SDL_Event &e)
         }
     }
 }
+
+void player::handleStatus()
+{
+    if(hp <= 0 && !hurting){
+        die = true;
+    }
+
+    if(!die && !attacking && !hurting && grounded && x_vel != 0) walking = true;
+    else walking = false;
+    if(!die && !hurting && grounded && x_vel == 0) idling = true;
+    else idling = false;
+    if(!die && !hurting && grounded && y_vel >= 0) falling = true;
+    else falling = false;
+    if(!die && !hurting && grounded && y_vel < 0) jumping = true;
+    else jumping = false;
+
+    if(hurting) attacking = false;
+
+    if(x_vel < 0)flip = SDL_FLIP_HORIZONTAL;
+    else if(x_vel > 0)flip = SDL_FLIP_NONE;
+}
+
 void player::handleCollision(deque <Map>& list_map)
 {
     x += x_vel;
@@ -123,9 +172,57 @@ void player::changeCam(SDL_Rect &camera, deque <Map>& list_map)
 
 void player::renderPlayer(SDL_Rect &camera)
 {
-    SDL_Rect str = {x - camera.x, y - camera.y, 64, 64};
-    SDL_Rect des = {0, 0, 64, 64};
-    gamefunc::renderTexture(p_texture, &des, &str);
+    SDL_Rect str = {x - camera.x, y - camera.y, 128, 128};
+
+    if(attacking){
+        if((countHit+2)/6>= ATTACKING_FRAMES) attacking = false;
+        countHit++;
+        gamefunc::renderTextureFlip(p_texture[attack], &animationPlayer[countHit/6], &str, flip);
+    }
+    else{
+        countHit = 0;
+        if(hurting){
+            if((countHurt+2)/6 >= HURTING_FRAMES) hurting = false;
+            countHurt++;
+            gamefunc::renderTextureFlip(p_texture[hurt], &animationPlayer[countHurt/6], &str, flip);
+        }
+        else countHurt=0;
+
+        if(jumping){
+            if((countJump+2)/6 >= JUMPING_FRAMES) countJump = 0;
+            countJump++;
+            gamefunc::renderTextureFlip(p_texture[jump], &animationPlayer[countJump/6], &str, flip);
+        }
+        else countJump=0;
+
+        if(falling){
+            if((countFall+1)/6 >= FALLING_FRAMES) countFall = 0;
+            countFall++;
+            gamefunc::renderTextureFlip(p_texture[jump], &animationFalling[countFall/6], &str, flip);
+        }
+        else countFall=0;
+
+        if(walking){
+            if((countWalk+1)/6 >= WALKING_FRAMES) countWalk = 0;
+            countWalk++;
+            gamefunc::renderTextureFlip(p_texture[walk], &animationPlayer[countWalk/6], &str, flip);
+        }
+        else countWalk=0;
+
+        if(idling){
+            if((countIdle+1)/8 >= IDLING_FRAMES) countIdle = 0;
+            countIdle++;
+            gamefunc::renderTextureFlip(p_texture[idle], &animationPlayer[countIdle/8], &str, flip);
+        }
+        else countIdle=0;
+
+        if(die){
+            if((countDead+1)/6 >= DIE_FRAMES) Mix_HaltChannel(-1);
+            countDead++;
+            gamefunc::renderTextureFlip(p_texture[dead], &animationPlayer[countDead/6], &str, flip);
+        }
+        else countDead = 0;
+    }
 }
 
 void player::resetplayer()
