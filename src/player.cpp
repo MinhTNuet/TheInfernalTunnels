@@ -76,9 +76,9 @@ void player::handleStatus()
     else walking = false;
     if(!die && !hurting && grounded && x_vel == 0) idling = true;
     else idling = false;
-    if(!die && !hurting && grounded && y_vel >= 0) falling = true;
+    if(!die && !hurting && !grounded && y_vel >= 0) falling = true;
     else falling = false;
-    if(!die && !hurting && grounded && y_vel < 0) jumping = true;
+    if(!die && !hurting && !grounded && y_vel < 0) jumping = true;
     else jumping = false;
 
     if(hurting)attacking = false;
@@ -125,7 +125,7 @@ void player::handleCollision(deque <Map>& list_map)
 void player::Jump()
 {
     if(grounded){
-        y_vel = -25;
+        y_vel = -17;
         jumping = true;
     }
 }
