@@ -33,7 +33,7 @@
 	"Texture.h"
 	"player.h"
 
-1712379618 d:\minhc++\theinfernaltunnels\include\gamefunc.h
+1712727092 d:\minhc++\theinfernaltunnels\include\gamefunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -55,7 +55,7 @@
 	<SDL_ttf.h>
 	<bits/stdc++.h>
 
-1712716199 source:d:\minhc++\theinfernaltunnels\src\player.cpp
+1712722605 source:d:\minhc++\theinfernaltunnels\src\player.cpp
 	"player.h"
 
 1712716224 d:\minhc++\theinfernaltunnels\include\player.h
