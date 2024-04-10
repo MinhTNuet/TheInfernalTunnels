@@ -46,8 +46,8 @@ public:
 
 private:
     int player_w = 48;
-    int player_h = 56;
-    int player_speed = 3;
+    int player_h = 55;
+    int player_speed = 4;
     int hp = 3;
     int index_map_player = 0;
     int startX_map_player;
@@ -61,9 +61,7 @@ private:
     static const int HURTING_FRAMES = 3;
     static const int DIE_FRAMES = 7;
 
-    SDL_Rect animationFalling[FALLING_FRAMES];
     SDL_Rect animationPlayer[8];
-
     SDL_Texture* p_texture[7];
 
     int countWalk = 0, countIdle = 0, countJump = 0, countFall = 0, countHit = 0, countHurt = 0, countDead = 0;

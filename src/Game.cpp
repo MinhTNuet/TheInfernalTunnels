@@ -34,12 +34,12 @@ bool Game::loadMedia()
     bool check = true;
     tileSet = gamefunc::loadTextureFromFile("image/tileSet.png");
     p_texture[0] = gamefunc::loadTextureFromFile("image/player/Sprites/Jump.png");
-    p_texture[1] = gamefunc::loadTextureFromFile("image/player/Sprites/Attack.png");
-    p_texture[2] = gamefunc::loadTextureFromFile("image/player/Sprites/Hurt.png");
-    p_texture[3] = gamefunc::loadTextureFromFile("image/player/Sprites/Death.png");
-    p_texture[4] = gamefunc::loadTextureFromFile("image/player/Sprites/Idle.png");
-    p_texture[5] = gamefunc::loadTextureFromFile("image/player/Sprites/Walking.png");
-    p_texture[6] = gamefunc::loadTextureFromFile("image/player/Sprites/Fall.png");
+    p_texture[1] = gamefunc::loadTextureFromFile("image/player/Sprites/Fall.png");
+    p_texture[2] = gamefunc::loadTextureFromFile("image/player/Sprites/Attack.png");
+    p_texture[3] = gamefunc::loadTextureFromFile("image/player/Sprites/Hurt.png");
+    p_texture[4] = gamefunc::loadTextureFromFile("image/player/Sprites/Death.png");
+    p_texture[5] = gamefunc::loadTextureFromFile("image/player/Sprites/Idle.png");
+    p_texture[6] = gamefunc::loadTextureFromFile("image/player/Sprites/Walking.png");
     return check;
 }
 
@@ -87,7 +87,7 @@ bool Game::createMap()
 
 bool Game::createPlayer()
 {
-    Player = new player(64, 320, p_texture);
+    Player = new player(64, 500, p_texture);
     if(Player == NULL) return false;
     return true;
 }
@@ -110,12 +110,11 @@ bool Game::updateMap()
         list_map[0].clearMap();
         list_map.pop_front();
 
-        int randomMap ;
+        int randomMap;
         randomMap = rand()%total_map.size();
         while((total_map[randomMap].STT == list_map[0].getSTT()) || (total_map[randomMap].STT == list_map[1].getSTT())){
            randomMap = rand()%total_map.size();
         }
-        cout << "Update Map number: " << randomMap << endl;
 
         Map mat(list_map[1].getStart_x() + TILE_SIZE*MAP_WIDTH, total_map[randomMap].path, tileSet, total_map[randomMap].STT );
         list_map.push_back(mat);

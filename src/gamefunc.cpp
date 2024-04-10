@@ -151,10 +151,10 @@ bool gamefunc::checkWall(SDL_Rect obj, Map map1, Map map2, bool* grounded)
     }
 
     if(map1.getDataMap(a, c).getType() < 132){
-        if(gamefunc::checkCollision( obj, map1.getDataMap(a, c).getCollision())) return true;
+        if(gamefunc::checkCollision(obj, map1.getDataMap(a, c).getCollision())) return true;
     }
     if(map1.getDataMap(a, d).getType() < 132){
-        if(gamefunc::checkCollision( obj, map1.getDataMap(a, d).getCollision())) return true;
+        if(gamefunc::checkCollision(obj, map1.getDataMap(a, d).getCollision())) return true;
     }
 
     obj.x -= 64*MAP_WIDTH;
