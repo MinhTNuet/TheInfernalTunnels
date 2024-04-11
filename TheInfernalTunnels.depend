@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1712421221 source:d:\minhc++\theinfernaltunnels\src\map.cpp
+1712855502 source:d:\minhc++\theinfernaltunnels\src\map.cpp
 	"Map.h"
 
-1712378549 d:\minhc++\theinfernaltunnels\include\map.h
+1712853058 d:\minhc++\theinfernaltunnels\include\map.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -19,10 +19,10 @@
 	<bits/stdc++.h>
 	"Game.h"
 
-1712715349 source:d:\minhc++\theinfernaltunnels\src\game.cpp
+1712855210 source:d:\minhc++\theinfernaltunnels\src\game.cpp
 	"Game.h"
 
-1712662219 d:\minhc++\theinfernaltunnels\include\game.h
+1712852706 d:\minhc++\theinfernaltunnels\include\game.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -32,8 +32,9 @@
 	"gamefunc.h"
 	"Texture.h"
 	"player.h"
+	"Monster.h"
 
-1712727092 d:\minhc++\theinfernaltunnels\include\gamefunc.h
+1712854217 d:\minhc++\theinfernaltunnels\include\gamefunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -55,7 +56,7 @@
 	<SDL_ttf.h>
 	<bits/stdc++.h>
 
-1712744782 source:d:\minhc++\theinfernaltunnels\src\player.cpp
+1712845741 source:d:\minhc++\theinfernaltunnels\src\player.cpp
 	"player.h"
 
 1712716224 d:\minhc++\theinfernaltunnels\include\player.h
@@ -64,4 +65,13 @@
 	<SDL_ttf.h>
 	<bits/stdc++.h>
 	"gamefunc.h"
+
+1712850695 source:d:\minhc++\theinfernaltunnels\src\monster.cpp
+	"Monster.h"
+
+1712854323 d:\minhc++\theinfernaltunnels\include\monster.h
+	<bits/stdc++.h>
+	"gamefunc.h"
+	"Map.h"
+	"player.h"
 

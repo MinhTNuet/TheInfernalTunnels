@@ -105,7 +105,7 @@ void player::handleCollision(deque <Map>& list_map)
     y += y_vel;
     collision.y = y;
     if(gamefunc::checkWall(getCollision(), list_map[index_map_player], &grounded)){
-        if(y_vel > 0){
+        if(y_vel > 0 && falling){
             grounded = true;
         }
         y -= y_vel;
@@ -173,7 +173,7 @@ void player::changeCam(SDL_Rect &camera, deque <Map>& list_map)
 
 void player::renderPlayer(SDL_Rect &camera)
 {
-    SDL_Rect str = {x - camera.x - 120, y - camera.y - 120, 260, 260};
+    SDL_Rect str = {x - camera.x - 140, y - camera.y - 140, 300, 300};
     if(attacking){
         if((countHit+2)/6>= ATTACKING_FRAMES)attacking = false;
         countHit++;

@@ -10,6 +10,7 @@
 #include "gamefunc.h"
 #include "Texture.h"
 #include "player.h"
+#include "Monster.h"
 
 using namespace std;
 
@@ -24,14 +25,15 @@ public:
 
     bool createMap();
     bool createPlayer();
+    bool createMonster();
 
     void updateGame();
     bool updateMap();
-
+    void update_Monster();
 
     void render_Game();
-    void load_map();
     void render_Map();
+    void render_Monster();
 
     void resetGame();
     void handleInputGame(SDL_Event &e);
@@ -45,6 +47,7 @@ private:
 
     SDL_Texture* tileSet = NULL;
     SDL_Texture* p_texture[7] = {NULL};
+    SDL_Texture* monsterTex[2] = {NULL};
 
     SDL_Rect camera = {64, 128, SCREEN_WIDTH, SCREEN_HEIGHT};
     vector <SDL_Rect> tileClip;
@@ -52,6 +55,7 @@ private:
     player* Player;
     vector <map_enemy> total_map;
     deque <Map> list_map;
+    vector<Monster*> monsterList;
 
 };
 #endif // GAME_H

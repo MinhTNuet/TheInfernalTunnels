@@ -40,20 +40,23 @@ bool Game::loadMedia()
     p_texture[4] = gamefunc::loadTextureFromFile("image/player/Sprites/Death.png");
     p_texture[5] = gamefunc::loadTextureFromFile("image/player/Sprites/Idle.png");
     p_texture[6] = gamefunc::loadTextureFromFile("image/player/Sprites/Walking.png");
+
+    monsterTex[0] = gamefunc::loadTextureFromFile( "image/mon1/Mon1.png");
+    monsterTex[1] = gamefunc::loadTextureFromFile( "image/mon2/Mon2.png");
     return check;
 }
 
 bool Game::loadMap()
 {
-    map_enemy map1("image/Map/map1.txt",1);
+    map_enemy map1("image/Map/map1.txt", {300}, 1);
     total_map.push_back(map1);
-    map_enemy map2("image/Map/map2.txt",2);
+    map_enemy map2("image/Map/map2.txt", {300}, 2);
     total_map.push_back(map2);
-    map_enemy map3("image/Map/map3.txt",3);
+    map_enemy map3("image/Map/map3.txt", {300}, 3);
     total_map.push_back(map3);
-    map_enemy map4("image/Map/map4.txt",4);
+    map_enemy map4("image/Map/map4.txt", {300}, 4);
     total_map.push_back(map4);
-    map_enemy map5("image/Map/map5.txt",5);
+    map_enemy map5("image/Map/map5.txt", {300}, 5);
     total_map.push_back(map5);
     return true;
 }
@@ -72,10 +75,11 @@ void Game::setTileClip()
 
 bool Game::createMap()
 {
-    for(int i=0 ; i<3 ; i++){
+    for(int i=0; i<3; i++){
         int random = rand() % total_map.size();
         random = i;
         Map mat(i*MAP_WIDTH*TILE_SIZE, total_map[random].path, tileSet, total_map[random].STT);
+        mat.setMonsterList(total_map[random].monster_pos);
         list_map.push_back(mat);
     }
     if(list_map.size() < 3){
@@ -89,6 +93,18 @@ bool Game::createPlayer()
 {
     Player = new player(64, 500, p_texture);
     if(Player == NULL) return false;
+    return true;
+}
+
+bool Game::createMonster()
+{
+    for(int i=0; i<list_map.size(); i++){
+        for(int j=0; j<list_map[i].getMonsterList().size(); j++){
+            int random = rand() % 3;
+            Monster* mon = new Monster((list_map[i].getMonsterList()[j]%MAP_WIDTH)*TILE_SIZE + list_map[i].getStart_x(), (list_map[i].getMonsterList()[j]/MAP_WIDTH)*TILE_SIZE, monsterTex[random], list_map[i], random );
+            monsterList.push_back(mon);
+        }
+    }
     return true;
 }
 
@@ -123,9 +139,11 @@ bool Game::updateMap()
     return false;
 }
 
+
 void Game::render_Game()
 {
     render_Map();
+    render_Monster();
     Player->renderPlayer(camera);
 }
 
@@ -135,6 +153,15 @@ void Game::render_Map()
     list_map[1].renderMap(tileClip, camera);
     list_map[2].fillRight(tileClip, camera);
 
+}
+
+void Game::render_Monster()
+{
+    for(int i=0; i<monsterList.size(); i++){
+        if(monsterList[i] != NULL){
+            monsterList[i]->render(camera);
+        }
+    }
 }
 
 void Game::resetGame()

@@ -40,6 +40,11 @@ void Map::setMapTexture(SDL_Texture* texture)
     tileSet = texture;
 }
 
+void Map::setMonsterList(vector<int> _monsterList)
+{
+    monsterList = _monsterList;
+}
+
 void Map::loadMap(const char* fileName, int _STT)
 {
     ifstream file(fileName);

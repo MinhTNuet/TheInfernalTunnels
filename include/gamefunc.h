@@ -6,25 +6,26 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <bits/stdc++.h>
-#include "Texture.h"
-#include "Map.h"
 
 using namespace std;
 
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGHT = 640;
-const int force = 1;
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
 
 #define MAP_WIDTH 34
 #define MAP_HEIGHT 17
 #define TILE_SIZE 64
+
+#include "Texture.h"
+#include "Map.h"
 
 const int distanceMax = MAP_WIDTH * MAP_HEIGHT;
 
 static SDL_Window* window = NULL;
 static SDL_Renderer* renderer = NULL;
 static TTF_Font* font = NULL;
-static SDL_Event* event;
+
+const int force = 1;
 
 class Map;
 
@@ -32,11 +33,14 @@ struct map_enemy
 {
     const char* path;
     int STT;
-    map_enemy(const char* _path, int _STT){
+    vector <int> monster_pos;
+
+    map_enemy(const char* _path, vector <int> mon, int _STT){
         path = _path;
+        monster_pos = mon;
         STT = _STT;
     }
-    const char* getPath() { return path; }
+    const char* getPath() {return path;}
 };
 
 namespace gamefunc {
