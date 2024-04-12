@@ -197,7 +197,6 @@ void player::renderPlayer(SDL_Rect &camera)
 
         if(falling){
             if((countFall+1)/6 >= FALLING_FRAMES)countFall = 0;
-            cout<<1;
             countFall++;
             gamefunc::renderTextureFlip(p_texture[fall], &animationPlayer[countFall/6], &str, flip);
         }
@@ -212,7 +211,6 @@ void player::renderPlayer(SDL_Rect &camera)
 
         if(idling){
             if((countIdle+1)/8 >= IDLING_FRAMES)countIdle = 0;
-            cout<<2;
             countIdle++;
             gamefunc::renderTextureFlip(p_texture[idle], &animationPlayer[countIdle/8], &str, flip);
         }

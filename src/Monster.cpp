@@ -2,7 +2,7 @@
 
 Monster::Monster(const int& _x, const int& _y, SDL_Texture* image, Map& _map, int _type) : Texture( _x, _y)
 {
-    origin_x = _x ;
+    origin_x = _x;
     x_vel = mon_speed/2;
     type = _type;
 
@@ -111,6 +111,57 @@ void Monster::autoMove(player& _Player){
             }
             else touchPlayer(_Player);
         }
+    }
+}
+
+void Monster::updateMonster(player& _Player)
+{
+    if((hp <= 0 && !falling) || y > 64*MAP_HEIGHT){
+        die = true;
+        walking = false;
+        attacking = false;
+        return;
+    }
+    if(!die){
+        if(x_vel != 0 && grounded)walking = true;
+        else walking = false;
+        if(y_vel >= 0 && !grounded)falling = true;
+        else falling = false;
+
+        if(gamefunc::checkCollision(getCollision(), _Player.getCollision()) && _Player.checkAttack() && flip!= _Player.getFlip()){
+            hurting = true;
+            attacking = false;
+        }
+    }
+//    Cập nhật tốc độ
+    autoMove(_Player);
+
+    if(hurting && countHurt == 0){
+        y_vel -= 8;
+        if(getCollision().x < _Player.getCollision().x)x_vel = -4;
+        else x_vel = 4;
+    }
+
+    if(x_vel < 0 && !hurting) flip = SDL_FLIP_HORIZONTAL;
+    else if(x_vel > 0 && !hurting) flip = SDL_FLIP_NONE;
+
+    if(!falling) x += x_vel;
+    collision.x = x - mat.getStart_x();
+    if(gamefunc::checkWall(getCollision(), mat) || !canMove() || x>=mat.getStart_x()+64*MAP_WIDTH || x<=mat.getStart_x() ){
+        x -= x_vel;
+        origin_x = x - 3*x_vel/abs(x_vel)*TILE_SIZE;
+        x_vel *= -1;
+        collision.x = x - mat.getStart_x();
+    }
+
+    y_vel += force;
+    y += y_vel;
+    collision.y = y+16;
+    if(gamefunc::checkWall(getCollision(), mat, &grounded)){
+        if(y_vel > 0 && falling) grounded = true;
+        y -= y_vel;
+        y_vel = 0;
+        collision.y = y+16;
     }
 }
 

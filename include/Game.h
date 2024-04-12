@@ -29,7 +29,7 @@ public:
 
     void updateGame();
     bool updateMap();
-    void update_Monster();
+    void updateMonster();
 
     void render_Game();
     void render_Map();
@@ -44,6 +44,7 @@ public:
 
 private:
     bool runningGame = false;
+    int scoreRun = 0, scoreMonster = 0, totalScore = 0, hightScore = 0;
 
     SDL_Texture* tileSet = NULL;
     SDL_Texture* p_texture[7] = {NULL};
