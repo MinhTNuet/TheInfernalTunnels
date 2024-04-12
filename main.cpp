@@ -17,7 +17,7 @@ int main( int argc, char* argv[] )
         if(!gameMain.loadMedia() || !gameMain.loadMap())return 0;
         else{
             gameMain.setTileClip();
-            if(!gameMain.createMap() || !gameMain.createPlayer())return 0;
+            if(!gameMain.createMap() || !gameMain.createPlayer() || !gameMain.createMonster())return 0;
             else {
                 while(true){
                     SDL_PollEvent(&e);

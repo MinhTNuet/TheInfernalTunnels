@@ -115,21 +115,21 @@ bool gamefunc::checkWall(SDL_Rect obj, Map mat, bool* grounded)
     if(d >= MAP_HEIGHT)return false;
 
     if(grounded != NULL){
-        if(mat.getDataMap(a,d).getType() > 132 && mat.getDataMap(b,d).getType() > 132) *grounded = false;
-        else if(mat.getDataMap(a,d).getType() > 132 && obj.x + obj.w < mat.getDataMap(b,d).getX()) * grounded = false;
+        if(mat.getDataMap(a,d).getType() > 180 && mat.getDataMap(b,d).getType() > 180) *grounded = false;
+        else if(mat.getDataMap(a,d).getType() > 180 && obj.x + obj.w < mat.getDataMap(b,d).getX()) * grounded = false;
 
     }
 
-    if(mat.getDataMap(a,c).getType() < 132){
+    if(mat.getDataMap(a,c).getType() < 180){
         if(gamefunc::checkCollision(obj, mat.getDataMap(a,c).getCollision()))return true;
     }
-    if(mat.getDataMap(b,c).getType() < 132){
+    if(mat.getDataMap(b,c).getType() < 180){
         if(gamefunc::checkCollision(obj, mat.getDataMap(b,c).getCollision()))return true;
     }
-    if(mat.getDataMap(a,d).getType() < 132){
+    if(mat.getDataMap(a,d).getType() < 180){
         if(gamefunc::checkCollision(obj, mat.getDataMap(a,d).getCollision()))return true;
     }
-    if(mat.getDataMap(b,d).getType() < 132){
+    if(mat.getDataMap(b,d).getType() < 180){
         if(gamefunc::checkCollision(obj, mat.getDataMap(b,d).getCollision()))return true;
     }
     return false;
@@ -146,22 +146,22 @@ bool gamefunc::checkWall(SDL_Rect obj, Map map1, Map map2, bool* grounded)
     if(d >= MAP_HEIGHT) return false;
 
     if(grounded != NULL){
-        if(map1.getDataMap(a, d).getType() > 132 && map2.getDataMap(b, d).getType() > 132 && grounded != NULL) *grounded = false;
-        else if(map1.getDataMap(a, d).getType() > 132 && obj.x+obj.w <= map2.getDataMap(b, d).getX()) *grounded = false;
+        if(map1.getDataMap(a, d).getType() > 180 && map2.getDataMap(b, d).getType() > 180 && grounded != NULL) *grounded = false;
+        else if(map1.getDataMap(a, d).getType() > 180 && obj.x+obj.w <= map2.getDataMap(b, d).getX()) *grounded = false;
     }
 
-    if(map1.getDataMap(a, c).getType() < 132){
+    if(map1.getDataMap(a, c).getType() < 180){
         if(gamefunc::checkCollision(obj, map1.getDataMap(a, c).getCollision())) return true;
     }
-    if(map1.getDataMap(a, d).getType() < 132){
+    if(map1.getDataMap(a, d).getType() < 180){
         if(gamefunc::checkCollision(obj, map1.getDataMap(a, d).getCollision())) return true;
     }
 
     obj.x -= 64*MAP_WIDTH;
-    if(map2.getDataMap(b, c).getType() < 132){
+    if(map2.getDataMap(b, c).getType() < 180){
         if(gamefunc::checkCollision(obj, map2.getDataMap(b, c).getCollision())) check = true;
     }
-    if(map2.getDataMap(b, d).getType() < 132){
+    if(map2.getDataMap(b, d).getType() < 180){
         if(gamefunc::checkCollision(obj, map2.getDataMap(b, d).getCollision())) check = true;
     }
 

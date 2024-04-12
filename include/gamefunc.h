@@ -9,8 +9,8 @@
 
 using namespace std;
 
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 720;
 
 #define MAP_WIDTH 34
 #define MAP_HEIGHT 17

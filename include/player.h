@@ -47,7 +47,7 @@ public:
 private:
     int player_w = 48;
     int player_h = 55;
-    int player_speed = 4;
+    int player_speed = 6;
     int hp = 3;
     int index_map_player = 0;
     int startX_map_player;

@@ -16,6 +16,12 @@ class Monster : public Texture
 public:
     Monster(const int& _x, const int& _y, SDL_Texture* image, Map& _map, int type);
 
+    bool canMove(player& _Player);
+    bool canMove();
+    void touchPlayer(player& _Player);
+    void autoMove(player& _Player);
+
+    void updateMonster(player& _Player);
     void render(SDL_Rect& camera);
 
     int getStartMap() const {return mat.getStart_x();}
