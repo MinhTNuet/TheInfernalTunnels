@@ -38,22 +38,22 @@ bool Monster::canMove(player& _Player)
     if(_Player.isDead())return false;
     if(getCollision().x > _Player.getCollision().x ){
         for(int i = mat.getIndexInMap(_Player.getCollision())%MAP_WIDTH; i<=mat.getIndexInMap(collision)%MAP_WIDTH; i++){
-            if(mat.getDataMap(i, y/TILE_SIZE+1).getType() < 132)return false;
-            if(mat.getDataMap(i, y/TILE_SIZE+2).getType() > 132)
+            if(mat.getDataMap(i, y/TILE_SIZE+1).getType() < 180)return false;
+            if(mat.getDataMap(i, y/TILE_SIZE+2).getType() > 180)
             for(int j=y/TILE_SIZE+1; j<=MAP_HEIGHT; j++){
                 if(j == MAP_HEIGHT)return false;
-                if(mat.getDataMap(i, j).getType() < 132)break;
+                if(mat.getDataMap(i, j).getType() < 180)break;
             }
         }
         return true;
     }
     else{
         for(int i = mat.getIndexInMap(_Player.getCollision())%MAP_WIDTH ; i>=mat.getIndexInMap(getCollision())%MAP_WIDTH; i--){
-            if(mat.getDataMap(i, y/TILE_SIZE+1).getType() < 132)return false;
-            if(mat.getDataMap(i, y/TILE_SIZE+2).getType() > 132)
+            if(mat.getDataMap(i, y/TILE_SIZE+1).getType() < 180)return false;
+            if(mat.getDataMap(i, y/TILE_SIZE+2).getType() > 180)
             for(int j=y/TILE_SIZE+1 ; j<=MAP_HEIGHT ; j++){
                 if(j == MAP_HEIGHT ) return false;
-                if(mat.getDataMap(i, j).getType() < 132) break;
+                if(mat.getDataMap(i, j).getType() < 180) break;
             }
         }
         return true;
@@ -66,9 +66,9 @@ bool Monster::canMove()
     int check_x = mat.getIndexInMap(getCollision())%MAP_WIDTH;
     int check_y = mat.getIndexInMap(getCollision())/MAP_WIDTH;
 
-    if(mat.getDataMap(check_x, check_y+2).getType() > 132){
+    if(mat.getDataMap(check_x, check_y+2).getType() > 180){
         for(int i=check_y+1; i<MAP_HEIGHT; i++){
-            if(mat.getDataMap(check_x, i).getType() < 132)return true;
+            if(mat.getDataMap(check_x, i).getType() < 180)return true;
         }
         return false;
     }
@@ -132,7 +132,7 @@ void Monster::updateMonster(player& _Player)
             attacking = false;
         }
     }
-//    Cập nhật tốc độ
+
     autoMove(_Player);
 
     if(hurting && countHurt == 0){
@@ -155,18 +155,18 @@ void Monster::updateMonster(player& _Player)
 
     y_vel += force;
     y += y_vel;
-    collision.y = y+16;
+    collision.y = y;
     if(gamefunc::checkWall(getCollision(), mat, &grounded)){
         if(y_vel > 0 && falling) grounded = true;
         y -= y_vel;
         y_vel = 0;
-        collision.y = y+16;
+        collision.y = y;
     }
 }
 
 void Monster::render(SDL_Rect& camera)
 {
-    SDL_Rect des = {x - camera.x, y - camera.y, 64, 64};
+    SDL_Rect des = {x - camera.x -16, y - camera.y-16, 64, 64};
 
     if(walking){
         if((countWalk+1)/6 >= WALK_FRAMES)countWalk = 0;
