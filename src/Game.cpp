@@ -110,9 +110,16 @@ bool Game::createMonster()
 
 void Game::updateGame()
 {
-    updateMap();
-    Player->updatePlayer(list_map);
+    if(updateMap()){
+        for(int j=0; j<list_map[4].getMonsterList().size(); j++){
+            int random = rand() % 5;
+            Monster* mon = new Monster((list_map[4].getMonsterList()[j]%MAP_WIDTH)*TILE_SIZE + list_map[2].getStart_x(), (list_map[2].getMonsterList()[j]/MAP_WIDTH)*TILE_SIZE, monsterTex[random], list_map[2], random);
+            monsterList.push_back(mon);
+        }
+    }
+    Player->updatePlayer(list_map, monsterList);
     Player->changeCam(camera, list_map);
+    updateMonster();
 }
 
 bool Game::updateMap()
@@ -133,30 +140,31 @@ bool Game::updateMap()
         }
 
         Map mat(list_map[1].getStart_x() + TILE_SIZE*MAP_WIDTH, total_map[randomMap].path, tileSet, total_map[randomMap].STT );
+        mat.setMonsterList(total_map[randomMap].monster_pos);
         list_map.push_back(mat);
         return true;
     }
     return false;
 }
 
-//void Game::updateMonster()
-//{
-//    for( int i=0 ; i<monsterList.size() ; i++){
-//        if(monsterList[i] != NULL){
-//            monsterList[i]->updateMonster(*Player);
-//            if(monsterList[i]->isDead()){
-//                if(monsterList[i]->getType() == 0) Player->buffhp();
-//                else if(monsterList[i]->getType() == 1) scoreMonster += 10;
-//                else scoreMonster += 5;
-//
-//                delete monsterList[i];
-//                monsterList[i] = NULL;
-//                monsterList.erase(monsterList.begin() + i);
-//                i--;
-//            }
-//        }
-//    }
-//}
+void Game::updateMonster()
+{
+    for(int i=0 ; i<monsterList.size() ; i++){
+        if(monsterList[i] != NULL){
+            monsterList[i]->updateMonster(*Player);
+            if(monsterList[i]->isDead()){
+                if(monsterList[i]->getType() == 0) Player->buffhp();
+                else if(monsterList[i]->getType() == 1) scoreMonster += 10;
+                else scoreMonster += 5;
+
+                delete monsterList[i];
+                monsterList[i] = NULL;
+                monsterList.erase(monsterList.begin() + i);
+                i--;
+            }
+        }
+    }
+}
 
 void Game::render_Game()
 {

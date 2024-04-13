@@ -16,7 +16,7 @@ player::player(int _x, int _y, SDL_Texture* image[]) : Texture(_x, _y)
     }
 }
 
-void player::updatePlayer(deque <Map>& list_map)
+void player::updatePlayer(deque <Map>& list_map, vector<Monster*>& monsterList)
 {
     mapPresent(list_map);
 

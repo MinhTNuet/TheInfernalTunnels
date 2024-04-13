@@ -6,8 +6,10 @@
 #include <SDL_ttf.h>
 #include <bits/stdc++.h>
 #include "gamefunc.h"
+#include "Monster.h"
 
 class Map;
+class Monster;
 
 using namespace std;
 
@@ -24,7 +26,7 @@ public:
         walk
     };
     player(int _x, int _y, SDL_Texture* image[]);
-    void updatePlayer(deque <Map>& list_map);
+    void updatePlayer(deque <Map>& list_map, vector<Monster*>& monsterList);
 
     void handleEvent(SDL_Event &e);
     void handleStatus();

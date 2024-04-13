@@ -19,7 +19,7 @@
 	<bits/stdc++.h>
 	"Game.h"
 
-1712907726 source:d:\minhc++\theinfernaltunnels\src\game.cpp
+1712979354 source:d:\minhc++\theinfernaltunnels\src\game.cpp
 	"Game.h"
 
 1712903034 d:\minhc++\theinfernaltunnels\include\game.h
@@ -56,17 +56,18 @@
 	<SDL_ttf.h>
 	<bits/stdc++.h>
 
-1712905399 source:d:\minhc++\theinfernaltunnels\src\player.cpp
+1712979354 source:d:\minhc++\theinfernaltunnels\src\player.cpp
 	"player.h"
 
-1712892672 d:\minhc++\theinfernaltunnels\include\player.h
+1712979602 d:\minhc++\theinfernaltunnels\include\player.h
 	<SDL_image.h>
 	<SDL_mixer.h>
 	<SDL_ttf.h>
 	<bits/stdc++.h>
 	"gamefunc.h"
+	"Monster.h"
 
-1712903444 source:d:\minhc++\theinfernaltunnels\src\monster.cpp
+1712936603 source:d:\minhc++\theinfernaltunnels\src\monster.cpp
 	"Monster.h"
 
 1712897473 d:\minhc++\theinfernaltunnels\include\monster.h
