@@ -1,6 +1,6 @@
 #include "player.h"
 
-player::player(int _x, int _y, SDL_Texture* image[]) : Texture(_x, _y)
+player::player(int _x, int _y, SDL_Texture* image[], Mix_Chunk* sound[]) : Texture(_x, _y)
 {
     collision = {_x, _y, player_w, player_h};
     p_texture[jump] = image[jump];
@@ -10,6 +10,12 @@ player::player(int _x, int _y, SDL_Texture* image[]) : Texture(_x, _y)
     p_texture[dead] = image[dead];
     p_texture[idle] = image[idle];
     p_texture[walk] = image[walk];
+
+    p_sound[attack] = sound[attack];
+    p_sound[jump] = sound[jump];
+    p_sound[fall] = sound[fall];
+    p_sound[hurt] = sound[hurt];
+    p_sound[dead] = sound[dead];
 
     for(int i=0 ; i<8; i++){
         animationPlayer[i] = {i*250, 0, 250, 250};
@@ -22,6 +28,7 @@ void player::updatePlayer(deque <Map>& list_map, vector<Monster*>& monsterList)
 
     if(!die){
         handleStatus();
+        takeDamage(monsterList);
         handleCollision(list_map);
     }
 
@@ -121,6 +128,18 @@ void player::handleCollision(deque <Map>& list_map)
     }
 }
 
+void player::takeDamage(vector<Monster*>& monsterList)
+{
+    for(int i=0; i<monsterList.size(); i++){
+        if(monsterList[i]->getStartMap() == getStartMap() && monsterList[i] != NULL){
+            if(monsterList[i]->getDistance() <= TILE_SIZE && monsterList[i]->isAttack() && !hurting){
+                hurting = true;
+                y_vel = -6;
+                hp--;
+            }
+        }
+    }
+}
 
 void player::Jump()
 {

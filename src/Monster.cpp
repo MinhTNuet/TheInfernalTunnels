@@ -38,22 +38,22 @@ bool Monster::canMove(player& _Player)
     if(_Player.isDead())return false;
     if(getCollision().x > _Player.getCollision().x ){
         for(int i = mat.getIndexInMap(_Player.getCollision())%MAP_WIDTH; i<=mat.getIndexInMap(collision)%MAP_WIDTH; i++){
-            if(mat.getDataMap(i, y/TILE_SIZE+1).getType() < 180)return false;
-            if(mat.getDataMap(i, y/TILE_SIZE+2).getType() > 180)
+            if(mat.getDataMap(i, y/TILE_SIZE+1).getType() < 132)return false;
+            if(mat.getDataMap(i, y/TILE_SIZE+2).getType() > 132)
             for(int j=y/TILE_SIZE+1; j<=MAP_HEIGHT; j++){
-                if(j == MAP_HEIGHT) return false;
-                if(mat.getDataMap(i, j).getType() < 180)break;
+                if(j == MAP_HEIGHT)return false;
+                if(mat.getDataMap(i, j).getType() < 132)break;
             }
         }
         return true;
     }
     else{
         for(int i = mat.getIndexInMap(_Player.getCollision())%MAP_WIDTH ; i>=mat.getIndexInMap(getCollision())%MAP_WIDTH; i--){
-            if(mat.getDataMap(i, y/TILE_SIZE+1).getType() < 180)return false;
-            if(mat.getDataMap(i, y/TILE_SIZE+2).getType() > 180)
+            if(mat.getDataMap(i, y/TILE_SIZE+1).getType() < 132)return false;
+            if(mat.getDataMap(i, y/TILE_SIZE+2).getType() > 132)
             for(int j=y/TILE_SIZE+1 ; j<=MAP_HEIGHT ; j++){
                 if(j == MAP_HEIGHT ) return false;
-                if(mat.getDataMap(i, j).getType() < 180) break;
+                if(mat.getDataMap(i, j).getType() < 132) break;
             }
         }
         return true;
@@ -66,9 +66,9 @@ bool Monster::canMove()
     int check_x = mat.getIndexInMap(getCollision())%MAP_WIDTH;
     int check_y = mat.getIndexInMap(getCollision())/MAP_WIDTH;
 
-    if(mat.getDataMap(check_x, check_y+2).getType() > 180){
-        for(int i=check_y+1 ; i<MAP_HEIGHT ; i++){
-            if(mat.getDataMap( check_x, i ).getType() < 180)return true;
+    if(mat.getDataMap(check_x, check_y+2).getType() > 132){
+        for(int i=check_y+1; i<MAP_HEIGHT; i++){
+            if(mat.getDataMap(check_x, i).getType() < 132)return true;
         }
         return false;
     }
@@ -91,7 +91,6 @@ void Monster::autoMove(player& _Player){
         if(x > origin_x && x-origin_x >= 3*TILE_SIZE) x_vel = -mon_speed/2;
         if(x < origin_x && origin_x-x >= 3*TILE_SIZE) x_vel = mon_speed/2;
     }
-
     else if(dist <= 4*TILE_SIZE){
         if(getCollision().x < _Player.getCollision().x) flip = SDL_FLIP_NONE;
         else flip = SDL_FLIP_HORIZONTAL;
@@ -145,9 +144,9 @@ void Monster::updateMonster(player& _Player)
     if(x_vel < 0 && !hurting) flip = SDL_FLIP_HORIZONTAL;
     else if(x_vel > 0 && !hurting) flip = SDL_FLIP_NONE;
 
-    if(!falling) x += x_vel;
+    if(!falling)x += x_vel;
     collision.x = x - mat.getStart_x();
-    if(gamefunc::checkWall(getCollision(), mat) || !canMove() || x>=mat.getStart_x()+64*MAP_WIDTH || x<=mat.getStart_x() ){
+    if(gamefunc::checkWall(getCollision(), mat) || x>=mat.getStart_x()+64*MAP_WIDTH || x<=mat.getStart_x() || !canMove()){
         x -= x_vel;
         origin_x = x - 3*x_vel/abs(x_vel)*TILE_SIZE;
         x_vel *= -1;

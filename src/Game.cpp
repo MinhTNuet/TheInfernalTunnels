@@ -43,20 +43,27 @@ bool Game::loadMedia()
 
     monsterTex[0] = gamefunc::loadTextureFromFile( "image/mon1/Mon1.png");
     monsterTex[1] = gamefunc::loadTextureFromFile( "image/mon2/Mon2.png");
+
+    p_sound[0] = Mix_LoadWAV("music/sound_Jump.wav");
+    p_sound[1] = Mix_LoadWAV("music/sound_Fall.wav");
+    p_sound[2] = Mix_LoadWAV("music/sound_Attack.wav");
+    p_sound[3] = Mix_LoadWAV("music/sound_Hurt.wav");
+    p_sound[4] = Mix_LoadWAV("music/sound_Death.wav");
+    for(int i=0; i<5; i++)if(p_sound[i] == NULL)check = false;
     return check;
 }
 
 bool Game::loadMap()
 {
-    map_enemy map1("image/Map/map1.txt", {329}, 1);
+    map_enemy map1("image/Map/map1.txt", {322}, 1);
     total_map.push_back(map1);
-    map_enemy map2("image/Map/map2.txt", {300}, 2);
+    map_enemy map2("image/Map/map2.txt", {254}, 2);
     total_map.push_back(map2);
-    map_enemy map3("image/Map/map3.txt", {300}, 3);
+    map_enemy map3("image/Map/map3.txt", {460}, 3);
     total_map.push_back(map3);
-    map_enemy map4("image/Map/map4.txt", {300}, 4);
+    map_enemy map4("image/Map/map4.txt", {513, 389}, 4);
     total_map.push_back(map4);
-    map_enemy map5("image/Map/map5.txt", {300}, 5);
+    map_enemy map5("image/Map/map5.txt", {69}, 5);
     total_map.push_back(map5);
     return true;
 }
@@ -91,7 +98,7 @@ bool Game::createMap()
 
 bool Game::createPlayer()
 {
-    Player = new player(64, 500, p_texture);
+    Player = new player(64, 500, p_texture, p_sound);
     if(Player == NULL) return false;
     return true;
 }
@@ -190,9 +197,31 @@ void Game::render_Monster()
     }
 }
 
+void Game::playSound()
+{
+    Mix_HaltMusic();
+}
+
 void Game::resetGame()
 {
+    while(!monsterList.empty()){
+        delete monsterList[0];
+        monsterList[0] = NULL;
+        monsterList.erase(monsterList.begin());
+    }
+
+    for(int i=0; i<list_map.size(); i++){
+        list_map[i].clearMap();
+    }
+    if(!list_map.empty())list_map.clear();
+
+    if(!createMap())cout << "Error reset list Map";
+    if(!createMonster())cout << "Error reset Monster";
+
     Player->resetplayer();
+    camera.x = 0;
+    camera.y = 0;
+
 
 }
 
@@ -204,9 +233,10 @@ void Game::handleInputGame(SDL_Event &e)
 
 void Game::runGame(SDL_Event &e)
 {
-    handleInputGame(e);
     updateGame();
     render_Game();
+    playSound();
+    handleInputGame(e);
 
     gamefunc::renderPresent();
 }

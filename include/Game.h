@@ -35,6 +35,7 @@ public:
     void render_Map();
     void render_Monster();
 
+    void playSound();
     void resetGame();
     void handleInputGame(SDL_Event &e);
     void clearMedia();
@@ -49,9 +50,11 @@ private:
     SDL_Texture* tileSet = NULL;
     SDL_Texture* p_texture[7] = {NULL};
     SDL_Texture* monsterTex[2] = {NULL};
+    Mix_Chunk* p_sound[5] = {nullptr};
 
     SDL_Rect camera = {64, 128, SCREEN_WIDTH, SCREEN_HEIGHT};
     vector <SDL_Rect> tileClip;
+    vector<SDL_Rect> hp_pos;
 
     player* Player;
     vector <map_enemy> total_map;
