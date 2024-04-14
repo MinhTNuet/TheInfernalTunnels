@@ -192,7 +192,7 @@ void player::changeCam(SDL_Rect &camera, deque <Map>& list_map)
 
 void player::renderPlayer(SDL_Rect &camera)
 {
-    SDL_Rect str = {x - camera.x - 135, y - camera.y - 140, 300, 300};
+    SDL_Rect str = {x - camera.x-110, y - camera.y -110, 250, 250};
     if(attacking){
         if((countHit+2)/6>= ATTACKING_FRAMES)attacking = false;
         countHit++;

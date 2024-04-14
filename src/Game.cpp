@@ -57,7 +57,7 @@ bool Game::loadMap()
 {
     map_enemy map1("image/Map/map1.txt", {322}, 1);
     total_map.push_back(map1);
-    map_enemy map2("image/Map/map2.txt", {254}, 2);
+    map_enemy map2("image/Map/map2.txt", {300}, 2);
     total_map.push_back(map2);
     map_enemy map3("image/Map/map3.txt", {460}, 3);
     total_map.push_back(map3);
