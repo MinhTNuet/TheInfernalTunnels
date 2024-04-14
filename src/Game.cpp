@@ -50,6 +50,13 @@ bool Game::loadMedia()
     p_sound[3] = Mix_LoadWAV("music/sound_Hurt.wav");
     p_sound[4] = Mix_LoadWAV("music/sound_Death.wav");
     for(int i=0; i<5; i++)if(p_sound[i] == NULL)check = false;
+
+    liveBar = gamefunc::loadTextureFromFile("image/LiveBar.png");
+    heart = gamefunc::loadTextureFromFile("image/heart.png");
+    hp_pos = {{20, 20, 36, 28}, {44, 20, 36, 28}, {68, 20, 36, 28}};
+
+    gamefunc::initFont("image/font.ttf");
+    getHighScore();
     return check;
 }
 
@@ -59,7 +66,7 @@ bool Game::loadMap()
     total_map.push_back(map1);
     map_enemy map2("image/Map/map2.txt", {337}, 2);
     total_map.push_back(map2);
-    map_enemy map3("image/Map/map3.txt", {460}, 3);
+    map_enemy map3("image/Map/map3.txt", {244, 159, 162, 481, 533, 336}, 3);
     total_map.push_back(map3);
     map_enemy map4("image/Map/map4.txt", {513, 389}, 4);
     total_map.push_back(map4);
@@ -127,6 +134,7 @@ void Game::updateGame()
     Player->updatePlayer(list_map, monsterList);
     Player->changeCam(camera, list_map);
     updateMonster();
+    if(Player->isDead())setHighScore();
 }
 
 bool Game::updateMap()
@@ -163,7 +171,6 @@ void Game::updateMonster()
                 if(monsterList[i]->getType() == 0) Player->buffhp();
                 else if(monsterList[i]->getType() == 1) scoreMonster += 10;
                 else scoreMonster += 5;
-
                 delete monsterList[i];
                 monsterList[i] = NULL;
                 monsterList.erase(monsterList.begin() + i);
@@ -173,11 +180,29 @@ void Game::updateMonster()
     }
 }
 
+void Game::getHighScore()
+{
+    string temp;
+    fstream high("image/HighScore.txt", fstream::in);
+    high >> temp;
+    highScore = stoi(temp);
+}
+
+void Game::setHighScore()
+{
+    totalScore = scoreMonster + scoreRun;
+    if(totalScore >= highScore){
+        fstream high( "image/HighScore.txt", fstream::out | fstream::trunc);
+        high << highScore;
+    }
+}
+
 void Game::render_Game()
 {
     render_Map();
     render_Monster();
     Player->renderPlayer(camera);
+    render_hp_Score();
 }
 
 void Game::render_Map()
@@ -194,6 +219,32 @@ void Game::render_Monster()
         if(monsterList[i] != NULL){
             monsterList[i]->render(camera);
         }
+    }
+}
+
+void Game::render_hp_Score()
+{
+    scoreRun = max(scoreRun, Player->getX()/TILE_SIZE);
+    totalScore = scoreRun + scoreMonster;
+    highScore = max(highScore, totalScore);
+
+    SDL_Texture* scoreTex = gamefunc::createTextTexture("Score: " + to_string(totalScore), {0, 0, 0, 255} );
+    SDL_Texture* highScoreTex = gamefunc::createTextTexture("High Score: " + to_string(highScore), {255, 0, 0, 255});
+
+    int *w = new int, *h = new int;
+    SDL_QueryTexture(scoreTex, NULL, NULL, w, h);
+    gamefunc::renderTexture(scoreTex, NULL, SCREEN_WIDTH - *w - 10, 10, *w, *h);
+
+    SDL_QueryTexture(highScoreTex, NULL, NULL, w, h);
+    gamefunc::renderTexture(highScoreTex, NULL, SCREEN_WIDTH - *w - 10, 35, *w, *h);
+
+    delete w, h;
+    SDL_DestroyTexture(scoreTex);
+    SDL_DestroyTexture(highScoreTex);
+
+    gamefunc::renderTexture(liveBar, NULL, 0, 0, 132, 68);
+    for(int i=0; i<Player->gethp(); i++){
+        gamefunc::renderTexture(heart, NULL, &hp_pos[i]);
     }
 }
 
@@ -235,7 +286,6 @@ void Game::runGame(SDL_Event &e)
 {
     updateGame();
     render_Game();
-    playSound();
     handleInputGame(e);
 
     gamefunc::renderPresent();
@@ -244,5 +294,10 @@ void Game::runGame(SDL_Event &e)
 void Game::clearMedia()
 {
     SDL_DestroyTexture(tileSet);
+    SDL_DestroyTexture(liveBar);
+    SDL_DestroyTexture(heart);
+    for(int i=0; i<7; i++)SDL_DestroyTexture(p_texture[i]);
+    for(int i=0; i<2; i++)SDL_DestroyTexture(monsterTex[i]);
     TTF_CloseFont(font);
+
 }

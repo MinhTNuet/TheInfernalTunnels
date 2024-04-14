@@ -47,20 +47,16 @@ namespace gamefunc {
     bool initWindow();
     void clearRender();
     SDL_Texture* loadTextureFromFile(string path);
-
     void renderTexture(SDL_Texture* img, SDL_Rect* rect1, SDL_Rect* rect2);
     void renderTexture(SDL_Texture* img, SDL_Rect* rect1, int x, int y, int w, int h);
     void renderTextureFlip( SDL_Texture* img, SDL_Rect* rect1, SDL_Rect* rect2, SDL_RendererFlip flip );
     void renderPresent();
     void destroyTexture();
-
     bool initFont(const char* path);
     SDL_Texture* createTextTexture(string text, SDL_Color color);
-
     bool checkCollision(SDL_Rect obj1, SDL_Rect obj2);
     bool checkWall(SDL_Rect obj, Map mat, bool* grounded = NULL);
     bool checkWall(SDL_Rect obj, Map map1, Map map2, bool* grounded = NULL);
-
     void setWindowFS();
     void quitWindowFS();
     void renderQuit();

@@ -16,7 +16,6 @@ class Texture
         SDL_Texture* texture;
         SDL_RendererFlip flip = SDL_FLIP_NONE;
         SDL_Rect collision;
-
     public:
         Texture(int _x = 0, int _y = 0, SDL_Texture* img = NULL);
         SDL_Texture* getTexture() const;

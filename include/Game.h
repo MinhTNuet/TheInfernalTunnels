@@ -30,10 +30,13 @@ public:
     void updateGame();
     bool updateMap();
     void updateMonster();
+    void getHighScore();
+    void setHighScore();
 
     void render_Game();
     void render_Map();
     void render_Monster();
+    void render_hp_Score();
 
     void playSound();
     void resetGame();
@@ -45,12 +48,14 @@ public:
 
 private:
     bool runningGame = false;
-    int scoreRun = 0, scoreMonster = 0, totalScore = 0, hightScore = 0;
-
+    int scoreRun = 0, scoreMonster = 0, totalScore = 0, highScore = 0;
+    int musicStatus = 0;
     SDL_Texture* tileSet = NULL;
     SDL_Texture* p_texture[7] = {NULL};
     SDL_Texture* monsterTex[2] = {NULL};
-    Mix_Chunk* p_sound[5] = {nullptr};
+    Mix_Chunk* p_sound[5] = {NULL};
+    SDL_Texture* liveBar = NULL;
+    SDL_Texture* heart = NULL;
 
     SDL_Rect camera = {64, 128, SCREEN_WIDTH, SCREEN_HEIGHT};
     vector <SDL_Rect> tileClip;

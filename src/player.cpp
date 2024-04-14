@@ -114,6 +114,7 @@ void player::handleCollision(deque <Map>& list_map)
     if(gamefunc::checkWall(getCollision(), list_map[index_map_player], &grounded)){
         if(y_vel > 0 && falling){
             grounded = true;
+            Mix_PlayChannel(-1, p_sound[fall], 0);
         }
         y -= y_vel;
         y_vel = 0;
@@ -136,6 +137,7 @@ void player::takeDamage(vector<Monster*>& monsterList)
                 hurting = true;
                 y_vel = -6;
                 hp--;
+                Mix_PlayChannel(-1, p_sound[hurt], 0);
             }
         }
     }
@@ -146,6 +148,7 @@ void player::Jump()
     if(grounded){
         y_vel = -17;
         jumping = true;
+        Mix_PlayChannel(-1, p_sound[jump], 0);
     }
 }
 
