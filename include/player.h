@@ -27,27 +27,23 @@ public:
     };
     player(int _x, int _y, SDL_Texture* image[], Mix_Chunk* sound[]);
     void updatePlayer(deque <Map>& list_map, vector<Monster*>& monsterList);
-
     void handleEvent(SDL_Event &e);
     void handleStatus();
     void handleCollision(deque <Map>& list_map);
     void takeDamage(vector<Monster*>& monsterList);
     void Jump();
     void buffhp() {if(hp<3) hp++;}
-
     void mapPresent(deque <Map>& list_map);
     void changeCam(SDL_Rect &camera, deque <Map>& list_map);
     void renderPlayer(SDL_Rect &camera);
     void resetplayer();
-
     int getStartMap() const {return startX_map_player;}
     int gethp() const {return hp;}
-    bool checkAttack() const { return countHit == 26; }
-    bool isDead() const { return countDead >= 7*6-1; }
-
+    bool checkAttack() const {return countHit == 26;}
+    bool isDead() const {return countDead >= 7*6-1;}
 private:
     int player_w = 48;
-    int player_h = 55;
+    int player_h = 56;
     int player_speed = 6;
     int hp = 3;
     int index_map_player = 0;

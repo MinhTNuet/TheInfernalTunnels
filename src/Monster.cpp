@@ -8,7 +8,7 @@ Monster::Monster(const int& _x, const int& _y, SDL_Texture* image, Map& _map, in
 
     texture = image;
     mat = _map;
-    collision = {x, y, mon_width, mon_height};
+    collision = {x, y+16, mon_width, mon_height};
 
     for(int i=0; i<WALK_FRAMES; i++){
         animationWalk[i] = {i*32, 0, 32, 32};
@@ -33,73 +33,31 @@ Monster::Monster(const int& _x, const int& _y, SDL_Texture* image, Map& _map, in
 
 }
 
-bool Monster::canMove(player& _Player)
-{
-    if(_Player.isDead())return false;
-    if(getCollision().x > _Player.getCollision().x ){
-        for(int i = mat.getIndexInMap(_Player.getCollision())%MAP_WIDTH; i<=mat.getIndexInMap(collision)%MAP_WIDTH; i++){
-            if(mat.getDataMap(i, y/TILE_SIZE+1).getType() < 180)return false;
-            if(mat.getDataMap(i, y/TILE_SIZE+2).getType() > 180)
-            for(int j=y/TILE_SIZE+1; j<=MAP_HEIGHT; j++){
-                if(j == MAP_HEIGHT)return false;
-                if(mat.getDataMap(i, j).getType() < 180)break;
-            }
-        }
-        return true;
-    }
-    else{
-        for(int i = mat.getIndexInMap(_Player.getCollision())%MAP_WIDTH ; i>=mat.getIndexInMap(getCollision())%MAP_WIDTH; i--){
-            if(mat.getDataMap(i, y/TILE_SIZE+1).getType() < 180)return false;
-            if(mat.getDataMap(i, y/TILE_SIZE+2).getType() > 180)
-            for(int j=y/TILE_SIZE+1; j<=MAP_HEIGHT; j++){
-                if(j == MAP_HEIGHT) return false;
-                if(mat.getDataMap(i, j).getType() < 180)break;
-            }
-        }
-        return true;
-    }
-}
-
-bool Monster::canMove()
-{
-    if(!grounded)return true;
-    int check_x = mat.getIndexInMap(getCollision())%MAP_WIDTH;
-    int check_y = mat.getIndexInMap(getCollision())/MAP_WIDTH;
-
-    if(mat.getDataMap(check_x, check_y+1).getType() > 180){
-        for(int i=check_y+1; i<MAP_HEIGHT; i++){
-            if(mat.getDataMap(check_x, i).getType() < 180)return true;
-        }
-        return false;
-    }
-    return true;
-}
-
 void Monster::touchPlayer(player& _Player)
 {
     attacking = false;
     if(getCollision().x < _Player.getCollision().x)x_vel = mon_speed;
-    else if(getCollision().x > _Player.getCollision().x ) x_vel = -mon_speed;
+    else if(getCollision().x > _Player.getCollision().x )x_vel = -mon_speed;
     else attacking = true;
 }
 
 void Monster::autoMove(player& _Player){
     dist = abs(getCollision().x - _Player.getCollision().x );
 
-    if(_Player.getStartMap() != mat.getStart_x() || dist > 4*TILE_SIZE || !canMove(_Player)){
+    if(_Player.getStartMap() != mat.getStart_x() || dist > 4*TILE_SIZE){
         if(attacking)attacking = false;
-        if(x > origin_x && x-origin_x >= 3*TILE_SIZE) x_vel = -mon_speed/2;
-        if(x < origin_x && origin_x-x >= 3*TILE_SIZE) x_vel = mon_speed/2;
+        if(x > origin_x && x-origin_x >= 3*TILE_SIZE)x_vel = -mon_speed/2;
+        if(x < origin_x && origin_x-x >= 3*TILE_SIZE)x_vel = mon_speed/2;
     }
     else if(dist <= 4*TILE_SIZE){
-        if(getCollision().x < _Player.getCollision().x) flip = SDL_FLIP_NONE;
+        if(getCollision().x < _Player.getCollision().x)flip = SDL_FLIP_NONE;
         else flip = SDL_FLIP_HORIZONTAL;
 
         if(abs(y - _Player.getY()) > 32){
             if(x_vel == 0) touchPlayer(_Player);
             attacking = false;
             if(dist >= 96){
-                if(getCollision().x > _Player.getCollision().x) x_vel = -mon_speed;
+                if(getCollision().x > _Player.getCollision().x)x_vel = -mon_speed;
                 else x_vel = mon_speed;
             }
         }
@@ -146,7 +104,7 @@ void Monster::updateMonster(player& _Player)
 
     if(!falling)x += x_vel;
     collision.x = x - mat.getStart_x();
-    if(gamefunc::checkWall(getCollision(), mat) || x>=mat.getStart_x()+64*MAP_WIDTH || x<=mat.getStart_x() || !canMove()){
+    if(gamefunc::checkWall(getCollision(), mat) || x>=mat.getStart_x()+64*MAP_WIDTH || x<=mat.getStart_x() ){
         x -= x_vel;
         origin_x = x - 3*x_vel/abs(x_vel)*TILE_SIZE;
         x_vel *= -1;
@@ -166,7 +124,7 @@ void Monster::updateMonster(player& _Player)
 
 void Monster::render(SDL_Rect& camera)
 {
-    SDL_Rect des = {x - camera.x-5, y - camera.y-5, 64, 64};
+    SDL_Rect des = {x - camera.x-10, y - camera.y-16, 64, 64};
 
     if(walking){
         if((countWalk+1)/6 >= WALK_FRAMES)countWalk = 0;
