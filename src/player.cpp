@@ -1,6 +1,6 @@
 #include "player.h"
 
-player::player(int _x, int _y, SDL_Texture* image[], Mix_Chunk* sound[]) : Texture(_x, _y)
+player::player(int _x, int _y, SDL_Texture* image[]) : Texture(_x, _y)
 {
     collision = {_x, _y, player_w, player_h};
     p_texture[jump] = image[jump];
@@ -10,12 +10,6 @@ player::player(int _x, int _y, SDL_Texture* image[], Mix_Chunk* sound[]) : Textu
     p_texture[dead] = image[dead];
     p_texture[idle] = image[idle];
     p_texture[walk] = image[walk];
-
-    p_sound[attack] = sound[attack];
-    p_sound[jump] = sound[jump];
-    p_sound[fall] = sound[fall];
-    p_sound[hurt] = sound[hurt];
-    p_sound[dead] = sound[dead];
 
     for(int i=0 ; i<8; i++){
         animationPlayer[i] = {i*250, 0, 250, 250};
@@ -114,7 +108,6 @@ void player::handleCollision(deque <Map>& list_map)
     if(gamefunc::checkWall(getCollision(), list_map[index_map_player], &grounded)){
         if(y_vel > 0 && falling){
             grounded = true;
-            Mix_PlayChannel(-1, p_sound[fall], 0);
         }
         y -= y_vel;
         y_vel = 0;

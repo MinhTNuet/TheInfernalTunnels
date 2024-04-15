@@ -44,13 +44,6 @@ bool Game::loadMedia()
     monsterTex[0] = gamefunc::loadTextureFromFile( "image/mon1/Mon1.png");
     monsterTex[1] = gamefunc::loadTextureFromFile( "image/mon2/Mon2.png");
 
-    p_sound[0] = Mix_LoadWAV("music/sound_Jump.wav");
-    p_sound[1] = Mix_LoadWAV("music/sound_Fall.wav");
-    p_sound[2] = Mix_LoadWAV("music/sound_Attack.wav");
-    p_sound[3] = Mix_LoadWAV("music/sound_Hurt.wav");
-    p_sound[4] = Mix_LoadWAV("music/sound_Death.wav");
-    for(int i=0; i<5; i++)if(p_sound[i] == NULL)check = false;
-
     liveBar = gamefunc::loadTextureFromFile("image/LiveBar.png");
     heart = gamefunc::loadTextureFromFile("image/heart.png");
     hp_pos = {{20, 20, 36, 28}, {44, 20, 36, 28}, {68, 20, 36, 28}};
@@ -70,7 +63,10 @@ bool Game::loadMedia()
     menuTex[12] = gamefunc::loadTextureFromFile("image/button_and_background/OKButton.png");
     menuTex[13] = gamefunc::loadTextureFromFile("image/button_and_background/Arrow.png");
 
-
+    menu = new Menu(menuTex, menuSound);
+    if(menu == NULL){
+        check = false;
+    }
     gamefunc::initFont("image/font.ttf");
     getHighScore();
     return check;
@@ -121,7 +117,7 @@ bool Game::createMap()
 
 bool Game::createPlayer()
 {
-    Player = new player(64, 500, p_texture, p_sound);
+    Player = new player(64, 500, p_texture);
     if(Player == NULL) return false;
     return true;
 }
@@ -287,22 +283,42 @@ void Game::resetGame()
     Player->resetplayer();
     camera.x = 0;
     camera.y = 0;
-
+    setHighScore();
+    scoreMonster = 0;
+    scoreRun = 0;
+    totalScore = 0;
+    getHighScore();
 
 }
 
 void Game::handleInputGame(SDL_Event &e)
 {
-    if(e.type == SDL_QUIT) gamefunc::renderQuit();
-    Player->handleEvent(e);
+    if(e.type == SDL_QUIT)gamefunc::renderQuit();
+    menu->handleInput(e, *Player, runningGame);
+    if(!menu->isRunning()){
+        Player->handleEvent(e);
+    }
 }
 
 void Game::runGame(SDL_Event &e)
 {
-    updateGame();
-    render_Game();
-    handleInputGame(e);
+    if(!menu->isMenu()){
+        if(!menu->isPause() && !menu->isEnd()){
+            updateGame();
+        }
+        render_Game();
+        if(menu->isEnd()) menu->renderEndMenu(totalScore);
+    }
+    else if(runningGame){
+        runningGame = false;
+        resetGame();
+    }
 
+    playSound();
+    handleInputGame( e );
+    if(menu->isRetry()){
+        resetGame();
+    }
     gamefunc::renderPresent();
 }
 

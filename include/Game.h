@@ -51,12 +51,13 @@ private:
     bool runningGame = false;
     int scoreRun = 0, scoreMonster = 0, totalScore = 0, highScore = 0;
     int musicStatus = 0;
+
     SDL_Texture* tileSet = NULL;
     SDL_Texture* p_texture[7] = {NULL};
     SDL_Texture* monsterTex[2] = {NULL};
-    Mix_Chunk* p_sound[5] = {NULL};
     SDL_Texture* menuTex[14] = {NULL};
     Mix_Chunk* menuSound[2] = {NULL};
+
     SDL_Texture* liveBar = NULL;
     SDL_Texture* heart = NULL;
     player* Player;

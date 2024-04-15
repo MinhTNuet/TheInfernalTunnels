@@ -25,7 +25,7 @@ public:
         idle,
         walk
     };
-    player(int _x, int _y, SDL_Texture* image[], Mix_Chunk* sound[]);
+    player(int _x, int _y, SDL_Texture* image[]);
     void updatePlayer(deque <Map>& list_map, vector<Monster*>& monsterList);
     void handleEvent(SDL_Event &e);
     void handleStatus();
@@ -60,7 +60,6 @@ private:
 
     SDL_Rect animationPlayer[8];
     SDL_Texture* p_texture[7];
-    Mix_Chunk* p_sound[5];
 
     int countWalk = 0, countIdle = 0, countJump = 0, countFall = 0, countHit = 0, countHurt = 0, countDead = 0;
     bool idling = false, grounded = false, walking = false, jumping= false, falling = false, attacking = false, hurting = false, die = false ;

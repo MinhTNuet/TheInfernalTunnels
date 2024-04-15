@@ -19,7 +19,7 @@ int main( int argc, char* argv[] )
             gameMain.setTileClip();
             if(!gameMain.createMap() || !gameMain.createPlayer() || !gameMain.createMonster())return 0;
             else {
-                while(true){
+                while(gameMain.isRunning()){
                     SDL_PollEvent(&e);
                     gameMain.runGame(e);
                 }
