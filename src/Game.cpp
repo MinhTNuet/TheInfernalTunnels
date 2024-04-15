@@ -55,6 +55,22 @@ bool Game::loadMedia()
     heart = gamefunc::loadTextureFromFile("image/heart.png");
     hp_pos = {{20, 20, 36, 28}, {44, 20, 36, 28}, {68, 20, 36, 28}};
 
+    menuTex[0] = gamefunc::loadTextureFromFile("image/button_and_background/background_menu.png");
+    menuTex[1] = gamefunc::loadTextureFromFile("image/button_and_background/Tick.png");
+    menuTex[2] = gamefunc::loadTextureFromFile("image/button_and_background/PlayButton.png");
+    menuTex[3] = gamefunc::loadTextureFromFile("image/button_and_background/Setting1Button.png");
+    menuTex[4] = gamefunc::loadTextureFromFile("image/button_and_background/ExitButton.png");
+    menuTex[5] = gamefunc::loadTextureFromFile("image/button_and_background/background_pause.png");
+    menuTex[6] = gamefunc::loadTextureFromFile("image/button_and_background/Setting2Button.png");
+    menuTex[7] = gamefunc::loadTextureFromFile("image/button_and_background/MenuButton.png");
+    menuTex[8] = gamefunc::loadTextureFromFile("image/button_and_background/BackButton.png");
+    menuTex[9] = gamefunc::loadTextureFromFile("image/button_and_background/background_end.png");
+    menuTex[10] = gamefunc::loadTextureFromFile("image/button_and_background/RetryButton.png");
+    menuTex[11] = gamefunc::loadTextureFromFile("image/button_and_background/background_setting.png");
+    menuTex[12] = gamefunc::loadTextureFromFile("image/button_and_background/OKButton.png");
+    menuTex[13] = gamefunc::loadTextureFromFile("image/button_and_background/Arrow.png");
+
+
     gamefunc::initFont("image/font.ttf");
     getHighScore();
     return check;
@@ -170,7 +186,6 @@ void Game::updateMonster()
             if(monsterList[i]->isDead()){
                 if(monsterList[i]->getType() == 0) Player->buffhp();
                 else if(monsterList[i]->getType() == 1) scoreMonster += 10;
-                else scoreMonster += 5;
                 delete monsterList[i];
                 monsterList[i] = NULL;
                 monsterList.erase(monsterList.begin() + i);

@@ -137,7 +137,6 @@ void player::takeDamage(vector<Monster*>& monsterList)
                 hurting = true;
                 y_vel = -6;
                 hp--;
-                Mix_PlayChannel(-1, p_sound[hurt], 0);
             }
         }
     }
@@ -148,7 +147,6 @@ void player::Jump()
     if(grounded){
         y_vel = -17;
         jumping = true;
-        Mix_PlayChannel(-1, p_sound[jump], 0);
     }
 }
 

@@ -19,10 +19,10 @@
 	<bits/stdc++.h>
 	"Game.h"
 
-1713109676 source:d:\minhc++\theinfernaltunnels\src\game.cpp
+1713188310 source:d:\minhc++\theinfernaltunnels\src\game.cpp
 	"Game.h"
 
-1713105912 d:\minhc++\theinfernaltunnels\include\game.h
+1713188310 d:\minhc++\theinfernaltunnels\include\game.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -33,6 +33,7 @@
 	"Texture.h"
 	"player.h"
 	"Monster.h"
+	"Menu.h"
 
 1713104482 d:\minhc++\theinfernaltunnels\include\gamefunc.h
 	<SDL.h>
@@ -56,7 +57,7 @@
 	<SDL_ttf.h>
 	<bits/stdc++.h>
 
-1713110015 source:d:\minhc++\theinfernaltunnels\src\player.cpp
+1713188310 source:d:\minhc++\theinfernaltunnels\src\player.cpp
 	"player.h"
 
 1713093229 d:\minhc++\theinfernaltunnels\include\player.h
@@ -67,7 +68,7 @@
 	"gamefunc.h"
 	"Monster.h"
 
-1713098878 source:d:\minhc++\theinfernaltunnels\src\monster.cpp
+1713176171 source:d:\minhc++\theinfernaltunnels\src\monster.cpp
 	"Monster.h"
 
 1713104482 d:\minhc++\theinfernaltunnels\include\monster.h
@@ -79,5 +80,12 @@
 1712903437 source:d:\minhc++\theinfernaltunnels\src\menu.cpp
 	"Menu.h"
 
-1712903437 d:\minhc++\theinfernaltunnels\include\menu.h
+1713188632 d:\minhc++\theinfernaltunnels\include\menu.h
+	<bits/stdc++.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+	"gamefunc.h"
+	"player.h"
 

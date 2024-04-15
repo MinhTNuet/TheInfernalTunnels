@@ -27,9 +27,8 @@ Monster::Monster(const int& _x, const int& _y, SDL_Texture* image, Map& _map, in
         else animationDie[i] = {i*32 - 64, 128, 32, 32};
     }
 
-    if(type == 0)hp = 3;
-    else if(type == 1)hp = 5;
-    else hp = 2;
+    if(type == 0)hp = 1;
+    else if(type == 1)hp = 3;
 
 }
 
