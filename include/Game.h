@@ -12,6 +12,7 @@
 #include "player.h"
 #include "Monster.h"
 #include "Menu.h"
+#include "Timer.h"
 
 using namespace std;
 
@@ -44,6 +45,7 @@ public:
     void handleInputGame(SDL_Event &e);
     void clearMedia();
 
+    void countDownTime();
     void runGame(SDL_Event &e);
     bool isRunning() {return runningGame;}
 
@@ -51,6 +53,7 @@ private:
     bool runningGame = false;
     int scoreRun = 0, scoreMonster = 0, totalScore = 0, highScore = 0;
     int musicStatus = 0;
+    float deltaTime = 1.0f;
 
     SDL_Texture* tileSet = NULL;
     SDL_Texture* p_texture[7] = {NULL};
@@ -60,6 +63,7 @@ private:
     SDL_Texture* liveBar = NULL;
     SDL_Texture* heart = NULL;
     player* Player;
+    Timer* time;
 
     SDL_Rect camera = {64, 128, SCREEN_WIDTH, SCREEN_HEIGHT};
     vector <SDL_Rect> tileClip;

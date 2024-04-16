@@ -4,8 +4,9 @@
 #include <SDL_ttf.h>
 #include <bits/stdc++.h>
 #include "Game.h"
+#include "Timer.h"
 using namespace std;
-#include "Menu.h"
+
 int main( int argc, char* argv[] )
 {
     SDL_Event e;
@@ -14,6 +15,7 @@ int main( int argc, char* argv[] )
     else{
         if(!gameMain.loadMedia() || !gameMain.loadMap())return 0;
         else{
+            gameMain.countDownTime();
             gameMain.setTileClip();
             if(!gameMain.createMap() || !gameMain.createPlayer() || !gameMain.createMonster())return 0;
             else {

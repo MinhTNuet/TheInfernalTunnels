@@ -35,7 +35,7 @@ void player::updatePlayer(deque <Map>& list_map, vector<Monster*>& monsterList)
     if(y > MAP_HEIGHT*64 +128 && !die){
         die = true;
         countDead = 6*24;
-        Mix_PlayChannel(-1, p_sound[dead], 0);
+//        Mix_PlayChannel(-1, p_sound[dead], 0);
     }
 
 }
@@ -58,7 +58,7 @@ void player::handleEvent(SDL_Event &e)
         case SDLK_SPACE:
             if(!hurting && !die) {
                 attacking = true;
-                Mix_PlayChannel(-1, p_sound[attack], 0);
+//                Mix_PlayChannel(-1, p_sound[attack], 0);
             }
             break;
         }

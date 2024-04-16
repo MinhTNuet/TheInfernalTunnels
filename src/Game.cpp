@@ -286,8 +286,24 @@ void Game::handleInputGame(SDL_Event &e)
     Player->handleEvent(e);
 }
 
+void Game::countDownTime()
+{
+    static Uint32 lastFrameTime = SDL_GetTicks();
+    Uint32 currentTime = SDL_GetTicks();
+    float deltaTime = (currentTime - lastFrameTime) / 1000.0f;
+    lastFrameTime = currentTime;
+    time = new Timer(60.0f, 60.0f);
+    time->countDown(deltaTime);
+    if(time->timeSIsZero()){
+        cout << "Het gio! Tro choi ket thuc." << endl;
+        runningGame = false;
+        time->resetToMax();
+    }
+}
+
 void Game::runGame(SDL_Event &e)
 {
+
     updateGame();
     render_Game();
     handleInputGame(e);
@@ -303,5 +319,5 @@ void Game::clearMedia()
     for(int i=0; i<7; i++)SDL_DestroyTexture(p_texture[i]);
     for(int i=0; i<2; i++)SDL_DestroyTexture(monsterTex[i]);
     TTF_CloseFont(font);
-
+    delete time;
 }
