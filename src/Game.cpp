@@ -41,8 +41,8 @@ bool Game::loadMedia()
     p_texture[5] = gamefunc::loadTextureFromFile("image/player/Sprites/Idle.png");
     p_texture[6] = gamefunc::loadTextureFromFile("image/player/Sprites/Walking.png");
 
-    monsterTex[0] = gamefunc::loadTextureFromFile( "image/mon1/Mon1.png");
-    monsterTex[1] = gamefunc::loadTextureFromFile( "image/mon2/Mon2.png");
+    monsterTex[0] = gamefunc::loadTextureFromFile("image/mon1/Mon1.png");
+    monsterTex[1] = gamefunc::loadTextureFromFile("image/mon2/Mon2.png");
 
     liveBar = gamefunc::loadTextureFromFile("image/LiveBar.png");
     heart = gamefunc::loadTextureFromFile("image/heart.png");
@@ -53,7 +53,48 @@ bool Game::loadMedia()
     p_sound[2] = Mix_LoadWAV("music/sound_Attack.wav");
     p_sound[3] = Mix_LoadWAV("music/sound_Hurt.wav");
     p_sound[4] = Mix_LoadWAV("music/sound_Death.wav");
-    for(int i=0; i<5; i++)if(p_sound[i] == NULL)check = false;
+    for(int i=0; i<5; i++){
+        if(p_sound[i] != NULL){
+            cout<<"Load success file p_sound: "<< i << endl;
+            check = false;
+        }else cout<<"Error load file p_sound: "<< i << endl;
+    }
+
+    menuTex[0] = gamefunc::loadTextureFromFile("image/button_and_background/background_menu.png");
+    menuTex[1] = gamefunc::loadTextureFromFile("image/button_and_background/PlayButton.png");
+
+    menuMusic = Mix_LoadMUS( "music/Exploring_Nightmare_1.wav" );
+    if(menuMusic != NULL){
+        check = true;
+        cout << "Load success file menu music: "<<endl;
+    }else{
+        check = false;
+        cout << "failed menu music: "<<endl;
+    }
+    gameMusic = Mix_LoadMUS( "music/Alone_at_Twilight_1.wav" );
+    if(gameMusic != NULL){
+        check = true;
+        cout << "Load success file game music: "<<endl;
+    }else{
+        check = false;
+        cout << "failed game music: "<<endl;
+    }
+    Mix_VolumeMusic(30);
+
+    menuSound[0] = Mix_LoadWAV("music/sound_menu_select.wav" );
+    menuSound[1] = Mix_LoadWAV("music/sound_menu_click.wav" );
+    for(int i=0; i<2; i++){
+        if(menuSound[i] != NULL){
+            cout<<"Load success file menu sound: "<< i << endl;
+            check = true;
+        }else {cout<<"Error load file menu sound: "<< i << endl;check = false;}
+    }
+
+    menu = new Menu(menuTex, menuSound);
+    if( menu == NULL ){
+        cout << "Error init Menu" << endl;
+        check = false;
+    }
 
     gamefunc::initFont("image/font.ttf");
     getHighScore();
@@ -250,7 +291,20 @@ void Game::render_hp_Score()
 
 void Game::playSound()
 {
-    Mix_HaltMusic();
+    if(menu->isRunning()){
+        if(musicStatus != 1){
+            Mix_HaltMusic();
+            Mix_FadeInMusic(menuMusic, -1, 1000);
+            musicStatus = 1;
+        }
+    }else if(musicStatus != 2) {
+        Mix_HaltMusic();
+        Mix_FadeInMusic(gameMusic, -1, 1000);
+        musicStatus = 2;
+    }else{
+        Mix_HaltMusic();
+        musicStatus = 0;
+    }
 }
 
 void Game::resetGame()
@@ -283,7 +337,10 @@ void Game::resetGame()
 void Game::handleInputGame(SDL_Event &e)
 {
     if(e.type == SDL_QUIT)gamefunc::renderQuit();
-    Player->handleEvent(e);
+    menu->handleInputMenu(e, *Player, runningGame);
+    if(!menu->isRunning()){
+        Player->handleEvent(e);
+    }
 }
 
 bool Game::createTimer()
@@ -296,11 +353,11 @@ bool Game::createTimer()
 void Game::render_time() {
     float timeRemaining = time->getTimeRemaining();
     string timeString = to_string((int)timeRemaining) + "s";
-    SDL_Texture* timeStringTex = gamefunc::createTextTexture("Time remaining: " + timeString, {255, 0, 0, 255});
+    SDL_Texture* timeStringTex = gamefunc::createTextTexture("Time remaining: " + timeString, {255, 255, 255, 255});
 
     int *w = new int, *h = new int;
     SDL_QueryTexture(timeStringTex, NULL, NULL, w, h);
-    gamefunc::renderTexture(timeStringTex, NULL, SCREEN_WIDTH - *w - 10, 100, *w, *h);
+    gamefunc::renderTexture(timeStringTex, NULL, SCREEN_WIDTH - *w - 10, 60, *w, *h);
     delete w, h;
     SDL_DestroyTexture(timeStringTex);
 }
@@ -321,9 +378,15 @@ void Game::countDownTime()
 
 void Game::runGame(SDL_Event &e)
 {
-    countDownTime();
-    cout << boolalpha << runningGame << endl;
-    updateGame();
+    if(!menu->isMenu()){
+        countDownTime();
+        updateGame();
+    }else if(runningGame){
+        runningGame = false;
+        resetGame();
+    }
+
+    playSound();
     render_Game();
     handleInputGame(e);
 
@@ -337,6 +400,9 @@ void Game::clearMedia()
     SDL_DestroyTexture(heart);
     for(int i=0; i<7; i++)SDL_DestroyTexture(p_texture[i]);
     for(int i=0; i<2; i++)SDL_DestroyTexture(monsterTex[i]);
+    for(int i=0; i<2; i++)SDL_DestroyTexture(menuTex[i]);
     TTF_CloseFont(font);
+    Mix_FreeMusic(menuMusic);
+    Mix_FreeMusic(gameMusic);
     delete time;
 }

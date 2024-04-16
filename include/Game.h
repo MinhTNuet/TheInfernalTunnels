@@ -49,7 +49,7 @@ public:
 
     void countDownTime();
     void runGame(SDL_Event &e);
-    bool isRunning() {return runningGame;}
+    bool isRunning(){return menu->isRunning() || runningGame;}
 
 private:
     bool runningGame = false;
@@ -57,15 +57,20 @@ private:
     int musicStatus = 0;
     float deltaTime = 1.0f;
 
+    SDL_Texture* liveBar = NULL;
+    SDL_Texture* heart = NULL;
     SDL_Texture* tileSet = NULL;
     SDL_Texture* p_texture[7] = {NULL};
     SDL_Texture* monsterTex[2] = {NULL};
+    SDL_Texture* menuTex[2] = {NULL};
     Mix_Chunk* p_sound[5] = {NULL};
+    Mix_Chunk* menuSound[2] = {NULL};
+    Mix_Music* menuMusic = NULL;
+    Mix_Music* gameMusic = NULL;
 
-    SDL_Texture* liveBar = NULL;
-    SDL_Texture* heart = NULL;
     player* Player;
     Timer* time;
+    Menu* menu;
 
     SDL_Rect camera = {64, 128, SCREEN_WIDTH, SCREEN_HEIGHT};
     vector <SDL_Rect> tileClip;
