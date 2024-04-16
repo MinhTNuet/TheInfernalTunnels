@@ -105,7 +105,7 @@ bool Game::createMap()
 
 bool Game::createPlayer()
 {
-    Player = new player(64, 500, p_texture);
+    Player = new player(64, 500, p_texture, p_sound);
     if(Player == NULL) return false;
     return true;
 }
