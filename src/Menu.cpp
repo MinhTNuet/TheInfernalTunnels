@@ -23,9 +23,9 @@ Menu::Menu(SDL_Texture* menuTex[], Mix_Chunk* menuSound[])
     okBtn.setButton(menuTex[12], 600, 450, 86, 37);
     arrow.setButton(menuTex[13], 0, 0, 12, 21);
 
-    soundTex = gamefunc::createTextTexture("Sound", {255, 255, 255, 255} );
-    musicTex = gamefunc::createTextTexture("Music", {255, 255, 255, 255} );
-    FSTex = gamefunc::createTextTexture("FullScr", {255, 255, 255, 255} );
+    soundTex = gamefunc::createTextTexture("Sound", {255, 255, 255, 255});
+    musicTex = gamefunc::createTextTexture("Music", {255, 255, 255, 255});
+    FSTex = gamefunc::createTextTexture("FullScreen", {255, 255, 255, 255});
 }
 
 void Menu::selectButton(button& check)
@@ -59,7 +59,7 @@ void Menu::handleInput(SDL_Event& e, player& _Player, bool& isRunning)
         switch(e.type){
         case SDL_MOUSEBUTTONDOWN:
             if(checkMouse(*retryBtn.getBtnRect())){
-                Mix_PlayChannel( -1, sound_menu_2, 0 );
+                Mix_PlayChannel(-1, sound_menu_2, 0);
                 retry = true;
                 endgame = false;
                 paused = false;
@@ -167,10 +167,10 @@ void Menu::renderMainMenu()
 
 void Menu::renderPauseMenu()
 {
-    gamefunc::renderTexture(pauseBG.getBtnTex(), NULL, pauseBG.getBtnRect() );
-    gamefunc::renderTexture(menuBtn.getBtnTex(), NULL, menuBtn.getBtnRect() );
-    gamefunc::renderTexture(settingBtn[1].getBtnTex(), NULL, settingBtn[1].getBtnRect() );
-    gamefunc::renderTexture(backBtn.getBtnTex(), NULL, backBtn.getBtnRect() );
+    gamefunc::renderTexture(pauseBG.getBtnTex(), NULL, pauseBG.getBtnRect());
+    gamefunc::renderTexture(menuBtn.getBtnTex(), NULL, menuBtn.getBtnRect());
+    gamefunc::renderTexture(settingBtn[1].getBtnTex(), NULL, settingBtn[1].getBtnRect());
+    gamefunc::renderTexture(backBtn.getBtnTex(), NULL, backBtn.getBtnRect());
 
     if(!isSetting()){
         selectButton(menuBtn);

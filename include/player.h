@@ -32,7 +32,7 @@ public:
     void handleCollision(deque <Map>& list_map);
     void takeDamage(vector<Monster*>& monsterList);
     void Jump();
-    void buffhp() {if(hp<3) hp++;}
+    void buffhp(){if(hp<3)hp++;}
     void mapPresent(deque <Map>& list_map);
     void changeCam(SDL_Rect &camera, deque <Map>& list_map);
     void renderPlayer(SDL_Rect &camera);

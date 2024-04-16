@@ -4,22 +4,20 @@
 #include <SDL_ttf.h>
 #include <bits/stdc++.h>
 #include "Game.h"
-
 using namespace std;
-
-
+#include "Menu.h"
 int main( int argc, char* argv[] )
 {
     SDL_Event e;
     Game gameMain;
-    if(!gameMain.init()) return 0;
+    if(!gameMain.init())return 0;
     else{
         if(!gameMain.loadMedia() || !gameMain.loadMap())return 0;
         else{
             gameMain.setTileClip();
             if(!gameMain.createMap() || !gameMain.createPlayer() || !gameMain.createMonster())return 0;
             else {
-                while(gameMain.isRunning()){
+                while(!gameMain.isRunning()){
                     SDL_PollEvent(&e);
                     gameMain.runGame(e);
                 }

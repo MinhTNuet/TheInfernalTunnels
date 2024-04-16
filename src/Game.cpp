@@ -48,25 +48,13 @@ bool Game::loadMedia()
     heart = gamefunc::loadTextureFromFile("image/heart.png");
     hp_pos = {{20, 20, 36, 28}, {44, 20, 36, 28}, {68, 20, 36, 28}};
 
-    menuTex[0] = gamefunc::loadTextureFromFile("image/button_and_background/background_menu.png");
-    menuTex[1] = gamefunc::loadTextureFromFile("image/button_and_background/Tick.png");
-    menuTex[2] = gamefunc::loadTextureFromFile("image/button_and_background/PlayButton.png");
-    menuTex[3] = gamefunc::loadTextureFromFile("image/button_and_background/Setting1Button.png");
-    menuTex[4] = gamefunc::loadTextureFromFile("image/button_and_background/ExitButton.png");
-    menuTex[5] = gamefunc::loadTextureFromFile("image/button_and_background/background_pause.png");
-    menuTex[6] = gamefunc::loadTextureFromFile("image/button_and_background/Setting2Button.png");
-    menuTex[7] = gamefunc::loadTextureFromFile("image/button_and_background/MenuButton.png");
-    menuTex[8] = gamefunc::loadTextureFromFile("image/button_and_background/BackButton.png");
-    menuTex[9] = gamefunc::loadTextureFromFile("image/button_and_background/background_end.png");
-    menuTex[10] = gamefunc::loadTextureFromFile("image/button_and_background/RetryButton.png");
-    menuTex[11] = gamefunc::loadTextureFromFile("image/button_and_background/background_setting.png");
-    menuTex[12] = gamefunc::loadTextureFromFile("image/button_and_background/OKButton.png");
-    menuTex[13] = gamefunc::loadTextureFromFile("image/button_and_background/Arrow.png");
+    p_sound[0] = Mix_LoadWAV("music/sound_Jump.wav");
+    p_sound[1] = Mix_LoadWAV("music/sound_Fall.wav");
+    p_sound[2] = Mix_LoadWAV("music/sound_Attack.wav");
+    p_sound[3] = Mix_LoadWAV("music/sound_Hurt.wav");
+    p_sound[4] = Mix_LoadWAV("music/sound_Death.wav");
+    for(int i=0; i<5; i++)if(p_sound[i] == NULL)check = false;
 
-    menu = new Menu(menuTex, menuSound);
-    if(menu == NULL){
-        check = false;
-    }
     gamefunc::initFont("image/font.ttf");
     getHighScore();
     return check;
@@ -214,6 +202,7 @@ void Game::render_Game()
     render_Monster();
     Player->renderPlayer(camera);
     render_hp_Score();
+
 }
 
 void Game::render_Map()
@@ -294,31 +283,15 @@ void Game::resetGame()
 void Game::handleInputGame(SDL_Event &e)
 {
     if(e.type == SDL_QUIT)gamefunc::renderQuit();
-    menu->handleInput(e, *Player, runningGame);
-    if(!menu->isRunning()){
-        Player->handleEvent(e);
-    }
+    Player->handleEvent(e);
 }
 
 void Game::runGame(SDL_Event &e)
 {
-    if(!menu->isMenu()){
-        if(!menu->isPause() && !menu->isEnd()){
-            updateGame();
-        }
-        render_Game();
-        if(menu->isEnd()) menu->renderEndMenu(totalScore);
-    }
-    else if(runningGame){
-        runningGame = false;
-        resetGame();
-    }
+    updateGame();
+    render_Game();
+    handleInputGame(e);
 
-    playSound();
-    handleInputGame( e );
-    if(menu->isRetry()){
-        resetGame();
-    }
     gamefunc::renderPresent();
 }
 

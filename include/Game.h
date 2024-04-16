@@ -55,15 +55,11 @@ private:
     SDL_Texture* tileSet = NULL;
     SDL_Texture* p_texture[7] = {NULL};
     SDL_Texture* monsterTex[2] = {NULL};
-    SDL_Texture* menuTex[14] = {NULL};
-    Mix_Chunk* menuSound[2] = {NULL};
+    Mix_Chunk* p_sound[5] = {NULL};
 
     SDL_Texture* liveBar = NULL;
     SDL_Texture* heart = NULL;
     player* Player;
-    Menu* menu;
-    Mix_Music* menuMusic = NULL;
-    Mix_Music* gameMusic = NULL;
 
     SDL_Rect camera = {64, 128, SCREEN_WIDTH, SCREEN_HEIGHT};
     vector <SDL_Rect> tileClip;
