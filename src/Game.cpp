@@ -371,7 +371,7 @@ void Game::countDownTime()
     time->countDown(deltaTime);
     if(time->timeSIsZero()){
         cout << "Het gio! Tro choi ket thuc." << endl;
-        runningGame = true;
+        runningGame = false;
         time->resetToMax();
     }
 }

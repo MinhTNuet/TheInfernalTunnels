@@ -55,7 +55,6 @@ private:
     bool runningGame = false;
     int scoreRun = 0, scoreMonster = 0, totalScore = 0, highScore = 0;
     int musicStatus = 0;
-    float deltaTime = 1.0f;
 
     SDL_Texture* liveBar = NULL;
     SDL_Texture* heart = NULL;

@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
             else {
                     cout<<1;
                 gameMain.countDownTime();
-                while(!gameMain.isRunning()){
+                while(gameMain.isRunning()){
                     SDL_PollEvent(&e);
                     gameMain.runGame(e);
                 }
