@@ -11,7 +11,7 @@
 	"gamefunc.h"
 	"Texture.h"
 
-1713268434 source:d:\minhc++\theinfernaltunnels\main.cpp
+1713274935 source:d:\minhc++\theinfernaltunnels\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -20,10 +20,10 @@
 	"Game.h"
 	"Timer.h"
 
-1713268434 source:d:\minhc++\theinfernaltunnels\src\game.cpp
+1713275965 source:d:\minhc++\theinfernaltunnels\src\game.cpp
 	"Game.h"
 
-1713268392 d:\minhc++\theinfernaltunnels\include\game.h
+1713275384 d:\minhc++\theinfernaltunnels\include\game.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -91,7 +91,7 @@
 	"gamefunc.h"
 	"player.h"
 
-1713262823 d:\minhc++\theinfernaltunnels\include\timer.h
+1713275988 d:\minhc++\theinfernaltunnels\include\timer.h
 	<SDL_image.h>
 	<SDL_mixer.h>
 	<SDL_ttf.h>

@@ -25,3 +25,7 @@ bool Timer::timeSIsZero() {
 bool Timer::timeSIsGreaterThanOrEqualTo(float timeSCheck) {
 	return (timeSCurrent >= timeSCheck);
 }
+
+float Timer::getTimeRemaining() {
+    return timeSCurrent;
+}

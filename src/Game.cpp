@@ -202,7 +202,7 @@ void Game::render_Game()
     render_Monster();
     Player->renderPlayer(camera);
     render_hp_Score();
-
+    render_time();
 }
 
 void Game::render_Map()
@@ -286,24 +286,43 @@ void Game::handleInputGame(SDL_Event &e)
     Player->handleEvent(e);
 }
 
+bool Game::createTimer()
+{
+    time = new Timer(60.0f, 60.0f);
+    if(time == NULL) return false;
+    return true;
+}
+
+void Game::render_time() {
+    float timeRemaining = time->getTimeRemaining();
+    string timeString = to_string((int)timeRemaining) + "s";
+    SDL_Texture* timeStringTex = gamefunc::createTextTexture("Time remaining: " + timeString, {255, 0, 0, 255});
+
+    int *w = new int, *h = new int;
+    SDL_QueryTexture(timeStringTex, NULL, NULL, w, h);
+    gamefunc::renderTexture(timeStringTex, NULL, SCREEN_WIDTH - *w - 10, 100, *w, *h);
+    delete w, h;
+    SDL_DestroyTexture(timeStringTex);
+}
+
 void Game::countDownTime()
 {
     static Uint32 lastFrameTime = SDL_GetTicks();
     Uint32 currentTime = SDL_GetTicks();
     float deltaTime = (currentTime - lastFrameTime) / 1000.0f;
     lastFrameTime = currentTime;
-    time = new Timer(60.0f, 60.0f);
     time->countDown(deltaTime);
     if(time->timeSIsZero()){
         cout << "Het gio! Tro choi ket thuc." << endl;
-        runningGame = false;
+        runningGame = true;
         time->resetToMax();
     }
 }
 
 void Game::runGame(SDL_Event &e)
 {
-
+    countDownTime();
+    cout << boolalpha << runningGame << endl;
     updateGame();
     render_Game();
     handleInputGame(e);

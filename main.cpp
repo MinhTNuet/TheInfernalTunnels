@@ -7,22 +7,23 @@
 #include "Timer.h"
 using namespace std;
 
-int main( int argc, char* argv[] )
+int main(int argc, char* argv[])
 {
     SDL_Event e;
     Game gameMain;
     if(!gameMain.init())return 0;
     else{
-        if(!gameMain.loadMedia() || !gameMain.loadMap())return 0;
+        if(!gameMain.loadMedia() || !gameMain.loadMap() || !gameMain.createTimer())return 0;
         else{
-            gameMain.countDownTime();
             gameMain.setTileClip();
             if(!gameMain.createMap() || !gameMain.createPlayer() || !gameMain.createMonster())return 0;
             else {
+                gameMain.countDownTime();
                 while(!gameMain.isRunning()){
                     SDL_PollEvent(&e);
                     gameMain.runGame(e);
                 }
+
             }
         }
     }

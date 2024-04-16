@@ -17,7 +17,7 @@ public:
 	void resetToMax();
 	bool timeSIsZero();
 	bool timeSIsGreaterThanOrEqualTo(float timeSCheck);
-
+    float getTimeRemaining() ;
 
 private:
 	float timeSMax;

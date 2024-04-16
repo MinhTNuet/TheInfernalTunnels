@@ -28,6 +28,7 @@ public:
     bool createMap();
     bool createPlayer();
     bool createMonster();
+    bool createTimer();
 
     void updateGame();
     bool updateMap();
@@ -39,6 +40,7 @@ public:
     void render_Map();
     void render_Monster();
     void render_hp_Score();
+    void render_time();
 
     void playSound();
     void resetGame();
