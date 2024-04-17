@@ -18,7 +18,6 @@ int main(int argc, char* argv[])
             gameMain.setTileClip();
             if(!gameMain.createMap() || !gameMain.createPlayer() || !gameMain.createMonster())return 0;
             else {
-                    cout<<1;
                 gameMain.countDownTime();
                 while(gameMain.isRunning()){
                     SDL_PollEvent(&e);

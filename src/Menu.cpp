@@ -1,14 +1,17 @@
 #include "menu.h"
 
-Menu::Menu(SDL_Texture* MenuTex[], Mix_Chunk* menuSound[])
+Menu::Menu(SDL_Texture* menuTex[], Mix_Chunk* menuSound[])
 {
     sound_menu_1 = menuSound[0];
     sound_menu_2 = menuSound[1];
-    menuBG = MenuTex[0];
+    menuBG = menuTex[0];
 
-    playBtn.setButton(MenuTex[1], 540, 330, 200, 48);
+    playBtn.setButton(menuTex[1], 540, 330, 200, 48);
+    exitBtn.setButton(menuTex[2], 540, 500, 200, 48);
 
-
+    backBtn.setButton(menuTex[2], 582, 425, 120, 53);
+    endBG.setButton(menuTex[3], 424, 250, 432, 246 );
+    restartBtn.setButton(menuTex[4], 582, 414, 120, 53);
 }
 
 bool Menu::checkMouse(const SDL_Rect& check)
@@ -32,12 +35,26 @@ void Menu::renderMainMenuScreen()
 {
     gamefunc::renderTexture(menuBG, NULL, NULL);
     gamefunc::renderTexture(playBtn.getBtnTex(), NULL, playBtn.getBtnRect());
-
+    gamefunc::renderTexture(exitBtn.getBtnTex(), NULL, exitBtn.getBtnRect() );
 }
 
 void Menu::handleInputMenu(SDL_Event& e, player& _Player, bool& isRunning)
 {
+    if(_Player.isDead())endgame = true;
+    else restart = false;
+    if(isEnd()){
+        switch(e.type){
+        case SDL_MOUSEBUTTONDOWN:
+            if(checkMouse(*restartBtn.getBtnRect())){
+                Mix_PlayChannel(-1, sound_menu_2, 0);
+                restart = true;
+                endgame = false;
+            }
+            break;
+        }
+    }
     if(isMenu()){
+        endgame = false;
         renderMainMenuScreen();
         switch(e.type){
         case SDL_MOUSEBUTTONDOWN:
@@ -46,9 +63,28 @@ void Menu::handleInputMenu(SDL_Event& e, player& _Player, bool& isRunning)
                 menu = false;
                 isRunning = true;
             }
+            if(checkMouse(*exitBtn.getBtnRect())){
+                Mix_PlayChannel(-1, sound_menu_2, 0);
+                menu = false;
+            }
             break;
         }
     }
+}
+
+void Menu::renderEndMenuScreen(int score)
+{
+    int *w = new int, *h = new int;
+    SDL_Color color = {255, 255, 255, 255};
+    SDL_Texture* text = gamefunc::createTextTexture(to_string(score), color);
+    SDL_QueryTexture(text, NULL, NULL, w, h);
+
+    gamefunc::renderTexture(endBG.getBtnTex(), NULL, endBG.getBtnRect());
+    gamefunc::renderTexture(restartBtn.getBtnTex(), NULL, restartBtn.getBtnRect());
+    gamefunc::renderTexture(text, NULL, 650-*w*3/4, 339, *w*1.25, *h*1.25);
+
+    delete w, h;
+    SDL_DestroyTexture(text);
 }
 
 

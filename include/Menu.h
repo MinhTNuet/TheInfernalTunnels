@@ -19,7 +19,6 @@ struct button{
     button(){;}
     void setButton( SDL_Texture* image, int _x, int _y, int _w, int _h ){
         btnTex = image;
-
         btnRect = new SDL_Rect;
         btnRect->x = _x;
         btnRect->y = _y;
@@ -33,21 +32,27 @@ struct button{
 
 class Menu {
 public:
-    Menu( SDL_Texture* MenuTex[] , Mix_Chunk* MenuSfx[] );
+    Menu(SDL_Texture* menuTex[], Mix_Chunk* menuSound[]);
     void selectButton(button& check);
     bool checkMouse(const SDL_Rect& check);
     void handleInputMenu(SDL_Event& e, player& _Player, bool& isGameRunning);
     void renderMainMenuScreen();
+    void renderEndMenuScreen(int score);
 
     bool isMenu(){return menu;}
-
-    bool isRunning(){return menu;}
+    bool isEnd(){return endgame;}
+    bool isRestart(){return restart;}
+    bool isRunning(){return menu || endgame;}
 private:
     button playBtn;
+    button exitBtn;
+    button restartBtn;
+    button backBtn;
+    button endBG;
     SDL_Texture* menuBG = NULL;
     Mix_Chunk* sound_menu_1 = NULL;
     Mix_Chunk* sound_menu_2 = NULL;
-    bool menu = true, paused = false, endG = false, retry = false, setting = false, tickS = true, tickM = true, fs = false;
+    bool menu = true, endgame = false, restart = false;
 };
 
 #endif // MENU_H

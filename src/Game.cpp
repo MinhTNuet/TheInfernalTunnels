@@ -61,25 +61,10 @@ bool Game::loadMedia()
     }
 
     menuTex[0] = gamefunc::loadTextureFromFile("image/button_and_background/background_menu.png");
-    menuTex[1] = gamefunc::loadTextureFromFile("image/button_and_background/PlayButton.png");
-
-    menuMusic = Mix_LoadMUS( "music/Exploring_Nightmare_1.wav" );
-    if(menuMusic != NULL){
-        check = true;
-        cout << "Load success file menu music: "<<endl;
-    }else{
-        check = false;
-        cout << "failed menu music: "<<endl;
-    }
-    gameMusic = Mix_LoadMUS( "music/Alone_at_Twilight_1.wav" );
-    if(gameMusic != NULL){
-        check = true;
-        cout << "Load success file game music: "<<endl;
-    }else{
-        check = false;
-        cout << "failed game music: "<<endl;
-    }
-    Mix_VolumeMusic(30);
+    menuTex[1] = gamefunc::loadTextureFromFile("image/button_and_background/play01.png");
+    menuTex[2] = gamefunc::loadTextureFromFile("image/button_and_background/back01.png");
+    menuTex[3] = gamefunc::loadTextureFromFile("image/button_and_background/background_end.png");
+    menuTex[4] = gamefunc::loadTextureFromFile("image/button_and_background/restart01.png");
 
     menuSound[0] = Mix_LoadWAV("music/sound_menu_select.wav" );
     menuSound[1] = Mix_LoadWAV("music/sound_menu_click.wav" );
@@ -146,7 +131,7 @@ bool Game::createMap()
 
 bool Game::createPlayer()
 {
-    Player = new player(64, 500, p_texture, p_sound);
+    Player = new player(40, 500, p_texture, p_sound);
     if(Player == NULL) return false;
     return true;
 }
@@ -188,13 +173,11 @@ bool Game::updateMap()
     if(camera.x >= list_map[2].getStart_x() - 1){
         list_map[0].clearMap();
         list_map.pop_front();
-
         int randomMap;
         randomMap = rand()%total_map.size();
         while((total_map[randomMap].STT == list_map[0].getSTT()) || (total_map[randomMap].STT == list_map[1].getSTT())){
            randomMap = rand()%total_map.size();
         }
-
         Map mat(list_map[1].getStart_x() + TILE_SIZE*MAP_WIDTH, total_map[randomMap].path, tileSet, total_map[randomMap].STT );
         mat.setMonsterList(total_map[randomMap].monster_pos);
         list_map.push_back(mat);
@@ -232,7 +215,7 @@ void Game::setHighScore()
 {
     totalScore = scoreMonster + scoreRun;
     if(totalScore >= highScore){
-        fstream high( "image/HighScore.txt", fstream::out | fstream::trunc);
+        fstream high("image/HighScore.txt", fstream::out | fstream::trunc);
         high << highScore;
     }
 }
@@ -289,24 +272,6 @@ void Game::render_hp_Score()
     }
 }
 
-void Game::playSound()
-{
-    if(menu->isRunning()){
-        if(musicStatus != 1){
-            Mix_HaltMusic();
-            Mix_FadeInMusic(menuMusic, -1, 1000);
-            musicStatus = 1;
-        }
-    }else if(musicStatus != 2) {
-        Mix_HaltMusic();
-        Mix_FadeInMusic(gameMusic, -1, 1000);
-        musicStatus = 2;
-    }else{
-        Mix_HaltMusic();
-        musicStatus = 0;
-    }
-}
-
 void Game::resetGame()
 {
     while(!monsterList.empty()){
@@ -350,7 +315,8 @@ bool Game::createTimer()
     return true;
 }
 
-void Game::render_time() {
+void Game::render_time()
+{
     float timeRemaining = time->getTimeRemaining();
     string timeString = to_string((int)timeRemaining) + "s";
     SDL_Texture* timeStringTex = gamefunc::createTextTexture("Time remaining: " + timeString, {255, 255, 255, 255});
@@ -379,17 +345,18 @@ void Game::countDownTime()
 void Game::runGame(SDL_Event &e)
 {
     if(!menu->isMenu()){
-        countDownTime();
-        updateGame();
-    }else if(runningGame){
+        if(!menu->isEnd()){
+            countDownTime();
+            updateGame();
+        }
+        render_Game();
+        if(menu->isEnd() || time->timeSIsZero())menu->renderEndMenuScreen(totalScore);
+    } else if(runningGame){
         runningGame = false;
         resetGame();
     }
-
-    playSound();
-    render_Game();
     handleInputGame(e);
-
+    if(menu->isRestart())resetGame();
     gamefunc::renderPresent();
 }
 
@@ -400,7 +367,7 @@ void Game::clearMedia()
     SDL_DestroyTexture(heart);
     for(int i=0; i<7; i++)SDL_DestroyTexture(p_texture[i]);
     for(int i=0; i<2; i++)SDL_DestroyTexture(monsterTex[i]);
-    for(int i=0; i<2; i++)SDL_DestroyTexture(menuTex[i]);
+    for(int i=0; i<5; i++)SDL_DestroyTexture(menuTex[i]);
     TTF_CloseFont(font);
     Mix_FreeMusic(menuMusic);
     Mix_FreeMusic(gameMusic);

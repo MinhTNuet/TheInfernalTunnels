@@ -42,7 +42,6 @@ public:
     void render_hp_Score();
     void render_time();
 
-    void playSound();
     void resetGame();
     void handleInputGame(SDL_Event &e);
     void clearMedia();

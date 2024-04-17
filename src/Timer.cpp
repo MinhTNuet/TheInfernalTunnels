@@ -21,7 +21,6 @@ bool Timer::timeSIsZero() {
 	return (timeSCurrent <= 0.0f);
 }
 
-
 bool Timer::timeSIsGreaterThanOrEqualTo(float timeSCheck) {
 	return (timeSCurrent >= timeSCheck);
 }
