@@ -307,7 +307,7 @@ void Game::handleInputGame(SDL_Event &e)
 
 bool Game::createTimer()
 {
-    time = new Timer(12.0f, 12.0f);
+    time = new Timer(62.0f, 62.0f);
     if(time == NULL) return false;
     return true;
 }
