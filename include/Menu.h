@@ -43,6 +43,7 @@ public:
     bool isEnd(){return endgame;}
     bool isRestart(){return restart;}
     bool isRunning(){return menu || endgame;}
+
 private:
     button playBtn;
     button exitBtn;

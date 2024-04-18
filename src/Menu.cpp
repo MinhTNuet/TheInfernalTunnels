@@ -8,9 +8,7 @@ Menu::Menu(SDL_Texture* menuTex[], Mix_Chunk* menuSound[])
 
     playBtn.setButton(menuTex[1], 540, 330, 200, 48);
     exitBtn.setButton(menuTex[2], 540, 500, 200, 48);
-
-    backBtn.setButton(menuTex[2], 582, 425, 120, 53);
-    endBG.setButton(menuTex[3], 424, 250, 432, 246 );
+    endBG.setButton(menuTex[3], 424, 250, 432, 250);
     restartBtn.setButton(menuTex[4], 582, 414, 120, 53);
 }
 
@@ -35,7 +33,7 @@ void Menu::renderMainMenuScreen()
 {
     gamefunc::renderTexture(menuBG, NULL, NULL);
     gamefunc::renderTexture(playBtn.getBtnTex(), NULL, playBtn.getBtnRect());
-    gamefunc::renderTexture(exitBtn.getBtnTex(), NULL, exitBtn.getBtnRect() );
+    gamefunc::renderTexture(exitBtn.getBtnTex(), NULL, exitBtn.getBtnRect());
 }
 
 void Menu::handleInputMenu(SDL_Event& e, player& _Player, bool& isRunning)
@@ -50,7 +48,6 @@ void Menu::handleInputMenu(SDL_Event& e, player& _Player, bool& isRunning)
                 restart = true;
                 endgame = false;
             }
-            break;
         }
     }
     if(isMenu()){
@@ -76,7 +73,7 @@ void Menu::renderEndMenuScreen(int score)
 {
     int *w = new int, *h = new int;
     SDL_Color color = {255, 255, 255, 255};
-    SDL_Texture* text = gamefunc::createTextTexture(to_string(score), color);
+    SDL_Texture* text = gamefunc::createTextTexture("Score: " + to_string(score), color);
     SDL_QueryTexture(text, NULL, NULL, w, h);
 
     gamefunc::renderTexture(endBG.getBtnTex(), NULL, endBG.getBtnRect());

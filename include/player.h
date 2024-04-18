@@ -7,6 +7,7 @@
 #include <bits/stdc++.h>
 #include "gamefunc.h"
 #include "Monster.h"
+#include "Timer.h"
 
 class Map;
 class Monster;
@@ -41,10 +42,11 @@ public:
     int gethp() const {return hp;}
     bool checkAttack() const {return countHit == 26;}
     bool isDead() const {return countDead >= 7*6-1;}
+    bool overTime();
 private:
     int player_w = 48;
     int player_h = 56;
-    int player_speed = 3;
+    int player_speed = 6;
     int hp = 3;
     int index_map_player = 0;
     int startX_map_player;
@@ -63,7 +65,7 @@ private:
     Mix_Chunk* p_sound[5];
 
     int countWalk = 0, countIdle = 0, countJump = 0, countFall = 0, countHit = 0, countHurt = 0, countDead = 0;
-    bool idling = false, grounded = false, walking = false, jumping= false, falling = false, attacking = false, hurting = false, die = false ;
+    bool idling = false, grounded = false, walking = false, jumping= false, falling = false, attacking = false, hurting = false, die = false;
 };
 
 #endif // PLAYER_H

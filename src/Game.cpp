@@ -279,15 +279,13 @@ void Game::resetGame()
         monsterList[0] = NULL;
         monsterList.erase(monsterList.begin());
     }
-
     for(int i=0; i<list_map.size(); i++){
         list_map[i].clearMap();
     }
     if(!list_map.empty())list_map.clear();
-
     if(!createMap())cout << "Error reset list Map";
     if(!createMonster())cout << "Error reset Monster";
-
+    time->resetToMax();
     Player->resetplayer();
     camera.x = 0;
     camera.y = 0;
@@ -296,7 +294,6 @@ void Game::resetGame()
     scoreRun = 0;
     totalScore = 0;
     getHighScore();
-
 }
 
 void Game::handleInputGame(SDL_Event &e)
@@ -310,13 +307,13 @@ void Game::handleInputGame(SDL_Event &e)
 
 bool Game::createTimer()
 {
-    time = new Timer(60.0f, 60.0f);
+    time = new Timer(12.0f, 12.0f);
     if(time == NULL) return false;
     return true;
 }
 
 void Game::render_time()
-{
+ {
     float timeRemaining = time->getTimeRemaining();
     string timeString = to_string((int)timeRemaining) + "s";
     SDL_Texture* timeStringTex = gamefunc::createTextTexture("Time remaining: " + timeString, {255, 255, 255, 255});
@@ -336,10 +333,9 @@ void Game::countDownTime()
     lastFrameTime = currentTime;
     time->countDown(deltaTime);
     if(time->timeSIsZero()){
-        cout << "Het gio! Tro choi ket thuc." << endl;
-        runningGame = false;
-        time->resetToMax();
+        Player->overTime();
     }
+
 }
 
 void Game::runGame(SDL_Event &e)
@@ -350,7 +346,7 @@ void Game::runGame(SDL_Event &e)
             updateGame();
         }
         render_Game();
-        if(menu->isEnd() || time->timeSIsZero())menu->renderEndMenuScreen(totalScore);
+        if(menu->isEnd())menu->renderEndMenuScreen(totalScore);
     } else if(runningGame){
         runningGame = false;
         resetGame();
@@ -369,7 +365,5 @@ void Game::clearMedia()
     for(int i=0; i<2; i++)SDL_DestroyTexture(monsterTex[i]);
     for(int i=0; i<5; i++)SDL_DestroyTexture(menuTex[i]);
     TTF_CloseFont(font);
-    Mix_FreeMusic(menuMusic);
-    Mix_FreeMusic(gameMusic);
     delete time;
 }

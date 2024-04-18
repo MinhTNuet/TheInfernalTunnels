@@ -18,8 +18,9 @@ public:
 	bool timeSIsZero();
 	bool timeSIsGreaterThanOrEqualTo(float timeSCheck);
     float getTimeRemaining() ;
-
+    bool checktime = true;
 private:
+
 	float timeSMax;
 	float timeSCurrent;
 };

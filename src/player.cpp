@@ -85,7 +85,7 @@ void player::handleStatus()
     else walking = false;
     if(!die && !hurting && grounded && x_vel == 0) idling = true;
     else idling = false;
-    if(!die && !hurting && !grounded && y_vel >= 0) falling = true;
+    if(!die && !hurting && !grounded && y_vel > 0) falling = true;
     else falling = false;
     if(!die && !hurting && !grounded && y_vel < 0) jumping = true;
     else jumping = false;
@@ -116,7 +116,7 @@ void player::handleCollision(deque <Map>& list_map)
     if(gamefunc::checkWall(getCollision(), list_map[index_map_player], &grounded)){
         if(y_vel > 0 && falling){
             grounded = true;
-            Mix_PlayChannel(-1, p_sound[fall], 0);
+//            Mix_PlayChannel(-1, p_sound[fall], 0);
         }
         y -= y_vel;
         y_vel = 0;
@@ -139,7 +139,7 @@ void player::takeDamage(vector<Monster*>& monsterList)
                 hurting = true;
                 y_vel = -6;
                 hp--;
-                Mix_PlayChannel(-1, p_sound[hurt], 0);
+//                Mix_PlayChannel(-1, p_sound[hurt], 0);
             }
         }
     }
@@ -150,7 +150,7 @@ void player::Jump()
     if(grounded){
         y_vel = -17;
         jumping = true;
-        Mix_PlayChannel(-1, p_sound[jump], 0);
+//        Mix_PlayChannel(-1, p_sound[jump], 0);
     }
 }
 
@@ -206,9 +206,9 @@ void player::renderPlayer(SDL_Rect &camera)
     else{
         countHit = 0;
         if(hurting){
-            if((countHurt+2)/6 >= HURTING_FRAMES)hurting = false;
+            if((countHurt+2)/4 >= HURTING_FRAMES)hurting = false;
             countHurt++;
-            gamefunc::renderTextureFlip(p_texture[hurt], &animationPlayer[countHurt/6], &str, flip);
+            gamefunc::renderTextureFlip(p_texture[hurt], &animationPlayer[countHurt/4], &str, flip);
         }
         else countHurt = 0;
 
@@ -240,16 +240,33 @@ void player::renderPlayer(SDL_Rect &camera)
         }
         else countIdle = 0;
 
+        if(die){
+            if((countDead+1)/6 >= DIE_FRAMES )Mix_HaltChannel( -1 );
+            countDead++;
+            gamefunc::renderTextureFlip(p_texture[dead], &animationPlayer[countDead/6], &str, flip);
+        }
+        else countDead = 0;
 
     }
 
 }
 
+bool player::overTime()
+{
+    die = true;
+    idling = false;
+    walking = false;
+    jumping= false;
+    falling = false;
+    attacking = false;
+    hurting = false;
+}
+
 void player::resetplayer()
 {
     die = false;
-    x = 64;
-    y = 320;
+    x = 40;
+    y = 500;
     y_vel = 0;
     hp = 3;
 }
