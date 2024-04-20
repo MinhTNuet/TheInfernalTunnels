@@ -85,7 +85,7 @@ void player::handleStatus()
     else walking = false;
     if(!die && !hurting && grounded && x_vel == 0) idling = true;
     else idling = false;
-    if(!die && !hurting && !grounded && y_vel > 0) falling = true;
+    if(!die && !hurting && !grounded && y_vel >= 0) falling = true;
     else falling = false;
     if(!die && !hurting && !grounded && y_vel < 0) jumping = true;
     else jumping = false;
@@ -148,7 +148,7 @@ void player::takeDamage(vector<Monster*>& monsterList)
 void player::Jump()
 {
     if(grounded){
-        y_vel = -17;
+        y_vel = -20;
         jumping = true;
 //        Mix_PlayChannel(-1, p_sound[jump], 0);
     }

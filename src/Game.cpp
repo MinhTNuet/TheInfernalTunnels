@@ -90,14 +90,14 @@ bool Game::loadMap()
 {
     map_enemy map1("image/Map/map1.txt", {322, 328}, 1);
     total_map.push_back(map1);
-    map_enemy map2("image/Map/map2.txt", {337}, 2);
+    map_enemy map2("image/Map/map2.txt", {387, 283, 254}, 2);
     total_map.push_back(map2);
-    map_enemy map3("image/Map/map3.txt", {244, 159, 162, 481, 533, 336}, 3);
+    map_enemy map3("image/Map/map3.txt", {159, 162, 244, 481}, 3);
     total_map.push_back(map3);
-    map_enemy map4("image/Map/map4.txt", {513, 389}, 4);
-    total_map.push_back(map4);
-    map_enemy map5("image/Map/map5.txt", {69}, 5);
-    total_map.push_back(map5);
+//    map_enemy map4("image/Map/map4.txt", {424, 513, 537}, 4);
+//    total_map.push_back(map4);
+//    map_enemy map5("image/Map/map5.txt", {69}, 5);
+//    total_map.push_back(map5);
     return true;
 }
 
@@ -151,9 +151,9 @@ bool Game::createMonster()
 void Game::updateGame()
 {
     if(updateMap()){
-        for(int j=0; j<list_map[4].getMonsterList().size(); j++){
-            int random = rand() % 5;
-            Monster* mon = new Monster((list_map[4].getMonsterList()[j]%MAP_WIDTH)*TILE_SIZE + list_map[2].getStart_x(), (list_map[2].getMonsterList()[j]/MAP_WIDTH)*TILE_SIZE, monsterTex[random], list_map[2], random);
+        for(int j=0; j<list_map[2].getMonsterList().size(); j++){
+            int random = rand() % 2;
+            Monster* mon = new Monster((list_map[2].getMonsterList()[j]%MAP_WIDTH)*TILE_SIZE + list_map[2].getStart_x(), (list_map[2].getMonsterList()[j]/MAP_WIDTH)*TILE_SIZE, monsterTex[random], list_map[2], random);
             monsterList.push_back(mon);
         }
     }
@@ -192,8 +192,11 @@ void Game::updateMonster()
         if(monsterList[i] != NULL){
             monsterList[i]->updateMonster(*Player);
             if(monsterList[i]->isDead()){
-                if(monsterList[i]->getType() == 0) Player->buffhp();
-                else if(monsterList[i]->getType() == 1) scoreMonster += 10;
+                if(monsterList[i]->getType() == 0){
+                    Player->buffhp();
+                    scoreMonster += 5;
+                }
+                else if(monsterList[i]->getType() == 1) scoreMonster += 30;
                 delete monsterList[i];
                 monsterList[i] = NULL;
                 monsterList.erase(monsterList.begin() + i);

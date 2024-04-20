@@ -27,7 +27,7 @@ Monster::Monster(const int& _x, const int& _y, SDL_Texture* image, Map& _map, in
         else animationDie[i] = {i*32 - 64, 128, 32, 32};
     }
 
-    if(type == 0)hp = 1;
+    if(type == 0)hp = 2;
     else if(type == 1)hp = 3;
 
 }
@@ -55,7 +55,7 @@ void Monster::autoMove(player& _Player){
         if(abs(y - _Player.getY()) > 32){
             if(x_vel == 0) touchPlayer(_Player);
             attacking = false;
-            if(dist >= 96){
+            if(dist >= 60){
                 if(getCollision().x > _Player.getCollision().x)x_vel = -mon_speed;
                 else x_vel = mon_speed;
             }
