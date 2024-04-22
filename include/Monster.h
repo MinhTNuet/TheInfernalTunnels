@@ -28,7 +28,7 @@ private:
     Map mat;
     int mon_width = 56;
     int mon_height = 48;
-    int mon_speed = 4;
+    int mon_speed = 3;
     int hp, type, origin_x, dist;
     int x_vel = 0, y_vel = 0;
     static const int WALK_FRAMES = 6;

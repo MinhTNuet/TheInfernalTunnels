@@ -148,7 +148,7 @@ void player::takeDamage(vector<Monster*>& monsterList)
 void player::Jump()
 {
     if(grounded){
-        y_vel = -20;
+        y_vel = -18;
         jumping = true;
 //        Mix_PlayChannel(-1, p_sound[jump], 0);
     }

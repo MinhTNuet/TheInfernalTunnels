@@ -52,10 +52,10 @@ void Monster::autoMove(player& _Player){
         if(getCollision().x < _Player.getCollision().x)flip = SDL_FLIP_NONE;
         else flip = SDL_FLIP_HORIZONTAL;
 
-        if(abs(y - _Player.getY()) > 32){
+        if(abs(y - _Player.getY()) > 20){
             if(x_vel == 0) touchPlayer(_Player);
             attacking = false;
-            if(dist >= 60){
+            if(dist >= 96){
                 if(getCollision().x > _Player.getCollision().x)x_vel = -mon_speed;
                 else x_vel = mon_speed;
             }
