@@ -92,7 +92,7 @@ bool Game::loadMap()
     total_map.push_back(map1);
     map_enemy map2("image/Map/map2.txt", {387, 283, 254}, 2);
     total_map.push_back(map2);
-    map_enemy map3("image/Map/map3.txt", {159, 162, 244, 481}, 3);
+    map_enemy map3("image/Map/map3.txt", {159, 162, 244, 481, 533}, 3);
     total_map.push_back(map3);
 //    map_enemy map4("image/Map/map4.txt", {424, 513, 537}, 4);
 //    total_map.push_back(map4);
