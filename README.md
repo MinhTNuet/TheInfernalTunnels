@@ -21,7 +21,7 @@
 - Bước 2: Cài mingw. Ở đây tôi cài đặt phiên bản MinGW-W64 GCC-8.1. **x86_64-posix-seh**
 - Một số chú ý:
 - Nếu sử dụng trình biên dịch khác thì phải dịch lại icon: vào thư mục icon rồi dùng lệnh windres main.rc -O coff main.res trong cmd.
-- Phải xóa ba dll của c++ trong thư mục chứa pvz.exe: libgcc_s_seh-1.dll, libstdc++-6.dll, libwinpthread-1.dll. Ba dll này chỉ dành cho người chơi không cài sẵn c++ trong máy.
+- Phải xóa ba dll của c++ trong thư mục chứa TheInfernalTunnels.exe: libgcc_s_seh-1.dll, libstdc++-6.dll, libwinpthread-1.dll. Ba dll này chỉ dành cho người chơi không cài sẵn c++ trong máy.
 - Bước 3: Cài GNU make.
 - Bước 4: Mở cmd trong thư mục chứa Makefile và gõ lệnh make.
 - Bước 5: Bật TheInfernalTunnels.exe và chơi game.
