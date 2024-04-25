@@ -59,6 +59,7 @@ void player::handleEvent(SDL_Event &e)
             if(!hurting && !die) {
                 attacking = true;
 //                Mix_PlayChannel(-1, p_sound[attack], 0);
+
             }
             break;
         }

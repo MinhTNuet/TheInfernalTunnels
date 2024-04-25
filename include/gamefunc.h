@@ -21,7 +21,7 @@ const int SCREEN_HEIGHT = 720;
 
 const int distanceMax = MAP_WIDTH * MAP_HEIGHT;
 
-static SDL_Window* window = NULL;
+ static SDL_Window* window = NULL;
 static SDL_Renderer* renderer = NULL;
 static TTF_Font* font = NULL;
 
@@ -57,8 +57,6 @@ namespace gamefunc {
     bool checkCollision(SDL_Rect obj1, SDL_Rect obj2);
     bool checkWall(SDL_Rect obj, Map mat, bool* grounded = NULL);
     bool checkWall(SDL_Rect obj, Map map1, Map map2, bool* grounded = NULL);
-    void setWindowFS();
-    void quitWindowFS();
     void renderQuit();
 }
 

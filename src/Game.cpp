@@ -75,8 +75,12 @@ bool Game::loadMedia()
         }else {cout<<"Error load file menu sound: "<< i << endl;check = false;}
     }
 
+    gameMusic = Mix_LoadMUS("music/MusicBackground.mp3");
+    if(gameMusic == NULL)check = false;
+    Mix_VolumeMusic(10);
+
     menu = new Menu(menuTex, menuSound);
-    if( menu == NULL ){
+    if(menu == NULL){
         cout << "Error init Menu" << endl;
         check = false;
     }
@@ -275,6 +279,14 @@ void Game::render_hp_Score()
     }
 }
 
+void Game::playMusic()
+{
+    if(menu->isRunning()){
+        Mix_HaltMusic();
+        Mix_FadeInMusic(gameMusic, -1, 1000);
+    }
+}
+
 void Game::resetGame()
 {
     while(!monsterList.empty()){
@@ -354,6 +366,7 @@ void Game::runGame(SDL_Event &e)
         runningGame = false;
         resetGame();
     }
+    playMusic();
     handleInputGame(e);
     if(menu->isRestart())resetGame();
     gamefunc::renderPresent();
@@ -368,5 +381,6 @@ void Game::clearMedia()
     for(int i=0; i<2; i++)SDL_DestroyTexture(monsterTex[i]);
     for(int i=0; i<5; i++)SDL_DestroyTexture(menuTex[i]);
     TTF_CloseFont(font);
+    Mix_FreeMusic(gameMusic);
     delete time;
 }

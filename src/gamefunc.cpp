@@ -168,15 +168,6 @@ bool gamefunc::checkWall(SDL_Rect obj, Map map1, Map map2, bool* grounded)
     return check;
 }
 
-void gamefunc::setWindowFS()
-{
-    SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
-}
-
-void gamefunc::quitWindowFS()
-{
-    SDL_SetWindowFullscreen(window, 0);
-}
 
 void gamefunc::renderQuit()
 {

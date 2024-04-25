@@ -42,6 +42,7 @@ public:
     void render_hp_Score();
     void render_time();
 
+    void playMusic();
     void resetGame();
     void handleInputGame(SDL_Event &e);
     void clearMedia();
@@ -53,7 +54,6 @@ public:
 private:
     bool runningGame = false;
     int scoreRun = 0, scoreMonster = 0, totalScore = 0, highScore = 0;
-    int musicStatus = 0;
 
     SDL_Texture* liveBar = NULL;
     SDL_Texture* heart = NULL;
@@ -63,7 +63,6 @@ private:
     SDL_Texture* menuTex[2] = {NULL};
     Mix_Chunk* p_sound[5] = {NULL};
     Mix_Chunk* menuSound[2] = {NULL};
-    Mix_Music* menuMusic = NULL;
     Mix_Music* gameMusic = NULL;
 
     player* Player;
