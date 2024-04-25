@@ -10,21 +10,21 @@
 
 ## Cách tải game
 ### Cách 1: Không bao gồm code
-Tải game (được nén thành .zip) tại link sau: **https://github.com/MinhTNuet/TheInfernalTunnels/releases/tag/publised**.
-Cách này tiết kiệm bộ nhớ và thời gian tải đi rất nhiều (khoảng 103MB).
-Giải nén game vào một thư mục và bật TheInfernalTunnels.exe lên và chơi.
+- Tải game (được nén thành .zip) tại link sau: **https://github.com/MinhTNuet/TheInfernalTunnels/releases/tag/publised**.
+- Cách này tiết kiệm bộ nhớ và thời gian tải đi rất nhiều (khoảng 103MB).
+- Giải nén game vào một thư mục và bật TheInfernalTunnels.exe lên và chơi.
 
 ### Cách 2: Bao gồm code và có thể biên dịch
-Bước 1: Clone repo này về hoặc chọn Code -> Download Zip.
+- Bước 1: Clone repo này về hoặc chọn Code -> Download Zip.
 - Tất cả code đều nằm trong thư mục src.
 - Có thể nhảy đến bước 5 để chơi luôn
-Bước 2: Cài mingw. Ở đây tôi cài đặt phiên bản MinGW-W64 GCC-8.1. **x86_64-posix-seh**
-Một số chú ý:
+- Bước 2: Cài mingw. Ở đây tôi cài đặt phiên bản MinGW-W64 GCC-8.1. **x86_64-posix-seh**
+- Một số chú ý:
 - Nếu sử dụng trình biên dịch khác thì phải dịch lại icon: vào thư mục icon rồi dùng lệnh windres main.rc -O coff main.res trong cmd.
 - Phải xóa ba dll của c++ trong thư mục chứa pvz.exe: libgcc_s_seh-1.dll, libstdc++-6.dll, libwinpthread-1.dll. Ba dll này chỉ dành cho người chơi không cài sẵn c++ trong máy.
-Bước 3: Cài GNU make.
-Bước 4: Mở cmd trong thư mục chứa Makefile và gõ lệnh make.
-Bước 5: Bật TheInfernalTunnels.exe và chơi game.
+- Bước 3: Cài GNU make.
+- Bước 4: Mở cmd trong thư mục chứa Makefile và gõ lệnh make.
+- Bước 5: Bật TheInfernalTunnels.exe và chơi game.
 
 ## Giới thiệu về game
 ### Cốt truyện
@@ -37,8 +37,8 @@ Bước 5: Bật TheInfernalTunnels.exe và chơi game.
 ### Luật chơi
 - Người chơi sẽ chỉ có 3 hp. Nên phải thực sự rất cẩn thận khi đánh nhau với các con quái và cũng thực sự cẩn thận với những cái hố vì những điều bất ngờ sẽ đến cuối cùng.
 - Hiện trong game mới chỉ có 2 loại quái vật(nếu có thêm thời gian có thể update thêm nhiều con nữa):
-> ![SlimeMonster](SlimeMonster.png): Có khả năng đánh player và mất 1 hp | Khi tiêu diệt thì nhận thêm 1 hp(Nếu đã mất hp trước đó) và nhận 5 score.
-> ![PenguinMonster](PenguinMonster.png): Có khả năng đánh player và mất 1 hp | KHi tiêu diệt thì nhận thêm 30 score.
+- ![SlimeMonster](SlimeMonster.png): Có khả năng đánh player và mất 1 hp | Khi tiêu diệt thì nhận thêm 1 hp(Nếu đã mất hp trước đó) và nhận 5 score.
+- ![PenguinMonster](PenguinMonster.png): Có khả năng đánh player và mất 1 hp | KHi tiêu diệt thì nhận thêm 30 score.
 - Bạn cũng có thể chọn cách không giết quái và chỉ chạy vì score sẽ được tăng với mỗi bước chạy theo phương x của bạn(lưu ý: không tính bước đi lại).
 - Game sẽ chỉ có 1 phút để các bạn chơi và dành số điểm. Khi hết time có nghĩa là bạn cũng sẽ die và end game.
 - Nút di chuyển của player: A(di chuyển sang trái), W(nhảy lên trên), D(di chuyển sang phải) và lưu ý đừng di chuyển liên tục hai nút A và D cùng lúc nhiều lần.
